@@ -21,7 +21,7 @@ int main()
         printf("7- Calcular el factorial (A!)\n");
         printf("8- Calcular todas las operacione\n");
         printf("9- Salir\n");
-        printf("operando 1 es %f \noperando 2 es %f\n\n", num1, num2);
+        printf("\noperando 1 es %f \noperando 2 es %f\n\n", num1, num2);
         scanf("%d",&opcion);
 
         switch(opcion)
@@ -70,23 +70,30 @@ int main()
                 resultado = restarFloats(num1, num2);
                 printf("el resultado de la resta es %f\n\n", resultado);
 
-                while(num2 == 0)
+                if(num2 == 0)
                 {
-                    num2 = ingresarNumeroF("no puedes dividir 0, ingrese de nuevo", num1);
+                    printf("no se pudo efectuar la division dado que el dividendo es 0\n\n");
                 }
-                resultado = dividirFloats(num1, num2);
-                printf("el resultado de la division es %f\n\n", resultado);
+                else
+                {
+                    resultado = dividirFloats(num1, num2);
+                    printf("el resultado de la division es %f\n\n", resultado);
+                }
+
 
                 resultado = multiplicarFloats(num1,num2);
                 printf("el resultado de la multiplicacion es %f\n\n", resultado);
 
-                while(num1 != factor || (num1 < 1 || num1 > 25))
+                if(num1 != factor || (num1 < 1 || num1 > 25))
                 {
-                    num1 = ingresarNumeroF("no puedes hacer factorial de numeros decimales ni menores a 1 y mayores de 25", num1);
-                    factor = num1;
+                    printf("no se pudo efectuar el factorial\n\n");
                 }
-                resultadoFactorial = factorial(factor);
-                printf("el resultado del facotorial es: %lld \n\n",resultadoFactorial);
+                else
+                {
+                    resultadoFactorial = factorial(factor);
+                    printf("el resultado del facotorial es: %lld \n\n",resultadoFactorial);
+                }
+
 
                 break;
             case 9:
