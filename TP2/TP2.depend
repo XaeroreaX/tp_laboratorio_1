@@ -1,0 +1,34 @@
+# depslib dependency file v1.0
+1491923215 source:d:\xaero\tp2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1492025805 source:c:\documents and settings\atilio\escritorio\tp2\main.c
+	"FSPersona.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1492025736 c:\documents and settings\atilio\escritorio\tp2\fspersona.h
+
+1492022931 source:c:\documents and settings\atilio\escritorio\tp2\fspersona.c
+	"FSPersona.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1492125834 source:c:\users\jmpit\downloads\proyectos\projectos del cod\programacio-i-master\tp2\fspersona.c
+	"FSPersona.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1492126917 c:\users\jmpit\downloads\proyectos\projectos del cod\programacio-i-master\tp2\fspersona.h
+
+1492126610 source:c:\users\jmpit\downloads\proyectos\projectos del cod\programacio-i-master\tp2\main.c
+	"FSPersona.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
