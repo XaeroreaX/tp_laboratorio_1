@@ -18,15 +18,16 @@
 	<stdlib.h>
 	<string.h>
 
-1492125834 source:c:\users\jmpit\downloads\proyectos\projectos del cod\programacio-i-master\tp2\fspersona.c
+1492212406 source:c:\users\jmpit\downloads\proyectos\projectos del cod\programacio-i-master\tp2\fspersona.c
 	"FSPersona.h"
 	<stdio.h>
 	<stdlib.h>
+	<ctype.h>
 	<string.h>
 
-1492126917 c:\users\jmpit\downloads\proyectos\projectos del cod\programacio-i-master\tp2\fspersona.h
+1492209357 c:\users\jmpit\downloads\proyectos\projectos del cod\programacio-i-master\tp2\fspersona.h
 
-1492126610 source:c:\users\jmpit\downloads\proyectos\projectos del cod\programacio-i-master\tp2\main.c
+1492212524 source:c:\users\jmpit\downloads\proyectos\projectos del cod\programacio-i-master\tp2\main.c
 	"FSPersona.h"
 	<stdio.h>
 	<stdlib.h>

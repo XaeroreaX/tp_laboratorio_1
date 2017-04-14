@@ -27,15 +27,23 @@ SPersona HarcodearS(char[], int, int, int);
  */
 
 
-void mostraArrayS(int ,SPersona[]);
+SPersona cargarPersonaS();
+ /** \brief carga a mano todo los datos de la estructura persona
+  *
+  * \return un tipo de dato de la estructura persona escrita a mano
+  *
+  */
+
+void mostraArrayS(int ,SPersona[], int);
 /** \brief muestra un vector de la estructura SPersona
  *
  * \param tamaño del vector
  * \param vector de la estructura
+ * \param un flag entero que determina si ver la posicion(1) o si no(0)
  *
  */
 
- void mostrarBarraEdades(int ,SPersona[]);
+ void mostrarBarraEdadesS(int ,SPersona[]);
  /** \brief imprime una barra que dependiendp de la edad(<18 19-35 >35) contara con un *
   *
   * \param vector de la estructura SPersona
@@ -45,11 +53,20 @@ void mostraArrayS(int ,SPersona[]);
 
 
 
-SPersona ordenarS(int ,SPersona[]);
-/** \brief ordena alfabeticamente un vector de la estructura SPersona
+void mostrarordenarS(int ,SPersona[]);
+/** \brief muestra alfabeticamente un vector de la estructura SPersona
  *
  * \param entero tamaño de la estructura
  * \param vector a ordenar
- * \return vector ordenado alfabeticamente
+ *
+ */
+
+
+int buscarDatosCargadosS(int ,SPersona[]);
+/** \brief busca si hay datos cargados en el vector SPersona fijandose en el parametro dni
+ *
+ * \param variable entera que representa el tamaño del vector
+ * \param variable vector de la estructura SPersona
+ * \return un valor entero (1 es que hay valor en el vector y 0 significa que no hay)
  *
  */

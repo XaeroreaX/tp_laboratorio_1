@@ -1,7 +1,53 @@
 #include "FSPersona.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include <string.h>
+
+SPersona cargarPersonaS()
+{
+    SPersona persona;
+    char Estado;
+
+    printf("ingrese el nombre de la persona:");
+    fflush(stdin);
+    gets(persona.nombre);
+
+    printf("ingrese la edad de la persona:");
+    scanf("%d", &persona.edad);
+    while(persona.dni < 1)
+    {
+        printf("ingreso mal la edad de la persona, por favor ingrese de nuevo:");
+        scanf("%d", &persona.dni);
+    }
+
+    printf("ingrese el DNI de la persona:");
+    scanf("%d", &persona.dni);
+    while(persona.dni < 1)
+    {
+        printf("ingreso mal el DNI de la persona, por favor ingrese de nuevo:");
+        scanf("%d", &persona.dni);
+    }
+
+    printf("ingrese el estado civil de la persona\nsoltero = s\ncasado = c\n");
+    Estado = tolower (getch());
+    while(Estado != 's' && Estado != 'c')
+    {
+        printf("ingreso mal el estado civil de la persona, por favor ingrese de nuevo\n");
+        Estado = tolower (getch());
+    }
+    if(Estado == 's')
+    {
+        persona.flagEstado = 0;
+    }
+    else
+    {
+        persona.flagEstado = 1;
+    }
+
+    return persona;
+}
+
 
 SPersona HarcodearS(char nombre[20],int edad,int dni, int flag)
 {
@@ -13,7 +59,8 @@ SPersona HarcodearS(char nombre[20],int edad,int dni, int flag)
     return persona;
 }
 
-void mostraArrayS(int tam, SPersona persona[tam])
+
+void mostraArrayS(int tam, SPersona persona[tam], int flagPos)
 {
     int i;
     char estado[10];
@@ -31,36 +78,52 @@ void mostraArrayS(int tam, SPersona persona[tam])
                 strcpy(estado, "soltero");
             }
         }
-        printf("Nombre:%s----Edad:%d----DNI:%d---Estado:%s\n",persona[i].nombre, persona[i].edad, persona[i].dni, estado);
+        if(persona[i].dni != 0)
+        {
+            if(flagPos == 1)
+            {
+                printf("posicion %d Nombre:%s----Edad:%d----DNI:%d----Estado:%s\n", i + 1, persona[i].nombre, persona[i].edad, persona[i].dni, estado);
+            }
+            else
+            {
+                printf("Nombre:%s----Edad:%d----DNI:%d---Estado:%s\n", persona[i].nombre, persona[i].edad, persona[i].dni, estado);
+            }
+
+        }
+
     }
     /*i = strcmp(persona[0].nombre,prueba);
     printf("la comparacion da %d",i);*/
 }
 
-void mostrarBarraEdades(int tam, SPersona persona[tam])
+void mostrarBarraEdadesS(int tam, SPersona persona[tam])
 {
     int i;
     int Menores18 = 0, Mayores18 = 0, Mayores35 = 0, Mayor;
     for(i = 0; i < tam; i++)
     {
-        if(persona[i].edad < 18)
+        if(persona[i].dni != 0)
         {
-            Menores18++;
-        }
-        else
-        {
-            if(persona[i].edad > 35)
+            if(persona[i].edad < 18)
             {
-                Mayores35++;
+                Menores18++;
             }
             else
             {
-                Mayores18++;
+                if(persona[i].edad > 35)
+                {
+                    Mayores35++;
+                }
+                else
+                {
+                    Mayores18++;
+                }
             }
         }
 
+
     }
-    if(Mayores18 > Menores18)
+    if(Mayores18 >= Menores18)
     {
         if(Mayores18 > Mayores35)
         {
@@ -114,10 +177,16 @@ void mostrarBarraEdades(int tam, SPersona persona[tam])
 
 }
 
-SPersona ordenarS(int tam, SPersona persona[tam])
+void mostrarordenarS(int tam, SPersona Spersona[tam])
 {
+    SPersona persona[tam];
     SPersona Aux;
     int i, j;
+    for(i = 0; i < tam; i++)
+    {
+        persona[i] = Spersona[i];
+    }
+
     for(i = 0; i < tam-1; i++)
     {
         for(j = i+1; j < tam; j++)
@@ -130,8 +199,24 @@ SPersona ordenarS(int tam, SPersona persona[tam])
             }
         }
     }
+    mostraArrayS(tam, persona, 0);
 
-    return persona[tam];
+
+}
+
+int buscarDatosCargadosS(int tam, SPersona persona[tam])
+{
+   int i = 0;
+
+   while(i < tam)
+   {
+       if(persona[i].dni != 0)
+       {
+           return 1;
+       }
+       i++;
+   }
+    return 0;
 }
 
 
