@@ -8,22 +8,29 @@ SPersona cargarPersonaS()
 {
     SPersona persona;
     char Estado;
+    char buffer[1024];
 
     printf("ingrese el nombre de la persona:");
     fflush(stdin);
-    gets(persona.nombre);
-
+    gets(buffer);
+    while(strlen(buffer) > 20)
+    {
+        printf("ingreso demasiados caracteres al nombre(maximo 20) por favor ingrese de nuevo\n");
+        fflush(stdin);
+        gets(buffer);
+    }
+    strcpy(persona.nombre, buffer);
     printf("ingrese la edad de la persona:");
     scanf("%d", &persona.edad);
-    while(persona.dni < 1)
+    while(persona.edad < 1)
     {
         printf("ingreso mal la edad de la persona, por favor ingrese de nuevo:");
-        scanf("%d", &persona.dni);
+        scanf("%d", &persona.edad);
     }
 
     printf("ingrese el DNI de la persona:");
     scanf("%d", &persona.dni);
-    while(persona.dni < 1)
+    while(persona.dni < 100000)
     {
         printf("ingreso mal el DNI de la persona, por favor ingrese de nuevo:");
         scanf("%d", &persona.dni);
@@ -136,7 +143,16 @@ void mostrarBarraEdadesS(int tam, SPersona persona[tam])
     }
     else
     {
-        Mayor = Menores18;
+        if(Menores18 >= Mayores35)
+        {
+            Mayor = Menores18;
+        }
+        else
+        {
+            Mayor = Mayores35;
+
+        }
+
     }
     printf("\n\tBarra de edades contadas por *\n\n");
     for(i = Mayor; i > 0; i--)
@@ -192,6 +208,17 @@ void mostrarordenarS(int tam, SPersona Spersona[tam])
         for(j = i+1; j < tam; j++)
         {
             if(strcmp(persona[j].nombre, persona[i].nombre) == -1)
+            {
+                Aux = persona[i];
+                persona[i] = persona[j];
+                persona[j] = Aux;
+            }
+
+        }
+        for(j = i+1; j < tam; j++)
+        {
+
+            if(strcmp(persona[j].nombre, persona[i].nombre) == 0 && persona[i].dni > persona[j].dni)
             {
                 Aux = persona[i];
                 persona[i] = persona[j];

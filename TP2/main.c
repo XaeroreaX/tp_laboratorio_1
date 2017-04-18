@@ -16,11 +16,11 @@ int main()
     }
     /*persona[0] = HarcodearS("pepe", 12, 37880456, 1);
     persona[1] = HarcodearS("juan", 24, 38840456, 0);
-    persona[2] = HarcodearS("yusepe", 54, 44750446, 0);
-    persona[3] = HarcodearS("yusepe", 54, 44750446, 0);
-    persona[4] = HarcodearS("yusepe", 54, 44750446, 0);
-    persona[5] = HarcodearS("yusepe", 54, 44750446, 0);
-    persona[6] = HarcodearS("yusepe", 54, 44750446, 0);*/
+    persona[2] = HarcodearS("yusepe", 34, 2000000, 0);
+    persona[3] = HarcodearS("yusepe", 15, 4000000, 0);
+    persona[4] = HarcodearS("yusepe", 99, 5000000, 0);
+    persona[5] = HarcodearS("yusepe", 20, 2000000, 0);
+    persona[6] = HarcodearS("yusepe", 54, 4000000, 0);*/
 
     while(quit == 1)
     {
@@ -89,7 +89,7 @@ int main()
                 quit = 0;
                 break;
             default:
-                printf("ingreso mal en la seleccion, por favor ingrese de nuevo");
+                printf("ingreso mal en la seleccion");
                 break;
         }
         printf("\n");

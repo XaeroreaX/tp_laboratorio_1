@@ -33,3 +33,18 @@
 	<stdlib.h>
 	<string.h>
 
+1492527354 source:d:\tp_laboratorio_1-master\tp2\main.c
+	"FSPersona.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1492524282 d:\tp_laboratorio_1-master\tp2\fspersona.h
+
+1492527280 source:d:\tp_laboratorio_1-master\tp2\fspersona.c
+	"FSPersona.h"
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+
