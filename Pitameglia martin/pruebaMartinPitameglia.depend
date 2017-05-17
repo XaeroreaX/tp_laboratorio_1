@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1493732655 source:d:\evaluacion\pruebamartinpitameglia\funsion.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Funsion.h"
+
+1493732645 d:\evaluacion\pruebamartinpitameglia\funsion.h
+
+1493730682 source:d:\evaluacion\pruebamartinpitameglia\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Funsion.h"
+
+1494974864 source:c:\users\jmpit\downloads\proyectos\projectos del cod\p\pitameglia martin\funsion.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Funsion.h"
+
+1494973446 c:\users\jmpit\downloads\proyectos\projectos del cod\p\pitameglia martin\funsion.h
+
+1494983528 source:c:\users\jmpit\downloads\proyectos\projectos del cod\p\pitameglia martin\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Funsion.h"
+
