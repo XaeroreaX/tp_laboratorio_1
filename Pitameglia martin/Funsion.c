@@ -22,7 +22,7 @@ void HarcodearSArray(int tam, Sauto aut0[H])
     int marca[H] = {FORD, PEUGEOT, OTRO, FORD, FIAT};//(1.fiat 2.peugeot 3.ford 4.otros)
     int profesor[H] = {1001, 1002, 1003, 1004, 1005};
 
-    for(i = 0; i < tam; i++)
+    for(i = 0; i < 5; i++)
     {
         strcpy(aut0[i].patente, patente[i]);
         strcpy(aut0[i].modelo, modelo[i]);
@@ -37,40 +37,76 @@ void HarcodearSArray(int tam, Sauto aut0[H])
 
 void MostrarS(int i,Sauto aut0)
 {
-    if(i == 0)
+
+    switch(i)
     {
-
-        if(aut0.profesor != 0)
-        {
-            printf("\npatente:%s----modelo:%s----profesor:%d", aut0.patente, aut0.modelo, aut0.profesor);
-            printf("-------------marca:");
-            switch(aut0.marca)
+        case 0:
+            if(aut0.profesor != 0)
             {
-                case FIAT:
-                    printf("FIAT\n");
-                    break;
-                case PEUGEOT:
-                    printf("PEUGEOT\n");
-                    break;
-                case FORD:
-                    printf("FORD\n");
-                    break;
-                case OTRO:
-                    printf("OTRO\n");
-                    break;
+                printf("\npatente:%s----modelo:%s----profesor:%d", aut0.patente, aut0.modelo, aut0.profesor);
+                printf("-------------marca:");
+                switch(aut0.marca)
+                {
+                    case FIAT:
+                        printf("FIAT\n");
+                        break;
+                    case PEUGEOT:
+                        printf("PEUGEOT\n");
+                        break;
+                    case FORD:
+                        printf("FORD\n");
+                        break;
+                    case OTRO:
+                        printf("OTRO\n");
+                        break;
 
+
+                }
+
+            }
+            break;
+
+        case 1:
+            printf("\npatente:%s---profesor:%d", aut0.patente, aut0.profesor);
+            break;
+        case 2:
+            printf("profesor:%d\n", aut0.profesor);
+            break;
+
+    }
+
+}
+
+
+/**-----------------------------------------------------------------------------------------------------------------------*/ ///3)
+
+
+void OrdenarSP(int tam, Sauto aut0[tam])
+{
+
+    int i, j;
+    Sauto aux;
+
+     for(i = 0; i < tam - 1; i++)
+    {
+        for(j = i + 1; j < tam; j++)
+        {
+
+            if( (aut0[i].profesor > aut0[j].profesor && aut0[j].profesor != 0) || aut0[i].profesor == 0)
+            {
+                aux = aut0[i];
+                aut0[i] = aut0[j];
+                aut0[j] = aux;
 
             }
 
         }
     }
-    else
-    {
-        printf("\npatente:%s---profesor:%d", aut0.patente, aut0.profesor);
-    }
+
 }
 
-/**-----------------------------------------------------------------------------------------------------------------------*/ ///3)
+/**-----------------------------------------------------------------------------------------------------------------------*/ ///4)
+
 
 void MostrarOrdenadoMP(int tam, Sauto Original[tam])
 {
@@ -118,7 +154,118 @@ void MostrarOrdenadoMP(int tam, Sauto Original[tam])
 
 }
 
+
+
+/**-----------------------------------------------------------------------------------------------------------------------*/  ///9)
+
+
+void estacionar(int tam, int estacion[tam], int profesor)
+{
+    int i;
+    for(i = 0;estacion[i] != 0 && i < tam; i++);
+    if(i < t)
+    {
+        estacion[i] = profesor;
+        printf("ingreso en el lugar %d", i + 1);
+    }
+    else
+    {
+        printf("no se encontro lugar de estacionamiento");
+    }
+}
+
+/**-----------------------------------------------------------------------------------------------------------------------*/  ///10)
+
+void egresar(int tam, int garage[tam])
+{
+    int i;
+    for(i = 0; garage[i] > 0 && i < tam; i++);
+
+    if(i < tam)
+    {
+        printf("lista del estacionamiento:");
+        for(i = 0; i < tam; i++)
+        {
+            if(garage[i] != 0)
+                printf("lugar%d: %d", (i+1),garage[i]);
+            else
+                printf("lugar%d: Libre", (i+1));
+
+        }
+        i--;
+        scanf("%d", &i);
+        garage[i] = 0;
+
+    }
+}
+
+
+/**-----------------------------------------------------------------------------------------------------------------------*/  ///10)
+
+void cargarCaracter(int tam, char caracteres[tam])
+{
+    char buffer[1024];
+
+    fflush(stdin);
+    gets(buffer);
+    while(strlen(buffer) > tam)
+    {
+        printf("ingreso mal la cadena de caracteres, ingrese de nuevo");
+        fflush(stdin);
+        gets(buffer);
+    }
+    strcpy(caracteres, buffer);
+
+
+}
+
+
+
+/**-----------------------------------------------------------------------------------------------------------------------*/  ///11)
+
+
+int cargarAutoA(int tam, Sauto aut0[tam])
+{
+    int i,j, flag = 0;
+
+    for(i = 0; i < tam && aut0[i].profesor != 0; i++);
+
+
+    if(i < tam)
+    {
+
+        printf("\ningrese la patente del auto");
+        cargarCaracter(C, aut0[i].patente);
+        //aut0[i].patente[C] = cargarCaracter(C, aut0[i].patente);
+        printf("\ningrese el modelo del auto");
+        cargarCaracter(C, aut0[i].modelo);
+        //aut0[i].modelo[C] = cargarCaracter(C, aut0[i].modelo);
+        printf("\ningrese la marca:\n1. FIAT\n2.PEUGEOT\n3. FORD\n4. OTRO");
+        scanf("%d", &aut0[i].marca);
+        printf("\ningrese el numero del profesor no existente:\n");
+        for(j = 0; aut0[j].profesor != 0; j++)
+        {
+            MostrarS(2, aut0[j]);
+        }
+        scanf("%d", &aut0[i].profesor);
+        for(j = 0; aut0[i].profesor != aut0[j].profesor; j++);
+        while(aut0[i].profesor < 1000 || j < i)
+        {
+            printf("\ningreso mal el numero del profesor, porfavor ingrese de nuevo");
+            scanf("%d", &aut0[i].profesor);
+            for(j = 0; aut0[i].profesor != aut0[j].profesor; j++);
+        }
+        flag = 1;
+    }
+    return flag;
+}
+
+
+
 /**-----------------------------------------------------------------------------------------------------------------------*/ ///4)
+
+
+
 
 
 int MostrarE(int tam, int estacionar[tam],Sauto aut0[tam])
@@ -205,14 +352,22 @@ int MostrarEgresados(int tam, int estacionamiento[tam], Sauto aut0[tam])
 
 int elegirP(int tam, Sauto aut0[tam])
 {
-    int i, profesor;
+    int i, vacio = 0,profesor;
     for(i = 0; i < tam; i++)
     {
         if(i != tam - 1)
-            printf("%d--",aut0[i].profesor);
-        else
-            printf("%d\n", aut0[i].profesor);
+        {
+            if(aut0[i].profesor == 0)
+            {
+                vacio++;
+            }
+            else
+                printf("--%d",aut0[i].profesor);
+        }
+
+
     }
+    printf("--\n");
     scanf("%d",&profesor);
     i = valProfesor(tam, profesor, aut0);
     while(i < 0)
@@ -243,80 +398,26 @@ int valProfesor(int tam,int profesor, Sauto aut0[tam])
     }
 }
 
-/**-----------------------------------------------------------------------------------------------------------------------*/  ///9)
-
-
-int estacionar(int estacion[H], int profesor)
-{
-    int i;
-    for(i = 0;estacion[i] != 0 && i < H; i++);
-    if(i < H)
-    {
-        estacion[i] = profesor;
-        printf("ingreso en el lugar %d", i + 1);
-    }
-    else
-    {
-        printf("no se encontro lugar de estacionamiento");
-    }
-}
-
-
-
-
-/**-----------------------------------------------------------------------------------------------------------------------*/  ///10)
-
-char cargarCaracter(int tam, char caracteres[tam])
-{
-    char buffer[1024];
-
-    gets(buffer);
-    while(strlen(buffer) > tam)
-    {
-        printf("ingreso mal la cadena de caracteres, ingrese de nuevo");
-        gets(buffer);
-    }
-    strcpy(caracteres, buffer);
-
-    return caracteres;
-}
-
-/**-----------------------------------------------------------------------------------------------------------------------*/  ///11)
-
-
-Sauto cargarAuto(Sauto aut0)
-{
-
-
-
-        printf("\ningrese la patente del auto");
-        aut0.patente[C] = cargarCaracter(C, aut0.patente);
-        printf("\ningrese el modelo del auto");
-        aut0.modelo[C] = cargarCaracter(C, aut0.modelo);
-        printf("\ningrese la marca:\n1. FIAT\n2.PEUGEOT\n3. FORD\n4. OTRO");
-        scanf("%d", &aut0.marca);
-        printf("\ningrese el numero del profesor");
-        scanf("%d", &aut0.profesor);
-        while(aut0.profesor < 1000)
-        {
-            printf("\ningreso mal el numero del profesor, porfavor ingrese de nuevo");
-            scanf("%d", &aut0.profesor);
-        }
-        return aut0;
-}
 
 
 /**-----------------------------------------------------------------------------------------------------------------------*/  ///12)
 
 
 
-Sauto bajaAuto()
+Sauto bajaAuto(int tam, int estacionamiento[tam], Sauto aut0)
 {
-    Sauto aut0;
-    strcpy(aut0.patente, "");
-    strcpy(aut0.modelo, "");
-    aut0.marca = 10;
-    aut0.profesor = 0;
+    Sauto erased;
+    int i;
+    strcpy(erased.patente, "");
+    strcpy(erased.modelo, "");
+    erased.marca = 10;
+    erased.profesor = 0;
 
-    return aut0;
+    for(i = 0; i < tam && aut0.profesor != estacionamiento[i]; i++)
+
+    if(i < tam)
+        estacionamiento[i] = 0;
+
+    return erased;
 }
+

@@ -19,7 +19,7 @@ void HarcodearSArray(int ,Sauto[]);
 
 
 ///2)
-void MostrarS(int i,Sauto aut0);
+void MostrarS(int ,Sauto );
 /** \brief muestra todos los campos o algunos de un elemento del tipo Sauto
  *
  * \param parametro de tipo entero que decide que mostrar(mayores a 0 solo para mostrar patente y profesor, si es 0 muestra todos los campos)
@@ -28,7 +28,13 @@ void MostrarS(int i,Sauto aut0);
  */
 
 
+
 ///3)
+void OrdenarSP(int , Sauto[]);
+
+
+
+///5)
 void MostrarOrdenadoMP(int, Sauto[]);
 /** \brief
  *
@@ -38,35 +44,41 @@ void MostrarOrdenadoMP(int, Sauto[]);
  *
  */
 
-
-
-
-///4)
-int MostrarE(int, int[],Sauto[]);
-
-///5)
-int MostrarAutosFIAT(int, Sauto[]);
+ ///11)
+void estacionar(int, int[], int)
 
 ///6)
-int MostrarEgresados(int, int[], Sauto[]);
+void egresar(int , int[]);
 
-///7)
-int elegirP(int, Sauto[]);
-
-///8)
-int valProfesor(int, int, Sauto[]);
-
-///9)
-int estacionar(int[], int);
-
-///10)
-char cargarCaracter(int , char[]);
-
-///11)
-Sauto cargarAuto(Sauto);
+///13)
+void cargarCaracter(int , char[]);
 
 ///12)
-Sauto bajaAuto();
+int cargarAutoA(int, Sauto[]);
+
+
+///6)
+int MostrarE(int, int[],Sauto[]);
+
+///7)
+int MostrarAutosFIAT(int, Sauto[]);
+
+///8)
+int MostrarEgresados(int, int[], Sauto[]);
+
+///9)
+int elegirP(int, Sauto[]);
+
+///10)
+int valProfesor(int, int, Sauto[]);
+
+
+
+
+
+
+///14)
+Sauto bajaAuto(int , int[], Sauto );
 
 
 
@@ -74,8 +86,6 @@ Sauto bajaAuto();
 
 
 
-
-void MostrarS(int, Sauto);
 
 
 
