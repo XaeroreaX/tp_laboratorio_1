@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define H 20
+#define H 5
 #define C 51
 #define FIAT 1
 #define PEUGEOT 2
@@ -10,26 +10,28 @@
 
 int main()
 {
-    int i, profesor,seleccionar = 0;
-    ;
+    int i , j, todos ,seleccionar = 0, val = 0;
     int estacionamiento[H] = {0};//profesor estacionado 0 vacio
     Sauto aut0[H];
+
+
     for(i = 0 ; i < H; i++)
         aut0[i] = bajaAuto(H, estacionamiento, aut0[i]);
+
     HarcodearSArray(H, aut0);
     while( seleccionar != 6 )
     {
         OrdenarSP(H, aut0);
-        printf("1. cargar nuevo profesor(1 - 20)\n2. quitar profesor\n3. ingresar un auto al estacionamiento(0 - 20)\n4. egresar un auto\n5. informar\n6. Salir");
+        printf("1. cargar nuevo profesor(1 - %d)\n2. quitar profesor\n3. ingresar un auto al estacionamiento(1 - %d)\n4. egresar un auto\n5. informar\n6. Salir", H, H);
         fflush(stdin);
         scanf("%d", &seleccionar);
         switch(seleccionar)
         {
-            case 1: //1. cargar nuevo profesor(1 - 20)
-                i = cargarAutoA(H, aut0);
-                if(i = 0)
+            case 1: //1. cargar nuevo profesor(1 - H)
+                val = cargarAutoA(H, aut0);
+                if(val == 0)
                 {
-                    printf("no hay mas lugares reservados");
+                    printf("no hay mas lugares reservados\n");
                 }
 
                 break;
@@ -38,41 +40,67 @@ int main()
 
                 printf("que auto desea dar de baja?:\n");
                 printf("elija profesor\n");
-                i = elegirP(H, aut0);
-                aut0[i] = bajaAuto(H, estacionamiento, aut0[i]);
-
+                val = elegirP(H, aut0);
+                if(val > -1)
+                    aut0[val] = bajaAuto(H, estacionamiento, aut0[val]);
+                else
+                    printf("no hay profesor registrado");
                 break;
-            case 3://3. ingresar un auto al estacionamiento(0 - 20)
 
-                printf("ingrese el profesor que quiere ingresar a la cochera\n");
-                i = elegirP(H, aut0);
-                profesor = aut0[i].profesor;
-                i = valProfesor(H, profesor, aut0);
 
-                while(i < 0)
+            case 3://3. ingresar un auto al estacionamiento(0 - H)
+                val = 0;
+                for(todos = 0; aut0[todos].profesor != 0 && todos < H ; todos++);
+
+
+                for(i = 0; i < todos; i++)
                 {
-                    printf("ingreso mal el profesor, por favor ingrese de nuevo");
-                    scanf("%d", &profesor);
+                    for(j = 0; j < H; j++)
+                    {
+                        if(aut0[i].profesor == estacionamiento[j])
+                            val++;
 
-                    i = valProfesor(H, profesor, aut0);
+
+                    }
                 }
-                estacionar(H, estacionamiento, profesor);
+                if(val < todos)
+                    estacionar(H, estacionamiento, aut0);
+
                 break;
             case 4: //4. egresar un auto
                 egresar(H, estacionamiento);
                 break;
             case 5: //5. informar
-                MostrarOrdenadoMP(H, aut0);
-                printf("\n");
-                i = MostrarE(H, estacionamiento, aut0);
-                if(i == 0)
+
+
+                val = MostrarOrdenadoMP(H, aut0);
+                if(val == 0)
+                    printf("no hay profesor registrado");
+                printf("\n\n-----------------------------------------------\n");
+                system("pause");
+
+
+                val = MostrarE(H, estacionamiento, aut0);
+                if(val == 0)
                     printf("no hay autos estacionados\n");
-                i = MostrarAutosFIAT(H, aut0);
-                if(i == 0)
+                printf("\n\n-----------------------------------------------\n");
+                system("pause");
+
+
+
+                val = MostrarAutosFIAT(H, aut0);
+                if(val == 0)
                     printf("no hay profesores con la marca de autos FIAT");
-                i = MostrarEgresados(H, estacionamiento, aut0);
-                if(i == 0)
+                printf("\n\n-----------------------------------------------\n");
+                system("pause");
+
+
+
+                val = MostrarEgresados(H, estacionamiento, aut0);
+                if(val == 0)
                     printf("todos los profesores estacionaron");
+
+
                 break;
             case 6: //6. salir
                 break;

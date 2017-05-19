@@ -105,67 +105,32 @@ void OrdenarSP(int tam, Sauto aut0[tam])
 
 }
 
-/**-----------------------------------------------------------------------------------------------------------------------*/ ///4)
 
-
-void MostrarOrdenadoMP(int tam, Sauto Original[tam])
-{
-    Sauto aut0[tam], aux;
-    int i, j;
-    for(i = 0; i < tam; i++)
-    {
-        aut0[i] = Original[i];
-    }
-
-    for(i = 0; i < tam - 1; i++)
-    {
-        for(j = i + 1; j < tam; j++)
-        {
-            if(aut0[i].marca > aut0[j].marca)
-            {
-                aux = aut0[i];
-                aut0[i] = aut0[j];
-                aut0[j] = aux;
-
-            }
-            else
-            {
-                if(aut0[i].marca == aut0[j].marca)
-                {
-                    if(strcmp(aut0[i].patente, aut0[j].patente) == 1)
-                    {
-                        aux = aut0[i];
-                        aut0[i] = aut0[j];
-                        aut0[j] = aux;
-                    }
-                }
-            }
-
-        }
-
-    }
-
-
-    printf("listado de profesores habilitado estacionar");
-    for(i = 0; i < H; i++)
-    {
-        MostrarS(1 ,aut0[i]);
-    }
-
-}
 
 
 
 /**-----------------------------------------------------------------------------------------------------------------------*/  ///9)
 
 
-void estacionar(int tam, int estacion[tam], int profesor)
+void estacionar(int tam, int estacionamiento[tam], Sauto aut0[tam])
 {
-    int i;
-    for(i = 0;estacion[i] != 0 && i < tam; i++);
-    if(i < t)
+    int i,j;
+
+        printf("ingrese el profesor que quiere ingresar a la cochera\n");
+        i = elegirP(tam, aut0);
+        for(j = 0; j < tam && estacionamiento[j] != aut0[i].profesor; j++);
+        while(j < tam)
+        {
+            printf("ingrese el profesor que quiere ingresar a la cochera\n");
+            i = elegirP(H, aut0);
+            for(j = 0; j < tam && estacionamiento[j] != aut0[i].profesor; j++);
+        }
+
+
+    for(i = 0;estacionamiento[i] != 0 && i < tam; i++);
+    if(i < tam)
     {
-        estacion[i] = profesor;
+        estacionamiento[i] = aut0[i].profesor;
         printf("ingreso en el lugar %d", i + 1);
     }
     else
@@ -187,9 +152,9 @@ void egresar(int tam, int garage[tam])
         for(i = 0; i < tam; i++)
         {
             if(garage[i] != 0)
-                printf("lugar%d: %d", (i+1),garage[i]);
+                printf("\nlugar%d: %d", (i+1),garage[i]);
             else
-                printf("lugar%d: Libre", (i+1));
+                printf("\nlugar%d: Libre", (i+1));
 
         }
         i--;
@@ -242,6 +207,12 @@ int cargarAutoA(int tam, Sauto aut0[tam])
         //aut0[i].modelo[C] = cargarCaracter(C, aut0[i].modelo);
         printf("\ningrese la marca:\n1. FIAT\n2.PEUGEOT\n3. FORD\n4. OTRO");
         scanf("%d", &aut0[i].marca);
+        while(aut0[i].marca <= 0 || aut0[i].marca >= 5)
+        {
+            printf("ingreso mal la marca, por favor ingrese de nuevo las siguientes opciones:\n");
+            printf("1. FIAT\n2.PEUGEOT\n3. FORD\n4. OTRO");
+            scanf("%d", &aut0[i].marca);
+        }
         printf("\ningrese el numero del profesor no existente:\n");
         for(j = 0; aut0[j].profesor != 0; j++)
         {
@@ -265,6 +236,65 @@ int cargarAutoA(int tam, Sauto aut0[tam])
 /**-----------------------------------------------------------------------------------------------------------------------*/ ///4)
 
 
+int MostrarOrdenadoMP(int tam, Sauto Original[tam])
+{
+    Sauto aut0[tam], aux;
+    int i, j;
+    for(i = 0; i < tam; i++)
+    {
+        aut0[i] = Original[i];
+    }
+
+    for(i = 0; i < tam - 1; i++)
+    {
+        for(j = i + 1; j < tam; j++)
+        {
+            if(aut0[i].marca > aut0[j].marca)
+            {
+                aux = aut0[i];
+                aut0[i] = aut0[j];
+                aut0[j] = aux;
+
+            }
+            else
+            {
+                if(aut0[i].marca == aut0[j].marca )
+                {
+                    if(strcmp(aut0[i].patente, aut0[j].patente) == 1)
+                    {
+                        aux = aut0[i];
+                        aut0[i] = aut0[j];
+                        aut0[j] = aux;
+                    }
+                }
+            }
+
+        }
+
+    }
+    for(i = 0; i< tam && aut0[i].profesor == 0;i++);
+
+    if( i < tam)
+    {
+
+
+        printf("listado de profesores habilitado estacionar");
+        for(i = 0; i < tam ; i++)
+        {
+            if(aut0[i].profesor != 0)
+                MostrarS(1 ,aut0[i]);
+        }
+        return 1;
+    }
+
+    return 0;
+
+}
+
+
+/**-----------------------------------------------------------------------------------------------------------------------*/ ///4)
+
+
 
 
 
@@ -273,7 +303,7 @@ int MostrarE(int tam, int estacionar[tam],Sauto aut0[tam])
     int i, j,flag = 0;
     for(i = 0; flag != 1 && i < tam; i++)
     {
-        for(j = 0;estacionar[i] != aut0[j].profesor && j < tam; j++);
+        for(j = 0;(estacionar[i] != aut0[j].profesor || estacionar[i] == 0) && j < tam; j++);
         if(j < tam)
         {
             flag = 1;
@@ -353,32 +383,40 @@ int MostrarEgresados(int tam, int estacionamiento[tam], Sauto aut0[tam])
 int elegirP(int tam, Sauto aut0[tam])
 {
     int i, vacio = 0,profesor;
-    for(i = 0; i < tam; i++)
+
+
+    for(i = 0; aut0[i].profesor == 0 && i < tam; i++);
+
+    if(i < tam)
     {
-        if(i != tam - 1)
+        for(i = 0; i < tam; i++)
         {
-            if(aut0[i].profesor == 0)
+            if(i != tam)
             {
-                vacio++;
-            }
-            else
+                if(aut0[i].profesor > 0)
                 printf("--%d",aut0[i].profesor);
+            }
+
+
+        }
+        printf("--\n");
+        scanf("%d",&profesor);
+
+        i = valProfesor(tam, profesor, aut0);
+        while(i < 0)
+        {
+            printf("ingreso mal el profesor, por favor ingrese de nuevo");
+            scanf("%d", &profesor);
+            i = valProfesor(tam, profesor, aut0);
         }
 
+        for(i = 0; profesor != aut0[i].profesor && i < tam; i++);
 
-    }
-    printf("--\n");
-    scanf("%d",&profesor);
-    i = valProfesor(tam, profesor, aut0);
-    while(i < 0)
-    {
-        printf("ingreso mal el profesor, por favor ingrese de nuevo");
-        scanf("%d", &profesor);
-        i = valProfesor(tam, profesor, aut0);
+        return i;
     }
 
-    for(i = 0; profesor != aut0[i].profesor && i < tam; i++);
-    return i;
+    return -1;
+
 }
 
 /**-----------------------------------------------------------------------------------------------------------------------*/  ///8)

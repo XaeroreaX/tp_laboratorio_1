@@ -34,18 +34,9 @@ void OrdenarSP(int , Sauto[]);
 
 
 
-///5)
-void MostrarOrdenadoMP(int, Sauto[]);
-/** \brief
- *
- * \param
- * \param
- * \return
- *
- */
 
  ///11)
-void estacionar(int, int[], int);
+void estacionar(int, int[], Sauto[]);
 
 ///6)
 void egresar(int , int[]);
@@ -55,6 +46,16 @@ void cargarCaracter(int , char[]);
 
 ///12)
 int cargarAutoA(int, Sauto[]);
+
+///5)
+int MostrarOrdenadoMP(int, Sauto[]);
+/** \brief
+ *
+ * \param
+ * \param
+ * \return
+ *
+ */
 
 
 ///6)
@@ -71,11 +72,6 @@ int elegirP(int, Sauto[]);
 
 ///10)
 int valProfesor(int, int, Sauto[]);
-
-
-
-
-
 
 ///14)
 Sauto bajaAuto(int , int[], Sauto );
