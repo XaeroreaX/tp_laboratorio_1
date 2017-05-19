@@ -12,7 +12,7 @@ typedef struct
 void HarcodearSArray(int ,Sauto[]);
 /** \brief  harcodea un vector del tipo Sauto
  *
- * \param un entero que tiene el valor del tamaño del vector
+ * \param un entero que tiene el valor del tamaÃ±o del vector
  * \param el vector de tipo Sauto que quier harcodear
  *
  */
@@ -45,7 +45,7 @@ void MostrarOrdenadoMP(int, Sauto[]);
  */
 
  ///11)
-void estacionar(int, int[], int)
+void estacionar(int, int[], int);
 
 ///6)
 void egresar(int , int[]);
