@@ -28,53 +28,74 @@ void MostrarS(int ,Sauto );
  */
 
 
-
 ///3)
-void OrdenarSP(int , Sauto[]);
-
-
-
-
- ///11)
-void estacionar(int, int[], Sauto[]);
-
-///6)
-void egresar(int , int[]);
-
-///13)
-void cargarCaracter(int , char[]);
-
-///12)
-int cargarAutoA(int, Sauto[]);
-
-///5)
-int MostrarOrdenadoMP(int, Sauto[]);
-/** \brief
+void OrdenarSP(int, Sauto[]);
+/** \brief ordena un vector de la estructura Sauto
  *
- * \param
- * \param
- * \return
+ * \param un entero con la dimension del vector Sauto
+ * \param vector Sauto que quiere ordenar
+ *
+ */
+
+
+///4)
+void MostrarOrdenadoMP(int, Sauto[]);
+/** \brief muestra una lista ordenadas por patente y marca todos los elementos de la estructura Sauto
+ *
+ * \param dimension de la estructura
+ * \param estructura Sauto
+ *
+ */
+
+ ///5)
+void estacionar(int, int, int[], int[], Sauto[]);
+/** \brief funcion pensada para estacionar o ingresar la lista de espera
+ *
+ * \param dimension de la estructura y de la lista de espera
+ * \param dimension del estacionamiento
+ * \param el vector que tiene todos los automoviles estacionados
+ * \param el vector con la lista de espera para estacionar
+ * \param el vector de la estructura Sauto
  *
  */
 
 
 ///6)
-int MostrarE(int, int[],Sauto[]);
+void cargarCaracter(int , char[]);
 
 ///7)
-int MostrarAutosFIAT(int, Sauto[]);
+int cargarAutoA(int, Sauto[]);
+
 
 ///8)
-int MostrarEgresados(int, int[], Sauto[]);
+int egresar(int, int, int[], int[]);
 
 ///9)
-int elegirP(int, Sauto[]);
+int elegirE(int, int[]);
 
 ///10)
-int valProfesor(int, int, Sauto[]);
+int MostrarE(int, int, int[],Sauto[]);
+
+///11)
+int MostrarAutosFIAT(int, Sauto[]);
+
+///12)
+int MostrarEgresados(int, int, int[], Sauto[]);
+
+///13)
+int verificarS(int, Sauto[]);
 
 ///14)
-Sauto bajaAuto(int , int[], Sauto );
+int elegirP(int, Sauto[]);
+
+///15)
+int valProfesor(int, int, Sauto[]);
+
+///16)
+int valTodosEstacionados(int, int[]);
+
+///17)
+Sauto bajaAuto(int, int[], Sauto );
 
 
 
