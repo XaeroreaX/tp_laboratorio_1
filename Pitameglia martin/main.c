@@ -77,7 +77,7 @@ int main()
                 val = verificarS(E, aut0);
                 if(val == OK)
                 {
-                    val = egresar(E, A, estacionamiento, ListEspera);
+                    val = egresar(E, A, estacionamiento, ListEspera, aut0);
                     if(val == DENIED)
                         printf("No hay autos estacionados\n\n");
                 }

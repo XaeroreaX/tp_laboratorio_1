@@ -167,11 +167,6 @@ void MostrarOrdenadoMP(int tam, Sauto Original[tam])
 
 
 
-
-
-
-
-
 /**-----------------------------------------------------------------------------------------------------------------------*/  ///5)
 
 
@@ -195,7 +190,17 @@ void estacionar(int sTam, int tam, int estacionamiento[tam], int ListEspera[sTam
             i = elegirP(sTam, aut0);
             for(j = 0; j < tam && estacionamiento[j] != aut0[i].profesor; j++);
         }
+        /////////////////////////////////////////////////////////////
+        // ingreso de horario de entrada y validacion
+        printf("ingrese la hora en que estaciono");
+        scanf("%d", &aut0[i].horaEntrada);
+        while(aut0[i].horaEntrada > 23 || aut0[i].horaEntrada < 0)
+        {
+            printf("ingreso mal el horario de estacionamiento, por favor ingrese de nuevo");
+            scanf("%d", &aut0[i].horaEntrada);
 
+        }
+        //////////////////////////////////////////////////////////////////////
         //estaciona el coche en el primer lugar que encuentre disponible
         for(j = 0; estacionamiento[j] != 0; j++);
         estacionamiento[j] = aut0[i].profesor;
@@ -309,9 +314,9 @@ int cargarAutoA(int tam, Sauto aut0[tam])
 
 /**-----------------------------------------------------------------------------------------------------------------------*/  ///8)
 
-int egresar(int tam, int sTam, int garage[tam],int Lista[sTam])
+int egresar(int tam, int sTam, int garage[tam],int Lista[sTam], Sauto aut0[sTam])
 {
-    int i;
+    int i, j, hora;
 
     //fijandose si hay algien estacionado
     for(i = 0; garage[i] == 0 && i < tam; i++);
@@ -328,7 +333,9 @@ int egresar(int tam, int sTam, int garage[tam],int Lista[sTam])
             printf("lista del estacionamiento(ingrese 0 para cancelar):");
             i = elegirE(tam, garage);
         }
-        if(i <= 0)//cancela si ingresa 0
+
+
+        if(i >= 0)//cancela si ingresa 0
         {
 
             //revisa la lista de espera y si no hay automoviles solo borra
@@ -336,13 +343,47 @@ int egresar(int tam, int sTam, int garage[tam],int Lista[sTam])
             if(Lista[0] != 0)
             {
 
+
+                ////////////////////////////////////////////////////////
+                //busco el profesor
+                for(j = 0; aut0[j].profesor != garage[i]; j++);
+
+                //pido ingreso y valido el horario de salida
+                printf("ingrese el horario de salida del automovil %d\n", aut0[j].profesor);
+                scanf("%d", &aut0[j].horaSalida);
+
+
+                while(aut0[j].horaSalida < 0 || aut0[j].horaSalida > 23)
+                {
+                    printf("ingreso mal el horario de salida del automovil %d, por favor ingrese de nuevo\n", aut0[j].profesor);
+                    scanf("%d", &aut0[j].horaSalida);
+                }
+
+                //para luego asignarlo al proximo que entre
+                hora = aut0[j].horaSalida;
+                //calculo y muestro cuanto tiempo estuvo y cuanto debe
+                calcularHorarioDeEgreso(aut0[j].horaEntrada, aut0[j].horaSalida);
+                //////////////////////////////////////////////////////////////////////////////
+
                 //pasa lo que hay en la cola
                 printf("el automovil %d esta ingresando en la posicion %d\n", Lista[0], i + 1);
                 garage[i] = Lista[0];
 
+
+                /////////////////////////////////////////////////////////////
+                // busca profesor ingreso y lo asigna a la hora que salio el anterior
+                for(j = 0; garage[i] != aut0[j].profesor; j++);
+                aut0[j].horaEntrada = hora;
+                //////////////////////////////////////////////////////////////////////
+
+
                 //pisa toda la lista
                 for(i = 0; Lista[i] != 0; i++)
                     Lista[i] = Lista[i + 1];
+
+
+
+
 
                 i = 0;
                 //muestra el proximo en la lista y si no queda nadie muestra que se vacio
@@ -350,11 +391,33 @@ int egresar(int tam, int sTam, int garage[tam],int Lista[sTam])
                     printf("se vacio la lista de espera\n");
                 else
                     printf(" el proximo en la lista es %d\n", Lista[0]);
+
+
             }
             else//borra
             {
-                printf("el automovil %d dejo el lugar %d\n", garage[i], i);
+                ////////////////////////////////////////////////////////
+                //busco el profesor
+                for(j = 0; aut0[j].profesor != garage[i]; j++);
+
+                //pido ingreso y valido el horario de salida
+                printf("ingrese el horario de salida del automovil %d\n", aut0[j].profesor);
+                scanf("%d", &aut0[j].horaSalida);
+                while((aut0[j].horaSalida < 0 || aut0[j].horaSalida > 23) || aut0[j].horaSalida == aut0[j].horaEntrada)
+                {
+                    printf("ingreso mal el horario de salida del automovil %d, por favor ingrese de nuevo\n", aut0[j].profesor);
+                    scanf("%d", &aut0[j].horaSalida);
+                }
+                //calculo y muestro cuanto tiempo estuvo y cuanto debe
+                calcularHorarioDeEgreso(aut0[j].horaEntrada, aut0[j].horaSalida);
+                //////////////////////////////////////////////////////////////////////////////
+
+
+                printf("el automovil %d dejo el lugar %d\n", garage[i], i + 1);
                 garage[i]  = 0;
+
+
+
 
             }
 
@@ -368,6 +431,42 @@ int egresar(int tam, int sTam, int garage[tam],int Lista[sTam])
 
     return 0;//si no queda nadie en el estacionamiento
 }
+
+/**-----------------------------------------------------------------------------------------------------------------------*/ ///9)
+
+int calcularHorarioDeEgreso(int horarioEntrada, int horarioSalida)
+{
+    int resultado, debe = 10, i = 1;
+
+    if(horarioEntrada < horarioSalida)
+    {
+        resultado = horarioSalida - horarioEntrada;
+
+
+    }
+    else
+    {
+
+        resultado = 24 - horarioEntrada;
+
+        resultado = resultado + horarioSalida;
+
+    }
+    printf("el automovil permanecio %d cantidad de horas\n", resultado);
+
+    if(resultado > 3)
+    {
+        if(resultado != 4)
+            i = resultado - 4;
+
+        debe = debe * i;
+
+        printf("se le cobrara %d peso\n", debe);
+    }
+    return resultado;
+}
+
+
 
 /**-----------------------------------------------------------------------------------------------------------------------*/ ///9)
 
@@ -429,6 +528,8 @@ int MostrarE(int tam, int sTam, int estacionamiento[tam],Sauto aut0[sTam])
     return flag;
 
 }
+
+
 /**-----------------------------------------------------------------------------------------------------------------------*/  ///11)
 
 int MostrarAutosFIAT(int tam, Sauto aut0[tam])

@@ -5,6 +5,8 @@ typedef struct
     char modelo[C];
     int marca;//(1.fiat 2.peugeot 3.ford 4.otros)
     int profesor;
+    int horaEntrada;
+    int horaSalida;
 
 }Sauto;
 
@@ -68,7 +70,10 @@ int cargarAutoA(int, Sauto[]);
 
 
 ///8)
-int egresar(int, int, int[], int[]);
+int egresar(int, int, int[], int[], Sauto[]);
+
+///n)
+int calcularHorarioDeEgreso(int, int);
 
 ///9)
 int elegirE(int, int[]);
