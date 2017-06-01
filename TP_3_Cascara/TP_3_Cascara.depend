@@ -21,3 +21,16 @@
 
 1496271524 c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\tp_3_cascara\funciones.h
 
+1496346548 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_3_cascara\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+
+1496341620 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_3_cascara\funciones.h
+
+1496346433 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_3_cascara\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+

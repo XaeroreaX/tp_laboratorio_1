@@ -17,7 +17,7 @@ typedef struct{
  *  @param movie la estructura a ser agregada al archivo
  *  @return retorna 1 o 0 de acuerdo a si pudo agregar la pelicula o no
  */
-int agregarPelicula(EMovie);
+int agregarPelicula(EMovie*);
 
 /**2)
  *  Borra una pelicula del archivo binario

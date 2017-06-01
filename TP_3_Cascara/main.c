@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "funciones.h"
 #define OK 1
-#define denied 0
+#define DENEID 0
 
 
 
@@ -11,8 +11,7 @@ int main()
     char seguir='s';
     int opcion=0, val;
 
-
-    EMovie movie;
+    EMovie* movie = (EMovie*) malloc(sizeof(EMovie)*5);
 
 
 
@@ -30,7 +29,7 @@ int main()
         {
             case 1:
                 val = agregarPelicula(movie);
-                if(val == denied) printf("no se pudo agregar la pelicula");
+                if(val == DENEID) printf("no se pudo agregar la pelicula");
 
                 break;
             case 2:
@@ -42,7 +41,11 @@ int main()
             case 5:
                 seguir = 'n';
                 break;
+
+
         }
+
+        leerArchData(movie, 5);
     }
 
     return 0;
