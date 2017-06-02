@@ -58,7 +58,44 @@ int borrarPelicula(EMovie movie)
     return 1;
 }
 
-/**-------------------------------------------------------*////3)
+/**-------------------------------------------------------*////2)
+
+int modificarM(EMovie* movie, int dim)
+{
+
+    FILE* arch;
+    int index;
+    char name[20];
+    printf("ingrese el nombre que quiera modificar");
+    cargarCaracter(20,name);
+
+    //bucle para validar y encontrar la pelicula
+    do{
+
+
+        for(index = 0; index < dim && strcmp((movie + index)->titulo,name)!= 0; index++);
+
+        if(index == dim)
+        {
+            printf("ingreso mal el nombre, por favor ingrese de nuevo que quiera modificar");
+            cargarCaracter(20,name);
+        }
+
+    }while(index == dim);
+
+    arch = fopen("data.exe","wb");
+
+    fseek(arch, sizeof(EMovie) * index, SEEK_CUR);
+
+
+
+    fclose(arch);
+
+    return 1;
+}
+
+
+/**-------------------------------------------------------*////4)
 
 void generarPagina(EMovie lista[], char nombre[])
 {
@@ -67,29 +104,30 @@ void generarPagina(EMovie lista[], char nombre[])
 
 /**-------------------------------------------------------*////n)
 
-int leerArchData(EMovie* movies,int dim)
+int leerArchData(EMovie* movies)
 {
 
 
     FILE* arch;
-    int i, len;
+    int i, dim;
     arch = fopen("data.txt", "rb");
     if(arch == NULL) return DENEID;
 
+    //situa el cursor al final
+    fseek(arch, 0, SEEK_END);
 
-    while(!feof(arch))
-    {
-
-        len = fread(movies, sizeof(EMovie), dim, arch);
-        if(!feof(arch) && len == dim)
-        {
-            dim += 5;
-            movies = (EMovie*) realloc(movies,sizeof(EMovie) * dim);
-            if(movies == NULL) return DENEID;
-        }
+    //contamos los bytes y lo dividimos por el tamaño de EMovie y despues redimensionamos
+    dim = ftell(arch)/sizeof(EMovie);
+    movies = (EMovie*) realloc(movies,sizeof(EMovie) * dim);
+    if(movies == NULL) return DENEID;
 
 
-    }
+    //rebobinamos
+    rewind(arch);
+
+    //y leemos el archivo
+    dim = fread(movies, sizeof(EMovie), dim, arch);
+
 
     fclose(arch);
 
@@ -100,10 +138,14 @@ int leerArchData(EMovie* movies,int dim)
     int puntaje;
     char linkImagen[50];*/
 
-    for(i = 0; i < len; i++)
-        printf("titulo:%s---genero:---duracion:\n", (movies+len)->titulo);
+    //mostramos
+    for(i = 0; i < dim; i++){
 
-    return OK;
+        printf("titulo:%s---genero:%s---duracion:%d---puntaje:%d\n", (movies+i)->titulo,(movies+i)->genero,(movies+i)->duracion,(movies+i)->puntaje);
+        printf("descripcion:%s\n\n", (movies+i)->descripcion);
+    }
+
+    return dim;
 
 }
 

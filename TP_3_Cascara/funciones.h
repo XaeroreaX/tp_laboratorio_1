@@ -8,7 +8,7 @@ typedef struct{
     char descripcion[50];
     int puntaje;
     char linkImagen[50];
-}EMovie;
+}EMovie __attribute__ ((packed));
 
 
 
@@ -26,12 +26,18 @@ int agregarPelicula(EMovie*);
  */
 int borrarPelicula(EMovie movie);
 
-/**3)
+
+int modificarM(EMovie*, int);
+
+/**4)
  *  Genera un archivo html a partir de las peliculas cargadas en el archivo binario.
  *  @param lista la lista de peliculas a ser agregadas en el archivo.
  *  @param nombre el nombre para el archivo.
  */
 void generarPagina(EMovie lista[], char nombre[]);
+
+
+int leerArchData(EMovie*);
 
 /**n)
  *  carga un dato de tipo string
