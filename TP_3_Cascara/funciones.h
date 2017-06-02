@@ -39,6 +39,11 @@ void generarPagina(EMovie lista[], char nombre[]);
 
 int leerArchData(EMovie*);
 
+int findMovie(EMovie* movie, int dim);
+
+
+void cargarSmovie(EMovie*, int);
+
 /**n)
  *  carga un dato de tipo string
  *  @param el tamaño del string

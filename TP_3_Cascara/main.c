@@ -9,9 +9,9 @@
 int main()
 {
     char seguir='s';
-    int opcion=0, val, dim;
+    int opcion=0, val, dim, i = 2;
 
-    EMovie* movie = (EMovie*) malloc(sizeof(EMovie));
+    EMovie* movie = (EMovie*) malloc(sizeof(EMovie) * 5);
 
 
 
@@ -35,6 +35,11 @@ int main()
             case 2:
                 break;
             case 3:
+
+                dim = leerArchData(movie);
+
+
+                val = modificarM(movie, dim);
                break;
             case 4:
                break;
@@ -45,7 +50,7 @@ int main()
 
         }
 
-        dim = leerArchData(movie);
+
     }
 
     return 0;

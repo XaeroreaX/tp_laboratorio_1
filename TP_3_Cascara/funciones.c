@@ -17,24 +17,7 @@ int agregarPelicula(EMovie* movie)
     FILE* arch;
     int len;
 
-    printf("ingrese el titulo de la pelicula\n");
-    cargarCaracter(20, movie->titulo);
-
-
-    printf("ingrese el genero de la pelicula\n");
-    cargarCaracter(20, movie->genero);
-
-    printf("ingrese la duracion de la pelicula(en minutos)");
-    scanf("%d", &movie->duracion);
-
-    printf("ingrese la descripcion de la pelicula");
-    cargarCaracter(50, movie->descripcion);
-
-    printf("ingrese el puntahe de la pelicula\n");
-    scanf("%d", &movie->puntaje);
-
-    printf("ingrese el link de imagen de la pelicula\n");
-    cargarCaracter(50, movie->linkImagen);
+    cargarSmovie(movie, 0);
 
     //lo almacenamos en data.txt
     arch = fopen("data.txt", "ab+");
@@ -65,34 +48,23 @@ int modificarM(EMovie* movie, int dim)
 
     FILE* arch;
     int index;
-    char name[20];
-    printf("ingrese el nombre que quiera modificar");
-    cargarCaracter(20,name);
 
-    //bucle para validar y encontrar la pelicula
-    do{
+    index = findMovie(movie, dim);
 
-
-        for(index = 0; index < dim && strcmp((movie + index)->titulo,name)!= 0; index++);
-
-        if(index == dim)
-        {
-            printf("ingreso mal el nombre, por favor ingrese de nuevo que quiera modificar");
-            cargarCaracter(20,name);
-        }
-
-    }while(index == dim);
+    cargarSmovie(movie, index);
 
     arch = fopen("data.exe","wb");
+    if(arch == NULL) return DENEID;
 
     fseek(arch, sizeof(EMovie) * index, SEEK_CUR);
 
-
+    fwrite(movie+index, sizeof(EMovie), 1 , arch);
 
     fclose(arch);
 
-    return 1;
+    return OK;
 }
+
 
 
 /**-------------------------------------------------------*////4)
@@ -102,9 +74,67 @@ void generarPagina(EMovie lista[], char nombre[])
 
 }
 
+/**-------------------------------------------------------*////4)
+
+
+int findMovie(EMovie* movie, int dim)
+{
+    int index;
+    char name[20];
+    printf("ingrese el nombre que quiera modificar");
+    cargarCaracter(20,name);
+
+    //bucle para validar y encontrar la pelicula
+    do{
+
+
+        index = 0;
+        while(index < dim)
+        {
+            if(strcmp(name,(movie+index)->titulo) == 0)break;
+
+            index++;
+        }
+        if(index == dim)
+        {
+            printf("ingreso mal el nombre, por favor ingrese de nuevo que quiera modificar: ");
+            cargarCaracter(20,name);
+        }
+
+    }while(index == dim);
+
+    return index;
+}
+
+/**-------------------------------------------------------*////4)
+
+void cargarSmovie(EMovie* movie, int index)
+{
+
+    printf("ingrese el titulo de la pelicula\n");
+    cargarCaracter(20, (movie+index)->titulo);
+
+
+    printf("ingrese el genero de la pelicula\n");
+    cargarCaracter(20, (movie + index)->genero);
+
+    printf("ingrese la duracion de la pelicula(en minutos)");
+    scanf("%d", &(movie + index)->duracion);
+
+    printf("ingrese la descripcion de la pelicula");
+    cargarCaracter(50, (movie+index)->descripcion);
+
+    printf("ingrese el puntahe de la pelicula\n");
+    scanf("%d", &(movie+index)->puntaje);
+
+    printf("ingrese el link de imagen de la pelicula\n");
+    cargarCaracter(50, (movie+index)->linkImagen);
+
+
+}
 /**-------------------------------------------------------*////n)
 
-int leerArchData(EMovie* movies)
+int leerArchData(EMovie* movie)
 {
 
 
@@ -118,32 +148,26 @@ int leerArchData(EMovie* movies)
 
     //contamos los bytes y lo dividimos por el tamaño de EMovie y despues redimensionamos
     dim = ftell(arch)/sizeof(EMovie);
-    movies = (EMovie*) realloc(movies,sizeof(EMovie) * dim);
-    if(movies == NULL) return DENEID;
+    movie = (EMovie*) realloc(movie,sizeof(EMovie) * dim);
+    if(movie == NULL) return DENEID;
 
 
     //rebobinamos
     rewind(arch);
 
     //y leemos el archivo
-    dim = fread(movies, sizeof(EMovie), dim, arch);
+    dim = fread(movie, sizeof(EMovie), dim, arch);
 
 
     fclose(arch);
 
-    /*char titulo[20];
-    char genero[20];
-    int duracion;
-    char descripcion[50];
-    int puntaje;
-    char linkImagen[50];*/
-
     //mostramos
     for(i = 0; i < dim; i++){
 
-        printf("titulo:%s---genero:%s---duracion:%d---puntaje:%d\n", (movies+i)->titulo,(movies+i)->genero,(movies+i)->duracion,(movies+i)->puntaje);
-        printf("descripcion:%s\n\n", (movies+i)->descripcion);
+        printf("titulo:%s---genero:%s---duracion:%d---puntaje:%d\n", (movie+i)->titulo,(movie+i)->genero,(movie+i)->duracion,(movie+i)->puntaje);
+        printf("descripcion:%s\n\n", (movie+i)->descripcion);
     }
+
 
     return dim;
 
