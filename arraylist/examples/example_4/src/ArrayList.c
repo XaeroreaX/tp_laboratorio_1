@@ -95,7 +95,7 @@ int al_add(ArrayList* pList,void* pElement)
     pList->size++;
     returnAux = 0;
 
-
+    free(aux);
     return returnAux;
 }
 
