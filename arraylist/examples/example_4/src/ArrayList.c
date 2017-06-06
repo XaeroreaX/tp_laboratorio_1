@@ -12,6 +12,8 @@ int contract(ArrayList* pList,int index);
 #define AL_INITIAL_VALUE  10
 //___________________
 
+/**--------------------------------------------------------------------------*////1)
+
 /** \brief Allocate a new arrayList with AL_INITIAL_VALUE elements.
  * \param void
  * \return ArrayList* Return (NULL) if Error [if can't allocate memory]
@@ -60,6 +62,8 @@ ArrayList* al_newArrayList(void)
 }
 
 
+/**--------------------------------------------------------------------------*////2)
+
 /** \brief  Add an element to arrayList and if is
  *          nessesary resize the array
  * \param pList ArrayList* Pointer to arrayList
@@ -70,25 +74,28 @@ ArrayList* al_newArrayList(void)
 int al_add(ArrayList* pList,void* pElement)
 {
     int returnAux = -1;
-    int flag = 0;
     void* aux;
-    int size = 0;
+    int size;
     if(pList == NULL || pElement == NULL)
     {
-        free(pList);
+
         return returnAux;
     }
-    printf("hola %d", pList->size);
+    //printf("\n %d, %d",pList->size, pList->reservedSize);
     if(pList->size == pList->reservedSize)
     {
-        aux = realloc(pList->pElements,sizeof(void*) * AL_INCREMENT);
+        aux = realloc(pList->pElements, sizeof(void*) * (pList->reservedSize+AL_INCREMENT));
+        //printf("REALLOC");
         if(aux == NULL)
         {
-            free(pList);
+            //printf("NULL");
+            free(aux);
+            returnAux = 0;
             return returnAux;
         }
-        pList->reservedSize += AL_INCREMENT;
+        pList->reservedSize = pList->reservedSize + AL_INCREMENT;
     }
+
 
     size = pList->size;
     pList->pElements[size] = pElement;
@@ -96,8 +103,11 @@ int al_add(ArrayList* pList,void* pElement)
     returnAux = 0;
 
     free(aux);
+    //free(pElement);
     return returnAux;
 }
+
+/**--------------------------------------------------------------------------*////3)
 
 /** \brief  Delete arrayList
  * \param pList ArrayList* Pointer to arrayList
@@ -108,8 +118,16 @@ int al_deleteArrayList(ArrayList* pList)
 {
     int returnAux = -1;
 
+    if(pList == NULL) return returnAux;
+
+    free(pList);
+
+    returnAux = 0;
+
     return returnAux;
 }
+
+/**--------------------------------------------------------------------------*////4)
 
 /** \brief  Delete arrayList
  * \param pList ArrayList* Pointer to arrayList
@@ -121,11 +139,12 @@ int al_len(ArrayList* pList)
 
     if(pList == NULL) return -1;
 
-    return pList->size;
+    return pList->size++;
 
 
 }
 
+/**--------------------------------------------------------------------------*////5)
 
 /** \brief  Get an element by index
  * \param pList ArrayList* Pointer to arrayList
@@ -137,9 +156,18 @@ void* al_get(ArrayList* pList , int index)
 {
     void* returnAux = NULL;
 
+    if(pList == NULL)
+    {
+        free(pList);
+        return returnAux;
+    }
+
+    returnAux = pList->pElements[index];
+
     return returnAux;
 }
 
+/**--------------------------------------------------------------------------*////6)
 
 /** \brief  Find if pList contains at least one element pElement
  * \param pList ArrayList* Pointer to arrayList
@@ -360,3 +388,4 @@ int contract(ArrayList* pList,int index)
 
     return returnAux;
 }
+
