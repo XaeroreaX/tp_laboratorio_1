@@ -76,8 +76,10 @@ int al_add(ArrayList* pList,void* pElement)
     int returnAux = -1;
     void* aux;
     int size;
+
     if(pList == NULL || pElement == NULL)
     {
+
 
         return returnAux;
     }
@@ -162,7 +164,9 @@ void* al_get(ArrayList* pList , int index)
         return returnAux;
     }
 
-    returnAux = pList->pElements[index];
+    returnAux =(void*) malloc(sizeof(void));
+
+    returnAux = pList->pElements+index;
 
     return returnAux;
 }
@@ -180,10 +184,27 @@ void* al_get(ArrayList* pList , int index)
 int al_contains(ArrayList* pList, void* pElement)
 {
     int returnAux = -1;
+    int size = 0;
+
+    if(pList == NULL || pElement == NULL) return returnAux;
+
+    returnAux++;
+
+    while(size < pList->reservedSize)
+    {
+        if(pList->pElements+size == pElement) break;
+
+        size++;
+
+    }
+
+    if(size < pList->reservedSize) returnAux++;
+
 
     return returnAux;
 }
 
+/**--------------------------------------------------------------------------*////7)
 
 /** \brief  Set a element in pList at index position
  * \param pList ArrayList* Pointer to arrayList
@@ -200,6 +221,7 @@ int al_set(ArrayList* pList, int index,void* pElement)
     return returnAux;
 }
 
+/**--------------------------------------------------------------------------*////8)
 
 /** \brief  Remove an element by index
  * \param pList ArrayList* Pointer to arrayList
@@ -214,7 +236,7 @@ int al_remove(ArrayList* pList,int index)
     return returnAux;
 }
 
-
+/**--------------------------------------------------------------------------*////9)
 
 /** \brief Removes all of the elements from this list
  * \param pList ArrayList* Pointer to arrayList
@@ -224,6 +246,22 @@ int al_remove(ArrayList* pList,int index)
 int al_clear(ArrayList* pList)
 {
     int returnAux = -1;
+
+    void* pElements;
+
+    if(pList == NULL) return returnAux;
+
+    returnAux++;
+
+    free(pList->pElements);
+
+    pElements = malloc(sizeof(void *)*AL_INITIAL_VALUE );
+
+    pList->pElements = pElements;
+
+    pList->size = 0;
+
+     pList->reservedSize=AL_INITIAL_VALUE;
 
     return returnAux;
 }
@@ -388,4 +426,3 @@ int contract(ArrayList* pList,int index)
 
     return returnAux;
 }
-
