@@ -158,9 +158,9 @@ void* al_get(ArrayList* pList , int index)
 {
     void* returnAux = NULL;
 
-    if(pList == NULL)
+    if(pList == NULL || index > pList->size)
     {
-        free(pList);
+        //free(pList);
         return returnAux;
     }
 
@@ -190,7 +190,7 @@ int al_contains(ArrayList* pList, void* pElement)
 
     returnAux++;
 
-    while(size < pList->reservedSize)
+    while(size < pList->size)
     {
         if(pList->pElements+size == pElement) break;
 
