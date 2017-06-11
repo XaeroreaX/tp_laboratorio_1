@@ -238,12 +238,13 @@ int al_set(ArrayList* pList, int index,void* pElement)
 int al_remove(ArrayList* pList,int index)
 {
     int returnAux = -1;
+    //void* aux =(void*) malloc(sizeof(void)* 0);
 
     if(pList == NULL || (index > pList->size || index < 0)) return returnAux;
 
-    returnAux++;
+    returnAux = 0;
 
-    pList->pElements[index] = 0;
+
 
     return returnAux;
 }
@@ -271,7 +272,7 @@ int al_clear(ArrayList* pList)
 
     pList->pElements = pElements;
 
-    pList->size = 0;
+    pList->size = NULL;
 
      pList->reservedSize=AL_INITIAL_VALUE;
 
@@ -289,10 +290,41 @@ ArrayList* al_clone(ArrayList* pList)
 {
     ArrayList* returnAux = NULL;
 
+    int index;
+
+    if(pList == NULL) return returnAux;
+
+
+
+        returnAux = malloc(sizeof(void *)*pList->reservedSize);
+        if(returnAux != NULL)
+        {
+            returnAux->size= pList->size;
+            returnAux->pElements=pList->pElements;
+            returnAux->reservedSize=pList->reservedSize;
+            returnAux->add=al_add;
+            returnAux->len=al_len;
+            returnAux->set=al_set;
+            returnAux->remove=al_remove;
+            returnAux->clear=al_clear;
+            returnAux->clone=al_clone;
+            returnAux->get=al_get;
+            returnAux->contains=al_contains;
+            returnAux->push=al_push;
+            returnAux->indexOf=al_indexOf;
+            returnAux->isEmpty=al_isEmpty;
+            returnAux->pop=al_pop;
+            returnAux->subList=al_subList;
+            returnAux->containsAll=al_containsAll;
+            returnAux->deleteArrayList = al_deleteArrayList;
+            returnAux->sort = al_sort;
+            //returnAux = pList;
+        }
+
+
     return returnAux;
+
 }
-
-
 
 /**--------------------------------------------------------------------------*////11)
 /** \brief Inserts the element at the specified position
@@ -305,6 +337,8 @@ ArrayList* al_clone(ArrayList* pList)
 int al_push(ArrayList* pList, int index, void* pElement)
 {
     int returnAux = -1;
+
+
 
     return returnAux;
 }
