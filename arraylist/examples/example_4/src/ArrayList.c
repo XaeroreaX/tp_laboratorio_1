@@ -24,7 +24,7 @@ ArrayList* al_newArrayList(void)
     ArrayList* pList;
     ArrayList* returnAux = NULL;
     void* pElements;
-    pList=(ArrayList *)malloc(sizeof(ArrayList));
+    pList =(ArrayList*)malloc(sizeof(ArrayList));
 
     if(pList != NULL)
     {
@@ -74,37 +74,32 @@ ArrayList* al_newArrayList(void)
 int al_add(ArrayList* pList,void* pElement)
 {
     int returnAux = -1;
-    void* aux;
     int size;
+    int flag = 0;
 
     if(pList == NULL || pElement == NULL)
     {
-
-
         return returnAux;
     }
-    //printf("\n %d, %d",pList->size, pList->reservedSize);
+
+
+
     if(pList->size == pList->reservedSize)
     {
-        aux = realloc(pList->pElements, sizeof(void*) * (pList->reservedSize+AL_INCREMENT));
-        //printf("REALLOC");
-        if(aux == NULL)
-        {
-            //printf("NULL");
-            free(aux);
-            returnAux = 0;
-            return returnAux;
-        }
-        pList->reservedSize = pList->reservedSize + AL_INCREMENT;
+        flag = resizeUp(pList);
     }
 
 
-    size = pList->size;
-    pList->pElements[size] = pElement;
-    pList->size++;
-    returnAux = 0;
+    if(flag == 0)
+    {
 
+        size = pList->size;
+        pList->pElements[size] = pElement;
+        pList->size++;
+        returnAux = 0;
+    }
 
+    //printf("devuelve: %d\n", returnAux);
     return returnAux;
 }
 
@@ -153,7 +148,7 @@ int al_len(ArrayList* pList)
  * \return void* Return (NULL) if Error [pList is NULL pointer or invalid index] - (Pointer to element) if Ok
  *
  */
-void* al_get(ArrayList* pList , int index)
+void* al_get(ArrayList* pList, int index)
 {
     void* returnAux = NULL;
 
@@ -162,8 +157,6 @@ void* al_get(ArrayList* pList , int index)
         //free(pList);
         return returnAux;
     }
-
-
 
     returnAux = pList->pElements[index];
 
@@ -242,8 +235,8 @@ int al_remove(ArrayList* pList,int index)
 
     if(pList == NULL || (index > pList->size || index < 0)) return returnAux;
 
-    returnAux = 0;
 
+    returnAux = contract(pList,index);
 
 
     return returnAux;
@@ -274,7 +267,7 @@ int al_clear(ArrayList* pList)
 
     pList->size = NULL;
 
-     pList->reservedSize=AL_INITIAL_VALUE;
+    pList->reservedSize=AL_INITIAL_VALUE;
 
     return returnAux;
 }
@@ -290,36 +283,36 @@ ArrayList* al_clone(ArrayList* pList)
 {
     ArrayList* returnAux = NULL;
 
-    int index;
+
 
     if(pList == NULL) return returnAux;
 
 
 
-        returnAux = malloc(sizeof(void *)*pList->reservedSize);
-        if(returnAux != NULL)
-        {
-            returnAux->size= pList->size;
-            returnAux->pElements=pList->pElements;
-            returnAux->reservedSize=pList->reservedSize;
-            returnAux->add=al_add;
-            returnAux->len=al_len;
-            returnAux->set=al_set;
-            returnAux->remove=al_remove;
-            returnAux->clear=al_clear;
-            returnAux->clone=al_clone;
-            returnAux->get=al_get;
-            returnAux->contains=al_contains;
-            returnAux->push=al_push;
-            returnAux->indexOf=al_indexOf;
-            returnAux->isEmpty=al_isEmpty;
-            returnAux->pop=al_pop;
-            returnAux->subList=al_subList;
-            returnAux->containsAll=al_containsAll;
-            returnAux->deleteArrayList = al_deleteArrayList;
-            returnAux->sort = al_sort;
-            //returnAux = pList;
-        }
+    returnAux = malloc(sizeof(void *)*pList->reservedSize);
+    if(returnAux != NULL)
+    {
+        returnAux->size= pList->size;
+        returnAux->pElements=pList->pElements;
+        returnAux->reservedSize=pList->reservedSize;
+        returnAux->add=al_add;
+        returnAux->len=al_len;
+        returnAux->set=al_set;
+        returnAux->remove=al_remove;
+        returnAux->clear=al_clear;
+        returnAux->clone=al_clone;
+        returnAux->get=al_get;
+        returnAux->contains=al_contains;
+        returnAux->push=al_push;
+        returnAux->indexOf=al_indexOf;
+        returnAux->isEmpty=al_isEmpty;
+        returnAux->pop=al_pop;
+        returnAux->subList=al_subList;
+        returnAux->containsAll=al_containsAll;
+        returnAux->deleteArrayList = al_deleteArrayList;
+        returnAux->sort = al_sort;
+        //returnAux = pList;
+    }
 
 
     return returnAux;
@@ -338,7 +331,11 @@ int al_push(ArrayList* pList, int index, void* pElement)
 {
     int returnAux = -1;
 
+    if((pList == NULL || pElement == NULL) || (index > pList->size || index < 0)) return returnAux;
 
+    returnAux = expand(pList, index);
+
+    pList->pElements = pElement;
 
     return returnAux;
 }
@@ -353,6 +350,19 @@ int al_push(ArrayList* pList, int index, void* pElement)
 int al_indexOf(ArrayList* pList, void* pElement)
 {
     int returnAux = -1;
+    int index = 0;
+    if(pList == NULL || pElement == NULL) return returnAux;
+
+    while(index <= pList->size)
+    {
+
+        if(pElement == pList->pElements[index]) break;
+        index++;
+
+    }
+
+
+    if(index <= pList->size) returnAux = index;
 
     return returnAux;
 }
@@ -382,6 +392,17 @@ int al_isEmpty(ArrayList* pList)
 void* al_pop(ArrayList* pList,int index)
 {
     void* returnAux = NULL;
+    int flag;
+
+    if(pList == NULL || (index > pList->size || index < 0)) return returnAux;
+
+
+    flag = contract(pList,index);
+
+    if(flag == 0)
+    {
+        returnAux = pList->pElements[index];
+    }
 
     return returnAux;
 }
@@ -427,7 +448,7 @@ int al_containsAll(ArrayList* pList,ArrayList* pList2)
  * \return int Return (-1) if Error [pList or pFunc are NULL pointer]
  *                  - (0) if ok
  */
-int al_sort(ArrayList* pList, int (*pFunc)(void* ,void*), int order)
+int al_sort(ArrayList* pList, int (*pFunc)(void*,void*), int order)
 {
     int returnAux = -1;
 
@@ -445,6 +466,20 @@ int al_sort(ArrayList* pList, int (*pFunc)(void* ,void*), int order)
 int resizeUp(ArrayList* pList)
 {
     int returnAux = -1;
+    void* aux;
+
+    if(pList == NULL) return returnAux;
+
+
+    aux = realloc(pList->pElements, sizeof(void*) * (pList->reservedSize+AL_INCREMENT));
+    printf("REALLOC");
+    if(aux == NULL)
+    {
+        printf("Se metio aca");
+        return returnAux;
+    }
+    pList->reservedSize = pList->reservedSize + AL_INCREMENT;
+    returnAux=0;
 
     return returnAux;
 
@@ -460,11 +495,32 @@ int resizeUp(ArrayList* pList)
 int expand(ArrayList* pList,int index)
 {
     int returnAux = -1;
+    int i;
+    int flag = 0;
 
     if(pList == NULL || (index > pList->size || index < 0)) return returnAux;
 
+    returnAux++;
+
+    if(pList->size == pList->reservedSize)
+    {
+        flag = resizeUp(pList);
+    }
+
+    if(flag == 0)
+    {
 
 
+        pList->size++;
+
+        for(i = index; i < pList->size; i++)
+        {
+
+            pList->pElements[i + 1] = pList->pElements[i];
+
+        }
+
+    }
     return returnAux;
 }
 
@@ -478,6 +534,24 @@ int expand(ArrayList* pList,int index)
 int contract(ArrayList* pList,int index)
 {
     int returnAux = -1;
+
+    int i;
+
+    if(pList == NULL || (index < 0 || index > pList->size)) return returnAux;
+
+    returnAux = 0;
+
+
+    //if(index)
+    for(i = index + 1; i < pList->size; i++)
+    {
+
+        pList->pElements[i] = pList->pElements[i + 1];
+
+
+    }
+
+    pList->size--;
 
     return returnAux;
 }
