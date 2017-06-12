@@ -287,9 +287,8 @@ ArrayList* al_clone(ArrayList* pList)
 
     if(pList == NULL) return returnAux;
 
+    returnAux = al_newArrayList();
 
-
-    returnAux = malloc(sizeof(void *)*pList->reservedSize);
     if(returnAux != NULL)
     {
         returnAux->size= pList->size;
