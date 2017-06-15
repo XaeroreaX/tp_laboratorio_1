@@ -334,7 +334,7 @@ int al_push(ArrayList* pList, int index, void* pElement)
 
     returnAux = expand(pList, index);
 
-    pList->pElements = pElement;
+    pList->pElements[index] = pElement;
 
     return returnAux;
 }
@@ -375,6 +375,12 @@ int al_indexOf(ArrayList* pList, void* pElement)
 int al_isEmpty(ArrayList* pList)
 {
     int returnAux = -1;
+
+    if(pList == NULL) return returnAux;
+
+    returnAux++;
+
+    if(pList->size == 0) returnAux++;
 
     return returnAux;
 }
@@ -418,6 +424,40 @@ void* al_pop(ArrayList* pList,int index)
 ArrayList* al_subList(ArrayList* pList,int from,int to)
 {
     void* returnAux = NULL;
+    int i;
+    int flag;
+    ArrayList* aux;
+
+    if(pList != NULL)
+    {
+        if(from < to)
+        {
+            if((from >= 0 || from <= pList->size) || (to >= 0 || to <= pList->size))
+            {
+
+
+                aux = al_newArrayList();
+
+                for(i = from; i < to; i++)
+                {
+
+                    aux->pElements[aux->pElements] = pList->pElements[i];
+                    if(aux->size == aux->reservedSize);
+                    {
+                        flag = resizeUp(aux);
+                    }
+
+                    aux->size++;
+                }
+
+            }
+        }
+
+    }
+
+
+    if(flag == 0)
+
 
     return returnAux ;
 }
@@ -467,17 +507,19 @@ int resizeUp(ArrayList* pList)
     int returnAux = -1;
     void* aux;
 
+
+
     if(pList == NULL) return returnAux;
 
 
-    aux = realloc(pList->pElements, sizeof(void*) * (pList->reservedSize+AL_INCREMENT));
+    aux = realloc(pList->pElements, sizeof(void*) * (pList->reservedSize + AL_INCREMENT));
     printf("REALLOC");
     if(aux == NULL)
     {
         printf("Se metio aca");
         return returnAux;
     }
-    pList->reservedSize = pList->reservedSize + AL_INCREMENT;
+    pList->reservedSize += AL_INCREMENT;
     returnAux=0;
 
     return returnAux;
