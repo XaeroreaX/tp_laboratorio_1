@@ -476,30 +476,25 @@ int al_containsAll(ArrayList* pList,ArrayList* pList2)
 {
     int returnAux = -1;
 
-    int index;
+    int index,j;
 
-    int size;
+    int size,size2;
 
     if(pList == NULL || pList2==NULL) return returnAux;
 
-    size = pList->size;
 
-    if(pList->size < pList2->size)
-    {
-        size = pList->size;
-    }
-    else
-    {
-        size = pList2->size;
-    }
+    size = pList->size;
+    size2 = pList2->size;
 
     for(index = 0; index < size; index++)
     {
 
+        for(j = 0; j < size2; j++)
+        {
+            if(pList->pElements[index] == pList2->pElements[j]) break;
+        }
 
-
-        if(pList->pElements[index] != pList2->pElements[index]) break;
-
+        if(j == size2) break;
 
     }
 
