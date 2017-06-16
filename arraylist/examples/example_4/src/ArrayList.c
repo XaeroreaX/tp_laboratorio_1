@@ -441,7 +441,7 @@ ArrayList* al_subList(ArrayList* pList,int from,int to)
                 for(i = from; i < to; i++)
                 {
 
-                    aux->pElements[aux->pElements] = pList->pElements[i];
+                    aux->pElements[aux->size] = pList->pElements[i];
                     if(aux->size == aux->reservedSize);
                     {
                         flag = resizeUp(aux);
@@ -456,7 +456,7 @@ ArrayList* al_subList(ArrayList* pList,int from,int to)
     }
 
 
-    if(flag == 0)
+    if(flag == 0) returnAux = aux;
 
 
     return returnAux ;
@@ -475,6 +475,35 @@ ArrayList* al_subList(ArrayList* pList,int from,int to)
 int al_containsAll(ArrayList* pList,ArrayList* pList2)
 {
     int returnAux = -1;
+
+    int index;
+
+    int size;
+
+    if(pList == NULL || pList2==NULL) return returnAux;
+
+    size = pList->size;
+
+    if(pList->size < pList2->size)
+    {
+        size = pList->size;
+    }
+    else
+    {
+        size = pList2->size;
+    }
+
+    for(index = 0; index < size; index++)
+    {
+
+
+
+        if(pList->pElements[index] != pList2->pElements[index]) break;
+
+
+    }
+
+    if(index == size) returnAux++;
 
     return returnAux;
 }
