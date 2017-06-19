@@ -135,7 +135,7 @@ int al_len(ArrayList* pList)
 
     if(pList == NULL) return -1;
 
-    return pList->size++;
+    return pList->size;
 
 
 }
@@ -514,8 +514,49 @@ int al_containsAll(ArrayList* pList,ArrayList* pList2)
 int al_sort(ArrayList* pList, int (*pFunc)(void*,void*), int order)
 {
     int returnAux = -1;
+    int i, j;
+    void* aux;
 
-    //if()
+    if((pList == NULL || pFunc==NULL) || (order > 1 || order <= -1)) return returnAux;
+//  printf("size: %d", pList->len(pList));
+   for(i = 0; i < pList->len(pList) - 1; i++)
+
+    {
+//        printf("i: %d", i);
+        for(j = i + 1; j < pList->len(pList) ; j++)
+        {
+//            printf("j: %d", j);
+            if(order == 1)
+            {
+
+
+                if(pFunc(pList->pElements[i], pList->pElements[j]) > 0)
+                {
+
+                    aux = pList->pElements[i];
+                    pList->pElements[i] = pList->pElements[j];
+                    pList->pElements[j] = aux;
+
+                }
+            }
+            else
+            {
+                if(pFunc(pList->pElements[i], pList->pElements[j]) < 0)
+                {
+
+                    aux = pList->pElements[i];
+                    pList->pElements[i] = pList->pElements[j];
+                    pList->pElements[j] = aux;
+
+                }
+            }
+        }
+
+    }
+
+    returnAux = 0;
+
+
 
     return returnAux;
 }
@@ -537,13 +578,15 @@ int resizeUp(ArrayList* pList)
 
 
     aux = realloc(pList->pElements, sizeof(void*) * (pList->reservedSize + AL_INCREMENT));
-    printf("REALLOC");
+    //printf("REALLOC");
     if(aux == NULL)
     {
-        printf("Se metio aca");
+        //printf("Se metio aca");
         return returnAux;
     }
+    pList->pElements=aux;
     pList->reservedSize += AL_INCREMENT;
+
     returnAux=0;
 
     return returnAux;
