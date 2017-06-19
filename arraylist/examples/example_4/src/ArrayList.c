@@ -425,35 +425,41 @@ ArrayList* al_subList(ArrayList* pList,int from,int to)
 {
     void* returnAux = NULL;
     int i;
+    int paux;
     int flag;
     ArrayList* aux;
 
-    if(pList != NULL)
-    {
-        if(from < to)
+    if(pList == NULL || from == to) return returnAux;
+
+        if(from > to)
         {
-            if((from >= 0 || from <= pList->size) || (to >= 0 || to <= pList->size))
-            {
-
-
-                aux = al_newArrayList();
-
-                for(i = from; i < to; i++)
-                {
-
-                    aux->pElements[aux->size] = pList->pElements[i];
-                    if(aux->size == aux->reservedSize);
-                    {
-                        flag = resizeUp(aux);
-                    }
-
-                    aux->size++;
-                }
-
-            }
+            paux = from;
+            from = to;
+            to = paux;
         }
 
-    }
+        if((from >= 0 || from <= pList->len(pList)) || (to >= 0 || to <= pList->len(pList)))
+        {
+
+
+            aux = al_newArrayList();
+
+            for(i = from; i < to; i++)
+            {
+
+                aux->pElements[aux->size] = pList->pElements[i];
+                if(aux->size == aux->reservedSize);
+                {
+                    flag = resizeUp(aux);
+                }
+
+                aux->size++;
+            }
+
+        }
+
+
+
 
 
     if(flag == 0) returnAux = aux;
