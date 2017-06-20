@@ -44,3 +44,27 @@
 
 1497866350 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_3_cascara\arraylist.h
 
+1497889970 source:c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\tp_4\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1497889970 c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\tp_4\arraylist.h
+
+1497889970 source:c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\tp_4\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+	"ArrayList.h"
+
+1497980790 c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\tp_4\funciones.h
+	"ArrayList.h"
+
+1497980830 source:c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\tp_4\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+	"ArrayList.h"
+

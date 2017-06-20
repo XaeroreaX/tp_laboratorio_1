@@ -32,6 +32,7 @@ int main()
         switch(opcion)
         {
             case 1:
+                agregarPelicula(list);
                 break;
             case 2:
                 break;

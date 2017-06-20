@@ -12,13 +12,17 @@
 
 /**-------------------------------------------------------*////1)
 
-int agregarPelicula(EMovie* movie)
+int agregarPelicula(ArrayList* list)
 {
 
     FILE* arch;
+    EMovie* movie;
     int len;
 
-    cargarSmovie(movie, 0);
+    movie = (EMovie*) malloc(sizeof(movie));
+    cargarSmovie(movie);
+
+    list->add(list, movie);
 
     //lo almacenamos en data.txt
     arch = fopen("data.txt", "ab+");
@@ -29,6 +33,7 @@ int agregarPelicula(EMovie* movie)
 
     fclose(arch);
 
+    free(movie);
 
     return 1;
 }
@@ -42,7 +47,7 @@ int borrarPelicula(EMovie movie)
     return 1;
 }
 
-/**-------------------------------------------------------*////2)
+/**-------------------------------------------------------///2)
 
 int modificarM(EMovie* movie, int dim)
 {
@@ -64,7 +69,7 @@ int modificarM(EMovie* movie, int dim)
     fclose(arch);
 
     return OK;
-}
+}*/
 
 
 
@@ -109,27 +114,27 @@ int findMovie(EMovie* movie, int dim)
 
 /**-------------------------------------------------------*////4)
 
-void cargarSmovie(EMovie* movie, int index)
+void cargarSmovie(EMovie* movie)
 {
 
     printf("ingrese el titulo de la pelicula\n");
-    cargarCaracter(20, (movie+index)->titulo);
+    cargarCaracter(20, movie->titulo);
 
 
     printf("ingrese el genero de la pelicula\n");
-    cargarCaracter(20, (movie + index)->genero);
+    cargarCaracter(20, movie->genero);
 
     printf("ingrese la duracion de la pelicula(en minutos)");
-    scanf("%d", &(movie + index)->duracion);
+    scanf("%d", &movie->duracion);
 
     printf("ingrese la descripcion de la pelicula");
-    cargarCaracter(50, (movie+index)->descripcion);
+    cargarCaracter(50, movie->descripcion);
 
     printf("ingrese el puntahe de la pelicula\n");
-    scanf("%d", &(movie+index)->puntaje);
+    scanf("%d", &movie->puntaje);
 
     printf("ingrese el link de imagen de la pelicula\n");
-    cargarCaracter(50, (movie+index)->linkImagen);
+    cargarCaracter(50, movie->linkImagen);
 
 
 }
@@ -137,12 +142,13 @@ void cargarSmovie(EMovie* movie, int index)
 
 int leerArchData(ArrayList* list)
 {
-    int dim
+    int dim, i, val;
     FILE* arch;
     EMovie* movie;
+
     movie = (EMovie*)malloc(sizeof(EMovie));
 
-    arch = fopen("data.txt", "+rb");
+    arch = fopen("data.txt", "rb+");
 
 
     //situa el cursor al final
@@ -150,7 +156,16 @@ int leerArchData(ArrayList* list)
 
     //contamos los bytes y lo dividimos por el tamaño de EMovie y despues redimensionamos
     dim = ftell(arch)/sizeof(EMovie);
+    //while
+    for(i = 0; i < dim; i++)
+    {
+        fread(movie, sizeof(movie), 1, arch);
+        val = list->add(list, movie);
+        if(val == -1) printf("no se pudo leer el registro");
+    }
 
+    fclose(arch);
+    free(movie);
     return OK;
 }
 
