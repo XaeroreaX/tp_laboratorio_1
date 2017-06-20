@@ -10,7 +10,7 @@
 int main()
 {
     char seguir='s';
-    int opcion=0, val, dim, i = 2;
+    int opcion=0, val;
     ArrayList* list;
 
     list = (ArrayList*) malloc(sizeof(ArrayList));
@@ -46,7 +46,7 @@ int main()
 
 
         }
-
+        showList(list);
 
     }
 

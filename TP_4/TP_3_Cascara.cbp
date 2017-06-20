@@ -35,7 +35,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="ArrayList.h" />
-		<Unit filename="data.txt" />
+		<Unit filename="data.dat" />
 		<Unit filename="funciones.c">
 			<Option compilerVar="CC" />
 		</Unit>

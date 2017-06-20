@@ -17,18 +17,16 @@ int agregarPelicula(ArrayList* list)
 
     FILE* arch;
     EMovie* movie;
-    int len;
 
     movie = (EMovie*) malloc(sizeof(movie));
     cargarSmovie(movie);
 
     list->add(list, movie);
 
-    //lo almacenamos en data.txt
-    arch = fopen("data.txt", "ab+");
+    arch = fopen("data.dat", "ab+");
     if(arch == NULL) return 0;
 
-    len = fwrite(movie, sizeof(EMovie), 1, arch);
+    fwrite(movie, sizeof(EMovie), 1, arch);
 
 
     fclose(arch);
@@ -82,7 +80,7 @@ void generarPagina(EMovie lista[], char nombre[])
 
 /**-------------------------------------------------------*////4)
 
-
+/*
 int findMovie(EMovie* movie, int dim)
 {
     int index;
@@ -111,7 +109,7 @@ int findMovie(EMovie* movie, int dim)
 
     return index;
 }
-
+*/
 /**-------------------------------------------------------*////4)
 
 void cargarSmovie(EMovie* movie)
@@ -142,22 +140,22 @@ void cargarSmovie(EMovie* movie)
 
 int leerArchData(ArrayList* list)
 {
-    int dim, i, val;
+    int size, i, val;
     FILE* arch;
     EMovie* movie;
 
     movie = (EMovie*)malloc(sizeof(EMovie));
 
-    arch = fopen("data.txt", "rb+");
+    arch = fopen("data.dat", "rb");
 
 
     //situa el cursor al final
     fseek(arch, 0, SEEK_END);
 
     //contamos los bytes y lo dividimos por el tamaño de EMovie y despues redimensionamos
-    dim = ftell(arch)/sizeof(EMovie);
-    //while
-    for(i = 0; i < dim; i++)
+    size = ftell(arch)/sizeof(EMovie);
+
+    for(i = 0; i < size; i++)
     {
         fread(movie, sizeof(movie), 1, arch);
         val = list->add(list, movie);
@@ -167,6 +165,32 @@ int leerArchData(ArrayList* list)
     fclose(arch);
     free(movie);
     return OK;
+}
+
+/**-------------------------------------------------------*////n)
+
+void showList(ArrayList* list)
+{
+    int i;
+
+    EMovie* movie;
+
+    movie = (EMovie*) malloc(sizeof(movie));
+
+      /*char titulo[20];
+    char genero[20];
+    int duracion;
+    char descripcion[50];
+    int puntaje;
+    char linkImagen[50];*/
+    for(i = 0; i < list->len(list); i++)
+    {
+        movie = list->get(list, i);
+        printf("titulo: %s\n", movie->titulo);
+
+    }
+
+    free(movie);
 }
 
 /**-------------------------------------------------------*////n)

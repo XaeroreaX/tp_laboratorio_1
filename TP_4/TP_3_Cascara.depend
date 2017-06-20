@@ -68,3 +68,27 @@
 	"funciones.h"
 	"ArrayList.h"
 
+1497966786 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_4\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1497966786 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_4\arraylist.h
+
+1497993647 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_4\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+	"ArrayList.h"
+
+1497966786 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_4\funciones.h
+	"ArrayList.h"
+
+1497994641 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_4\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+	"ArrayList.h"
+
