@@ -17,7 +17,7 @@ typedef struct{
  *  @param movie la estructura a ser agregada al archivo
  *  @return retorna 1 o 0 de acuerdo a si pudo agregar la pelicula o no
  */
-int agregarPelicula(ArrayList*);
+int addMovieList(ArrayList*);
 
 /**2)
  *  Borra una pelicula del archivo binario
@@ -26,6 +26,7 @@ int agregarPelicula(ArrayList*);
  */
 int borrarPelicula(EMovie movie);
 
+int listWFile(ArrayList* MovieList);
 
 int modificarM(EMovie*, int);
 

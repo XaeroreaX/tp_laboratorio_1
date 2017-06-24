@@ -12,35 +12,42 @@
 
 /**-------------------------------------------------------*////1)
 
-int agregarPelicula(ArrayList* list)
+int addMovieList(ArrayList* Movielist)
 {
 
-    FILE* arch;
     EMovie* movie;
 
     movie = (EMovie*) malloc(sizeof(movie));
+    if(movie == NULL) return -1;
     cargarSmovie(movie);
 
-    list->add(list, movie);
+    Movielist->add(Movielist, movie);
 
-    arch = fopen("data.dat", "ab+");
-    if(arch == NULL) return 0;
-
-    fwrite(movie, sizeof(EMovie), 1, arch);
-
-
-    fclose(arch);
-
-    free(movie);
+    //free(movie);
 
     return 1;
 }
 
 /**-------------------------------------------------------*////2)
 
-int borrarPelicula(EMovie movie)
+int listWFile(ArrayList* MovieList)
 {
+    int i;
+    FILE* arch;
 
+    EMovie* movie;
+
+    arch = fopen("data.dat", "wb");
+    if(arch == NULL) return 0;
+
+    for(i = 0; i < MovieList->len(MovieList); i++)
+    {
+        movie = (EMovie*)(MovieList->get(MovieList, i));
+        fwrite(movie,sizeof(EMovie*), 1 , arch);
+
+    }
+
+    fclose(arch);
 
     return 1;
 }
@@ -147,6 +154,7 @@ int leerArchData(ArrayList* list)
     movie = (EMovie*)malloc(sizeof(EMovie));
 
     arch = fopen("data.dat", "rb");
+    if(arch == NULL) return DENEID;
 
 
     //situa el cursor al final
@@ -163,7 +171,7 @@ int leerArchData(ArrayList* list)
     }
 
     fclose(arch);
-    free(movie);
+    //free(movie);
     return OK;
 }
 
@@ -175,7 +183,7 @@ void showList(ArrayList* list)
 
     EMovie* movie;
 
-    movie = (EMovie*) malloc(sizeof(movie));
+   // movie = (EMovie*) malloc(sizeof(movie));
 
       /*char titulo[20];
     char genero[20];
@@ -185,12 +193,12 @@ void showList(ArrayList* list)
     char linkImagen[50];*/
     for(i = 0; i < list->len(list); i++)
     {
-        movie = list->get(list, i);
+        movie = (EMovie*)(list->get(list, i));
         printf("titulo: %s\n", movie->titulo);
 
     }
 
-    free(movie);
+
 }
 
 /**-------------------------------------------------------*////n)

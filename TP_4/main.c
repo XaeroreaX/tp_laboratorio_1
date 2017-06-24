@@ -13,14 +13,18 @@ int main()
     int opcion=0, val;
     ArrayList* list;
 
-    list = (ArrayList*) malloc(sizeof(ArrayList));
-
     list = al_newArrayList();
 
-    val = leerArchData(list);
+
+
 
     while(seguir=='s')
     {
+
+
+        val = leerArchData(list);
+        printf("%d", val);
+
         printf("1- Agregar pelicula\n");
         printf("2- Borrar pelicula\n");
         printf("3- Modificar pelicula\n");
@@ -32,7 +36,7 @@ int main()
         switch(opcion)
         {
             case 1:
-                agregarPelicula(list);
+                addMovieList(list);
                 break;
             case 2:
                 break;
@@ -41,11 +45,12 @@ int main()
             case 4:
                break;
             case 5:
+
                 seguir = 'n';
                 break;
 
-
         }
+        //listWFile(list);
         showList(list);
 
     }
