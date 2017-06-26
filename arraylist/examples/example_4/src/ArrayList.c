@@ -152,7 +152,7 @@ void* al_get(ArrayList* pList, int index)
 {
     void* returnAux = NULL;
 
-    if(pList == NULL || (index > pList->len(pList) || index < 0))
+    if(pList == NULL || (index > pList->size || index < 0))
     {
         //free(pList);
         return returnAux;
@@ -426,40 +426,29 @@ ArrayList* al_subList(ArrayList* pList,int from,int to)
     void* returnAux = NULL;
     int i;
     int paux;
-    int flag;
+    int flag = -1;
     ArrayList* aux;
 
-    if(pList == NULL || from == to) return returnAux;
+    if(from > to) return returnAux;
 
-        if(from > to)
-        {
-            paux = from;
-            from = to;
-            to = paux;
-        }
+    if(pList != NULL && from != to)
+    {
 
-        if((from >= 0 || from <= pList->len(pList)) || (to >= 0 || to <= pList->len(pList)))
+        if((from > -1 && from <= pList->len(pList)) && (to > -1 && to <= pList->len(pList)))
         {
 
 
             aux = al_newArrayList();
-
-            for(i = from; i < to; i++)
+            if(aux != NULL)
             {
 
-                aux->pElements[aux->size] = pList->pElements[i];
-                if(aux->size == aux->reservedSize);
-                {
-                    flag = resizeUp(aux);
-                }
+                for(i = from; i < to; i++)
+                    flag = aux->add(aux, pList->pElements[i]);
 
-                aux->size++;
             }
 
         }
-
-
-
+    }
 
 
     if(flag == 0) returnAux = aux;
@@ -480,31 +469,20 @@ ArrayList* al_subList(ArrayList* pList,int from,int to)
  */
 int al_containsAll(ArrayList* pList,ArrayList* pList2)
 {
-    int returnAux = -1;
+    int returnAux = -1, index, size;
 
-    int index,j;
 
-    int size,size2;
 
     if(pList == NULL || pList2==NULL) return returnAux;
 
+    returnAux++;
 
-    size = pList->size;
-    size2 = pList2->size;
 
-    for(index = 0; index < size; index++)
-    {
+    for(index = 0; index < pList->len(pList); index++)
+        if(pList2->contains(pList2, pList->pElements[index]) < 1) return returnAux;
 
-        for(j = 0; j < size2; j++)
-        {
-            if(pList->pElements[index] == pList2->pElements[j]) break;
-        }
-
-        if(j == size2) break;
-
-    }
-
-    if(index == size) returnAux++;
+    returnAux++;
+    printf("%d", returnAux);
 
     return returnAux;
 }
