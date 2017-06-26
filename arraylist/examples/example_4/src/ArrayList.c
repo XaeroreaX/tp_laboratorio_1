@@ -479,10 +479,10 @@ int al_containsAll(ArrayList* pList,ArrayList* pList2)
 
 
     for(index = 0; index < pList->len(pList); index++)
-        if(pList2->contains(pList2, pList->pElements[index]) < 1) return returnAux;
+        if(pList2->contains(pList2, pList->get(pList, index)) < 1) return returnAux;
 
     returnAux++;
-    printf("%d", returnAux);
+    //printf("%d", returnAux);
 
     return returnAux;
 }
