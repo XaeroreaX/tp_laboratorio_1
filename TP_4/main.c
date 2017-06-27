@@ -29,13 +29,22 @@ int main()
         switch(opcion)
         {
             case 1:
-
+                system("cls");
                 val = addMovieList(list);
                 if(val == DENEID)
+                {
                     printf("Error en la funcion addMovieList");
-
+                    system("pause");
+                }
                 break;
             case 2:
+                system("cls");
+                val = removeMovieList(list);
+                if(val == DENEID)
+                {
+                    printf("Error en la funcion removeMovieList");
+                    system("pause");
+                }
                 break;
             case 3:
                break;
@@ -47,9 +56,13 @@ int main()
 
 
         }
-
-        val = showMovieList(list);
+        system("cls");
+        val = showMovieListIndex(list);
         if(val == DENEID) printf("Error en la funcion showMovieList");
+
+
+        system("pause");
+        system("cls");
 
     }
 

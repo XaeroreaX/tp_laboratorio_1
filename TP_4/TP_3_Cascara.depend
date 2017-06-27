@@ -68,7 +68,7 @@
 	"funciones.h"
 	"ArrayList.h"
 
-1497966786 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_4\arraylist.c
+1498574509 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_4\arraylist.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -85,7 +85,7 @@
 1498573881 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_4\funciones.h
 	"ArrayList.h"
 
-1498573918 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_4\funciones.c
+1498576594 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_4\funciones.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

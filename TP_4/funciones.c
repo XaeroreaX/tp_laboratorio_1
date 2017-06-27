@@ -28,7 +28,30 @@ int addMovieList(ArrayList* movieList)
     return returnAux;
 }
 
-int showMovieList(ArrayList* movieList)
+/**-------------------------------------------------------*////2)
+
+int removeMovieList(ArrayList* movieList)
+{
+
+    int returnAux = DENEID, index, val;
+
+
+    if(movieList == NULL) return returnAux;
+
+    printf("elija una pelicula por indice\n");
+    val = showMovieListIndex(movieList);
+    if(val == DENEID) printf("Error en la funcion showMovieList");
+
+    scanf("%d", &index);
+
+    returnAux = movieList->remove(movieList, index);
+
+    return returnAux;
+}
+
+/**-------------------------------------------------------*////n)
+
+int showMovieListIndex(ArrayList* movieList)
 {
     int i, returnAux = DENEID;
 
@@ -41,14 +64,15 @@ int showMovieList(ArrayList* movieList)
     for(i = 0; i < movieList->len(movieList); i++)
     {
         movie = (EMovie*) movieList->get(movieList, i);
-        printf("\ntitulo:%s", movie->titulo);
+        printf("\n%d)titulo:%s", i, movie->titulo);
     }
 
-    returnAux = OK;
+    returnAux = i;
 
     return returnAux;
 }
 
+/**-------------------------------------------------------*////n)
 
 EMovie* addMovie()
 {
@@ -98,6 +122,7 @@ EMovie* addMovie()
     return movie;
 }
 
+/**-------------------------------------------------------*////n)
 
 void cargarCaracter(int tam, char caracteres[tam])
 {
