@@ -3,8 +3,8 @@
 #include <string.h>
 #include "funciones.h"
 #include "ArrayList.h"
-#define OK 1
-#define DENEID 0
+#define OK 0
+#define DENEID -1
 
 
 
@@ -12,202 +12,99 @@
 
 /**-------------------------------------------------------*////1)
 
-int addMovieList(ArrayList* Movielist)
+int addMovieList(ArrayList* movieList)
 {
-
+    int returnAux = DENEID;
     EMovie* movie;
 
-    movie = (EMovie*) malloc(sizeof(movie));
-    if(movie == NULL) return -1;
-    cargarSmovie(movie);
+    if(movieList == NULL) return returnAux;
 
-    Movielist->add(Movielist, movie);
+    movie = addMovie();
 
-    //free(movie);
+    if(movie != NULL)
+        returnAux = movieList->add(movieList, movie);
 
-    return 1;
+
+    return returnAux;
 }
 
-/**-------------------------------------------------------*////2)
-
-int listWFile(ArrayList* MovieList)
+int showMovieList(ArrayList* movieList)
 {
-    int i;
-    FILE* arch;
+    int i, returnAux = DENEID;
 
     EMovie* movie;
 
-    arch = fopen("data.dat", "wb");
-    if(arch == NULL) return 0;
+    movie = (EMovie*) malloc(sizeof(EMovie));
 
-    for(i = 0; i < MovieList->len(MovieList); i++)
+    if(movieList == NULL || movie == NULL) return returnAux;
+
+    for(i = 0; i < movieList->len(movieList); i++)
     {
-        movie = (EMovie*)(MovieList->get(MovieList, i));
-        fwrite(movie,sizeof(EMovie*), 1 , arch);
-
+        movie = (EMovie*) movieList->get(movieList, i);
+        printf("\ntitulo:%s", movie->titulo);
     }
 
-    fclose(arch);
+    returnAux = OK;
 
-    return 1;
+    return returnAux;
 }
 
-/**-------------------------------------------------------///2)
 
-int modificarM(EMovie* movie, int dim)
+EMovie* addMovie()
 {
-
-    FILE* arch;
-    int index;
-
-    index = findMovie(movie, dim);
-
-    cargarSmovie(movie, index);
-
-    arch = fopen("data.exe","wb");
-    if(arch == NULL) return DENEID;
-
-    fseek(arch, sizeof(EMovie) * index, SEEK_CUR);
-
-    fwrite(movie+index, sizeof(EMovie), 1 , arch);
-
-    fclose(arch);
-
-    return OK;
-}*/
-
-
-
-/**-------------------------------------------------------*////4)
-
-void generarPagina(EMovie lista[], char nombre[])
-{
-
-}
-
-/**-------------------------------------------------------*////4)
-
-/*
-int findMovie(EMovie* movie, int dim)
-{
-    int index;
-    char name[20];
-    printf("ingrese el nombre que quiera modificar");
-    cargarCaracter(20,name);
-
-    //bucle para validar y encontrar la pelicula
-    do{
-
-
-        index = 0;
-        while(index < dim)
-        {
-            if(strcmp(name,(movie+index)->titulo) == 0)break;
-
-            index++;
-        }
-        if(index == dim)
-        {
-            printf("ingreso mal el nombre, por favor ingrese de nuevo que quiera modificar: ");
-            cargarCaracter(20,name);
-        }
-
-    }while(index == dim);
-
-    return index;
-}
-*/
-/**-------------------------------------------------------*////4)
-
-void cargarSmovie(EMovie* movie)
-{
-
-    printf("ingrese el titulo de la pelicula\n");
-    cargarCaracter(20, movie->titulo);
-
-
-    printf("ingrese el genero de la pelicula\n");
-    cargarCaracter(20, movie->genero);
-
-    printf("ingrese la duracion de la pelicula(en minutos)");
-    scanf("%d", &movie->duracion);
-
-    printf("ingrese la descripcion de la pelicula");
-    cargarCaracter(50, movie->descripcion);
-
-    printf("ingrese el puntahe de la pelicula\n");
-    scanf("%d", &movie->puntaje);
-
-    printf("ingrese el link de imagen de la pelicula\n");
-    cargarCaracter(50, movie->linkImagen);
-
-
-}
-/**-------------------------------------------------------*////n)
-
-int leerArchData(ArrayList* list)
-{
-    int size, i, val;
-    FILE* arch;
     EMovie* movie;
 
-    movie = (EMovie*)malloc(sizeof(EMovie));
+    movie = (EMovie*) malloc(sizeof(EMovie));
 
-    arch = fopen("data.dat", "rb");
-    if(arch == NULL) return DENEID;
-
-
-    //situa el cursor al final
-    fseek(arch, 0, SEEK_END);
-
-    //contamos los bytes y lo dividimos por el tamaño de EMovie y despues redimensionamos
-    size = ftell(arch)/sizeof(EMovie);
-
-    for(i = 0; i < size; i++)
-    {
-        fread(movie, sizeof(movie), 1, arch);
-        val = list->add(list, movie);
-        if(val == -1) printf("no se pudo leer el registro");
-    }
-
-    fclose(arch);
-    //free(movie);
-    return OK;
-}
-
-/**-------------------------------------------------------*////n)
-
-void showList(ArrayList* list)
-{
-    int i;
-
-    EMovie* movie;
-
-   // movie = (EMovie*) malloc(sizeof(movie));
-
-      /*char titulo[20];
+    /*char titulo[20];
     char genero[20];
     int duracion;
     char descripcion[50];
     int puntaje;
     char linkImagen[50];*/
-    for(i = 0; i < list->len(list); i++)
+
+    if(movie != NULL)
     {
-        movie = (EMovie*)(list->get(list, i));
-        printf("titulo: %s\n", movie->titulo);
+        printf("\nIngrese el titulo de la pelicula:");
+        cargarCaracter(20, movie->titulo);
+
+        printf("\nIngrese el genero de la pelicula:");
+        cargarCaracter(20, movie->genero);
+
+        printf("\nIngrese el duracion de la pelicula(en minutos):");
+        scanf("%d", &movie->duracion);
+        while(movie->duracion < 3)
+        {
+            printf("\nIngreso mal el duracion de la pelicula, por favor ingrese de nuevo:");
+            scanf("%d", &movie->duracion);
+        }
+
+        printf("\nIngrese la descripcion de la pelicula:");
+        cargarCaracter(50, movie->descripcion);
+
+        printf("\nIngrese el puntuacion de la pelicula(de 10 a 100):");
+        scanf("%d", &movie->puntaje);
+        while(movie->puntaje < 10 || movie->puntaje > 100)
+        {
+            printf("\nIngreso mal la puntuacion de la pelicula, por favor ingrese de nuevo:");
+            scanf("%d", &movie->puntaje);
+        }
+
+        printf("\nIngrese un link para la imagen de la pelicula:");
+        cargarCaracter(50, movie->linkImagen);
 
     }
 
-
+    return movie;
 }
 
-/**-------------------------------------------------------*////n)
 
 void cargarCaracter(int tam, char caracteres[tam])
 {
     char buffer[1024];
 
     fflush(stdin);
+
     gets(buffer);
     while(strlen(buffer) > tam)
     {
@@ -216,6 +113,5 @@ void cargarCaracter(int tam, char caracteres[tam])
         gets(buffer);
     }
     strcpy(caracteres, buffer);
-
 
 }

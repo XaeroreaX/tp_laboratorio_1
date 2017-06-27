@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include "funciones.h"
 #include "ArrayList.h"
-#define OK 1
-#define DENEID 0
+#define OK 0
+#define DENEID -1
 
 
 
@@ -16,15 +16,8 @@ int main()
     list = al_newArrayList();
 
 
-
-
     while(seguir=='s')
     {
-
-
-        val = leerArchData(list);
-        printf("%d", val);
-
         printf("1- Agregar pelicula\n");
         printf("2- Borrar pelicula\n");
         printf("3- Modificar pelicula\n");
@@ -36,7 +29,11 @@ int main()
         switch(opcion)
         {
             case 1:
-                addMovieList(list);
+
+                val = addMovieList(list);
+                if(val == DENEID)
+                    printf("Error en la funcion addMovieList");
+
                 break;
             case 2:
                 break;
@@ -45,13 +42,14 @@ int main()
             case 4:
                break;
             case 5:
-
                 seguir = 'n';
                 break;
 
+
         }
-        //listWFile(list);
-        showList(list);
+
+        val = showMovieList(list);
+        if(val == DENEID) printf("Error en la funcion showMovieList");
 
     }
 
