@@ -14,6 +14,14 @@ typedef struct{
 
 int addMovieList(ArrayList*);
 
+int removeMovieList(ArrayList* movieList);
+
+int setMovieList(ArrayList* movieList);
+
+int fileToMovieList(ArrayList* movieList);
+
+int movieListToFile(ArrayList* movieList);
+
 int showMovieList(ArrayList* movieList);
 
 EMovie* addMovie();

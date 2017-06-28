@@ -15,6 +15,7 @@ int main()
 
     list = al_newArrayList();
 
+    fileToMovieList(list);
 
     while(seguir=='s')
     {
@@ -47,7 +48,13 @@ int main()
                 }
                 break;
             case 3:
-               break;
+                val = setMovieList(list);
+                if(val == DENEID)
+                {
+                    printf("Error en la funcion removeMovieList");
+                    system("pause");
+                }
+                break;
             case 4:
                break;
             case 5:
@@ -56,11 +63,12 @@ int main()
 
 
         }
+
         system("cls");
         val = showMovieListIndex(list);
         if(val == DENEID) printf("Error en la funcion showMovieList");
 
-
+        movieListToFile(list);
         system("pause");
         system("cls");
 

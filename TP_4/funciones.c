@@ -38,7 +38,7 @@ int removeMovieList(ArrayList* movieList)
 
     if(movieList == NULL) return returnAux;
 
-    printf("elija una pelicula por indice\n");
+    printf("elija la pelicula que quiere borrar por indice\n");
     val = showMovieListIndex(movieList);
     if(val == DENEID) printf("Error en la funcion showMovieList");
 
@@ -46,6 +46,104 @@ int removeMovieList(ArrayList* movieList)
 
     returnAux = movieList->remove(movieList, index);
 
+    return returnAux;
+}
+
+/**-------------------------------------------------------*////3)
+
+int setMovieList(ArrayList* movieList)
+{
+    int returnAux = DENEID, index, val;
+    EMovie* movie;
+
+    if(movieList == NULL) return returnAux;
+
+    printf("ingrese el indice la pelicula que quiere modificar:\n");
+    val = showMovieListIndex(movieList);
+    if(val == DENEID) printf("Error en la funcion showMovieList");
+
+    scanf("%d", &index);
+
+    movie = addMovie();
+
+    if(movie != NULL)
+        returnAux = movieList->set(movieList, index, movie);
+
+
+    return returnAux;
+
+}
+
+/**-------------------------------------------------------*////n)
+
+int fileToMovieList(ArrayList* movieList)
+{
+    FILE* file;
+    int returnAux = DENEID, index, size, len;
+
+    EMovie* movie;
+
+    movie = (EMovie*) malloc(sizeof(EMovie));
+
+    file = fopen("data.dat", "rb");
+
+    if(file == NULL || movieList == NULL)
+    {
+        fclose(file);
+        return returnAux;
+    }
+
+    fseek(file, 0 , SEEK_END);
+
+    size = ftell(file)/sizeof(EMovie);
+
+    rewind(file);
+
+    for(index = 0; index<size; index++)
+    {
+        len = fread(movie, sizeof(EMovie), 1,file);
+        returnAux = movieList->add(movieList, movie);
+        if(returnAux == DENEID) break;
+
+        printf("%d-%s",len, movie->titulo);
+    }
+
+
+    fclose(file);
+    return returnAux;
+}
+
+
+/**-------------------------------------------------------*////n)
+
+int movieListToFile(ArrayList* movieList)
+{
+    FILE* file;
+    int returnAux = DENEID, index, size, len;
+
+    EMovie* movie;
+
+    movie = (EMovie*) malloc(sizeof(EMovie));
+
+    file = fopen("data.dat", "w+b");
+
+    if(file == NULL || movieList == NULL)
+    {
+        fclose(file);
+        return returnAux;
+    }
+
+    size = movieList->len(movieList);
+
+    for(index = 0; index<size; index++)
+    {
+        movie =(EMovie*) movieList->get(movieList, index);
+        len = fwrite(movie, sizeof(EMovie), 1,file);
+        printf("%d-%d-%s",index,len, movie->titulo);
+    }
+
+
+    fclose(file);
     return returnAux;
 }
 
