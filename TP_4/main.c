@@ -51,6 +51,7 @@ int main()
                 val = setMovieList(list);
                 if(val == DENEID)
                 {
+
                     printf("Error en la funcion removeMovieList");
                     system("pause");
                 }

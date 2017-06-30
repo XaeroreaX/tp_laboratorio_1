@@ -44,6 +44,8 @@ int removeMovieList(ArrayList* movieList)
 
     scanf("%d", &index);
 
+    index--;
+
     returnAux = movieList->remove(movieList, index);
 
     return returnAux;
@@ -63,6 +65,7 @@ int setMovieList(ArrayList* movieList)
     if(val == DENEID) printf("Error en la funcion showMovieList");
 
     scanf("%d", &index);
+    index--;
 
     movie = addMovie();
 
@@ -102,12 +105,14 @@ int fileToMovieList(ArrayList* movieList)
     for(index = 0; index<size; index++)
     {
         len = fread(movie, sizeof(EMovie), 1,file);
+        printf("%d-%s\n",len, movie->titulo);
         returnAux = movieList->add(movieList, movie);
         if(returnAux == DENEID) break;
 
-        printf("%d-%s",len, movie->titulo);
     }
 
+    len = showMovieListIndex(movieList);
+        if(len == DENEID) printf("Error en la funcion showMovieList");
 
     fclose(file);
     return returnAux;
@@ -133,14 +138,17 @@ int movieListToFile(ArrayList* movieList)
         return returnAux;
     }
 
+    //fseek(file, 0 , SEEK_END);
+
     size = movieList->len(movieList);
 
     for(index = 0; index<size; index++)
     {
         movie =(EMovie*) movieList->get(movieList, index);
         len = fwrite(movie, sizeof(EMovie), 1,file);
-        printf("%d-%d-%s",index,len, movie->titulo);
+        //printf("%d-%d-%s",index,len, movie->titulo);
     }
+
 
 
     fclose(file);
@@ -162,9 +170,10 @@ int showMovieListIndex(ArrayList* movieList)
     for(i = 0; i < movieList->len(movieList); i++)
     {
         movie = (EMovie*) movieList->get(movieList, i);
-        printf("\n%d)titulo:%s", i, movie->titulo);
+        printf("\n%d)titulo:%s", (i + 1), movie->titulo);
     }
 
+    printf("\n");
     returnAux = i;
 
     return returnAux;

@@ -22,7 +22,7 @@ int fileToMovieList(ArrayList* movieList);
 
 int movieListToFile(ArrayList* movieList);
 
-int showMovieList(ArrayList* movieList);
+int showMovieListIndex(ArrayList* movieList);
 
 EMovie* addMovie();
 
