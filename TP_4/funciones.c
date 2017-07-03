@@ -86,7 +86,7 @@ int fileToMovieList(ArrayList* movieList)
 
     EMovie* movie;
 
-    movie = (EMovie*) malloc(sizeof(EMovie));
+
 
     file = fopen("data.dat", "rb");
 
@@ -104,15 +104,18 @@ int fileToMovieList(ArrayList* movieList)
 
     for(index = 0; index<size; index++)
     {
+        movie = (EMovie*) malloc(sizeof(EMovie));
+
         len = fread(movie, sizeof(EMovie), 1,file);
-        printf("%d-%s\n",len, movie->titulo);
+  //      printf("%d-%s\n",len, movie->titulo);
+
         returnAux = movieList->add(movieList, movie);
         if(returnAux == DENEID) break;
 
     }
-
+/*
     len = showMovieListIndex(movieList);
-        if(len == DENEID) printf("Error en la funcion showMovieList");
+        if(len == DENEID) printf("Error en la funcion showMovieList");*/
 
     fclose(file);
     return returnAux;
@@ -228,6 +231,24 @@ EMovie* addMovie()
 
     return movie;
 }
+
+/**-------------------------------------------------------*////n)
+
+/*int compareMovie(void* MovieA, void* MovieB)
+{
+
+    if(((EMovie*)MovieA)->titulo > ((EMovie*)MovieB)->titulo)
+    {
+        return 1;
+    }
+    if(((EMovie*)MovieA)->titulo < ((EMovie*)MovieB)->titulo)
+    {
+        return -1;
+    }
+    return 0;
+
+
+}*/
 
 /**-------------------------------------------------------*////n)
 
