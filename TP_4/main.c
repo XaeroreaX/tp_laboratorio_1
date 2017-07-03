@@ -11,6 +11,8 @@ int main()
 {
     char seguir='s';
     int opcion=0, val;
+
+
     ArrayList* list;
 
     list = al_newArrayList();
@@ -57,6 +59,13 @@ int main()
                 }
                 break;
             case 4:
+                generarPagina(list);
+                if(val == DENEID)
+                {
+
+                    printf("Error en la funcion generarPagina");
+                    system("pause");
+                }
                break;
             case 5:
                 seguir = 'n';
@@ -66,6 +75,8 @@ int main()
         }
 
         system("cls");
+        /*val = list->sort(list, compareMovie(), 1);
+        if(val < 1) printf("error");*/
         val = showMovieListIndex(list);
         if(val == DENEID) printf("Error en la funcion showMovieList");
 

@@ -66,15 +66,61 @@ int setMovieList(ArrayList* movieList)
 
     scanf("%d", &index);
     index--;
+    if(index > 0)
+    {
 
-    movie = addMovie();
 
-    if(movie != NULL)
-        returnAux = movieList->set(movieList, index, movie);
+        movie = addMovie();
 
+        if(movie != NULL)
+            returnAux = movieList->set(movieList, index, movie);
+    }
 
     return returnAux;
 
+}
+
+/**-------------------------------------------------------*////4)
+
+int generarPagina(ArrayList* movieList)
+{
+    int i, returnAux = DENEID, val;
+
+    EMovie* movie;
+
+    FILE* file;
+
+    movie = (EMovie*) malloc(sizeof(EMovie));
+
+    if(movieList == NULL || movie == NULL) return returnAux;
+
+    printf("ingrese el indice la pelicula que quiere generar pagina:\n");
+    val = showMovieListIndex(movieList);
+    if(val == DENEID) printf("Error en la funcion showMovieList");
+
+    scanf("%d", &i);
+    i--;
+
+    movie = (EMovie*) movieList->get(movieList, i);
+
+    file = fopen("index.HTML", "w");
+
+
+    fprintf(file,"<img  src=%s alt=%s style=width:200px;hight:200px>",movie->linkImagen,movie->titulo);
+
+            //titulo
+    fprintf(file,"<h2><a href=#>%s</a></h2>",movie->titulo);
+
+            //otros aspectos
+
+    fprintf(file,"<h3><li> Genero: %s</li>   <li>Puntaje: %d </li>     <li>Duracion: %d </li>               </h3>",movie->genero,movie->puntaje,movie->duracion);
+
+    fprintf(file,"<pre>%s</pre>", movie->descripcion);
+
+
+    fclose(file);
+    returnAux = OK;
+    return returnAux;
 }
 
 /**-------------------------------------------------------*////n)
@@ -234,7 +280,7 @@ EMovie* addMovie()
 
 /**-------------------------------------------------------*////n)
 
-/*int compareMovie(void* MovieA, void* MovieB)
+int compareMovie(void* MovieA, void* MovieB)
 {
 
     if(((EMovie*)MovieA)->titulo > ((EMovie*)MovieB)->titulo)
@@ -248,7 +294,7 @@ EMovie* addMovie()
     return 0;
 
 
-}*/
+}
 
 /**-------------------------------------------------------*////n)
 
