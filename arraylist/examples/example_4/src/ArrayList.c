@@ -176,18 +176,21 @@ void* al_get(ArrayList* pList, int index)
 int al_contains(ArrayList* pList, void* pElement)
 {
     int returnAux = -1;
-    int size = 0;
+    int index = 0;
     int flag = 0;
 
     if(pList == NULL || pElement == NULL) return returnAux;
 
     returnAux++;
 
-    while(size <= pList->size)
+    while(index <= pList->len(pList))
     {
-        if(pList->pElements[size] == pElement) flag++;
-
-        size++;
+        if(pList->get(pList, index) == pElement)
+        {
+            flag++;
+            break;
+        }
+        index++;
 
     }
 
@@ -469,7 +472,7 @@ ArrayList* al_subList(ArrayList* pList,int from,int to)
  */
 int al_containsAll(ArrayList* pList,ArrayList* pList2)
 {
-    int returnAux = -1, index, size;
+    int returnAux = -1, index;
 
 
 
@@ -479,9 +482,14 @@ int al_containsAll(ArrayList* pList,ArrayList* pList2)
 
 
     for(index = 0; index < pList->len(pList); index++)
-        if(pList2->contains(pList2, pList->get(pList, index)) < 1) return returnAux;
+    {
+        if(pList->contains(pList, pList2->get(pList2, index)) < 1) break;
+        printf("%d",pList2->contains(pList2, pList->get(pList, index)));
 
-    returnAux++;
+    }
+
+    if(index == pList->len(pList))
+        returnAux++;
     //printf("%d", returnAux);
 
     return returnAux;
