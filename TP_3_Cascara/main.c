@@ -1,19 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "funciones.h"
-#define OK 1
-#define DENEID 0
+#include "ArrayList.h"
+#define OK 0
+#define DENEID -1
 
 
 
 int main()
 {
     char seguir='s';
-    int opcion=0, val, dim, i = 2;
-
-    EMovie* movie = (EMovie*) malloc(sizeof(EMovie) * 5);
+    int opcion=0, val;
 
 
+    ArrayList* list;
+
+    list = al_newArrayList();
+
+    fileToMovieList(list);
+
+    val = list->sort(list, compareMovie, 1);
 
     while(seguir=='s')
     {
@@ -28,20 +34,40 @@ int main()
         switch(opcion)
         {
             case 1:
-                val = agregarPelicula(movie);
-                if(val == DENEID) printf("no se pudo agregar la pelicula");
-
+                system("cls");
+                val = addMovieList(list);
+                if(val == DENEID)
+                {
+                    printf("Error en la funcion addMovieList");
+                    system("pause");
+                }
                 break;
             case 2:
+                system("cls");
+                val = removeMovieList(list);
+                if(val == DENEID)
+                {
+                    printf("Error en la funcion removeMovieList");
+                    system("pause");
+                }
                 break;
             case 3:
+                val = setMovieList(list);
+                if(val == DENEID)
+                {
 
-                dim = leerArchData(movie);
-
-
-                val = modificarM(movie, dim);
-               break;
+                    printf("Error en la funcion removeMovieList");
+                    system("pause");
+                }
+                break;
             case 4:
+                generarPagina(list);
+                if(val == DENEID)
+                {
+
+                    printf("Error en la funcion generarPagina");
+                    system("pause");
+                }
                break;
             case 5:
                 seguir = 'n';
@@ -50,6 +76,15 @@ int main()
 
         }
 
+        system("cls");
+        val = list->sort(list, compareMovie, 1);
+//        if(val < 1) printf("error");
+       /*val = showMovieListIndex(list);
+        if(val == DENEID) printf("Error en la funcion showMovieList");*/
+
+        movieListToFile(list);
+        system("pause");
+        system("cls");
 
     }
 
