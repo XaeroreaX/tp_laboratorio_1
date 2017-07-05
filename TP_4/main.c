@@ -19,6 +19,8 @@ int main()
 
     fileToMovieList(list);
 
+    val = list->sort(list, compareMovie, 1);
+
     while(seguir=='s')
     {
         printf("1- Agregar pelicula\n");
@@ -75,10 +77,10 @@ int main()
         }
 
         system("cls");
-        /*val = list->sort(list, compareMovie(), 1);
-        if(val < 1) printf("error");*/
-        val = showMovieListIndex(list);
-        if(val == DENEID) printf("Error en la funcion showMovieList");
+        val = list->sort(list, compareMovie, 1);
+//        if(val < 1) printf("error");
+       /*val = showMovieListIndex(list);
+        if(val == DENEID) printf("Error en la funcion showMovieList");*/
 
         movieListToFile(list);
         system("pause");

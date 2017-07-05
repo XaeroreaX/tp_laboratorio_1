@@ -26,6 +26,8 @@ int showMovieListIndex(ArrayList* movieList);
 
 EMovie* addMovie();
 
+int compareMovie(void* MovieA, void* MovieB);
+
 void cargarCaracter(int tam, char caracteres[tam]);
 
 #endif // FUNCIONES_H_INCLUDED

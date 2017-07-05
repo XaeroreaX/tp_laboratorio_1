@@ -38,15 +38,24 @@ int removeMovieList(ArrayList* movieList)
 
     if(movieList == NULL) return returnAux;
 
-    printf("elija la pelicula que quiere borrar por indice\n");
+    printf("elija la pelicula que quiere borrar por indice\n0)Cancel");
     val = showMovieListIndex(movieList);
     if(val == DENEID) printf("Error en la funcion showMovieList");
 
     scanf("%d", &index);
+    while(index < 0 || index > movieList->len(movieList))
+    {
+        printf("elijio mal la pelicula que quiere borrar, por favor ingrese de nuevo\n");
+        scanf("%d", &index);
+    }
 
     index--;
 
-    returnAux = movieList->remove(movieList, index);
+    if(index >= 0)
+        returnAux = movieList->remove(movieList, index);
+    else
+        returnAux = OK;
+
 
     return returnAux;
 }
@@ -60,21 +69,30 @@ int setMovieList(ArrayList* movieList)
 
     if(movieList == NULL) return returnAux;
 
-    printf("ingrese el indice la pelicula que quiere modificar:\n");
+    printf("ingrese el indice la pelicula que quiere modificar:\n0)Cancel");
     val = showMovieListIndex(movieList);
     if(val == DENEID) printf("Error en la funcion showMovieList");
 
     scanf("%d", &index);
-    index--;
-    if(index > 0)
-    {
 
+    while(index < 0 || index > movieList->len(movieList))
+    {
+        printf("elijio mal la pelicula que quiere modificar, por favor ingrese de nuevo\n");
+        scanf("%d", &index);
+    }
+
+
+    index--;
+    if(index >= 0)
+    {
 
         movie = addMovie();
 
         if(movie != NULL)
             returnAux = movieList->set(movieList, index, movie);
     }
+    else
+        returnAux = OK;
 
     return returnAux;
 
@@ -94,31 +112,41 @@ int generarPagina(ArrayList* movieList)
 
     if(movieList == NULL || movie == NULL) return returnAux;
 
-    printf("ingrese el indice la pelicula que quiere generar pagina:\n");
+    printf("ingrese el indice la pelicula que quiere generar pagina:\n\n0)Cancel");
     val = showMovieListIndex(movieList);
     if(val == DENEID) printf("Error en la funcion showMovieList");
 
     scanf("%d", &i);
+    while(i < 0 || i > movieList->len(movieList))
+    {
+        printf("elijio mal el indice, por favor ingrese de nuevo\n");
+        scanf("%d", &i);
+    }
     i--;
 
-    movie = (EMovie*) movieList->get(movieList, i);
+    if(i >= 0)
+    {
 
-    file = fopen("index.HTML", "w");
+        movie = (EMovie*) movieList->get(movieList, i);
 
-
-    fprintf(file,"<img  src=%s alt=%s style=width:200px;hight:200px>",movie->linkImagen,movie->titulo);
-
-            //titulo
-    fprintf(file,"<h2><a href=#>%s</a></h2>",movie->titulo);
-
-            //otros aspectos
-
-    fprintf(file,"<h3><li> Genero: %s</li>   <li>Puntaje: %d </li>     <li>Duracion: %d </li>               </h3>",movie->genero,movie->puntaje,movie->duracion);
-
-    fprintf(file,"<pre>%s</pre>", movie->descripcion);
+        file = fopen("index.HTML", "w");
 
 
-    fclose(file);
+        fprintf(file,"<img  src=%s alt=%s style=width:200px;hight:200px>",movie->linkImagen,movie->titulo);
+
+                //titulo
+        fprintf(file,"<h2><a href=#>%s</a></h2>",movie->titulo);
+
+                //otros aspectos
+
+        fprintf(file,"<h3><li> Genero: %s</li>   <li>Puntaje: %d </li>     <li>Duracion: %d </li>               </h3>",movie->genero,movie->puntaje,movie->duracion);
+
+        fprintf(file,"<pre>%s</pre>", movie->descripcion);
+
+
+        fclose(file);
+
+    }
     returnAux = OK;
     return returnAux;
 }
@@ -283,11 +311,11 @@ EMovie* addMovie()
 int compareMovie(void* MovieA, void* MovieB)
 {
 
-    if(((EMovie*)MovieA)->titulo > ((EMovie*)MovieB)->titulo)
+    if( strcmp(((EMovie*)MovieA)->titulo, ((EMovie*)MovieB)->titulo) == 1)
     {
         return 1;
     }
-    if(((EMovie*)MovieA)->titulo < ((EMovie*)MovieB)->titulo)
+    if( strcmp(((EMovie*)MovieA)->titulo, ((EMovie*)MovieB)->titulo) == -1)
     {
         return -1;
     }
