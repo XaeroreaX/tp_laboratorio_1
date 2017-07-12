@@ -45,29 +45,22 @@ int main()
             case 2:
                 system("cls");
                 val = removeMovieList(list);
-                if(val == DENEID)
-                {
-                    printf("Error en la funcion removeMovieList");
-                    system("pause");
-                }
+                if(val == DENEID) printf("Error en la funcion removeMovieList");
+
+                system("pause");
                 break;
             case 3:
+                system("cls");
                 val = setMovieList(list);
-                if(val == DENEID)
-                {
-
-                    printf("Error en la funcion removeMovieList");
-                    system("pause");
-                }
+                if(val == DENEID) printf("Error en la funcion removeMovieList");
+                system("pause");
                 break;
             case 4:
+                system("cls");
                 generarPagina(list);
                 if(val == DENEID)
-                {
-
                     printf("Error en la funcion generarPagina");
-                    system("pause");
-                }
+                system("pause");
                break;
             case 5:
                 seguir = 'n';
@@ -76,14 +69,12 @@ int main()
 
         }
 
-        system("cls");
         val = list->sort(list, compareMovie, 1);
 //        if(val < 1) printf("error");
        /*val = showMovieListIndex(list);
         if(val == DENEID) printf("Error en la funcion showMovieList");*/
 
         movieListToFile(list);
-        system("pause");
         system("cls");
 
     }
