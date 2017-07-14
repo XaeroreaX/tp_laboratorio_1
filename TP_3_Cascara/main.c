@@ -10,16 +10,15 @@
 int main()
 {
     char seguir='s';
-    int opcion=0, val;
+    int opcion=0;
 
 
-    ArrayList* list;
+    ArrayList* movieList;
 
-    list = al_newArrayList();
+    movieList = al_newArrayList();
 
-    fileToMovieList(list);
+    fileToMovieList(movieList);
 
-    val = list->sort(list, compareMovie, 1);
 
     while(seguir=='s')
     {
@@ -27,7 +26,8 @@ int main()
         printf("2- Borrar pelicula\n");
         printf("3- Modificar pelicula\n");
         printf("4- Generar pagina web\n");
-        printf("5- Salir\n");
+        printf("5- Limpiar la lista de peliculas\n");
+        printf("6- Salir\n");
 
         scanf("%d",&opcion);
 
@@ -35,46 +35,57 @@ int main()
         {
             case 1:
                 system("cls");
-                val = addMovieList(list);
-                if(val == DENEID)
-                {
-                    printf("Error en la funcion addMovieList");
-                    system("pause");
-                }
+
+                if(addMovieList(movieList) == DENEID) printf("Error en la funcion addMovieList\n");
+
+                system("pause");
                 break;
             case 2:
                 system("cls");
-                val = removeMovieList(list);
-                if(val == DENEID) printf("Error en la funcion removeMovieList");
+                if(removeMovieList(movieList) == DENEID) printf("Error en la funcion removeMovieList\n");
 
                 system("pause");
                 break;
             case 3:
                 system("cls");
-                val = setMovieList(list);
-                if(val == DENEID) printf("Error en la funcion removeMovieList");
+
+                if(setMovieList(movieList) == DENEID) printf("Error en la funcion removeMovieList\n");
+
                 system("pause");
                 break;
             case 4:
                 system("cls");
-                generarPagina(list);
-                if(val == DENEID)
-                    printf("Error en la funcion generarPagina");
+
+                if(generarPagina(movieList) == DENEID) printf("Error en la funcion generarPagina\n");
+
                 system("pause");
                break;
             case 5:
+                system("cls");
+                if(movieList->clear(movieList) == DENEID)
+                {
+
+
+                    printf("ERROR en la funsion CLEAR en movieList\n");
+                }
+                else
+                {
+
+
+                    printf("el arrayList fue limpiado\n");
+                }
+
+                system("pause");
+                break;
+            case 6:
                 seguir = 'n';
                 break;
 
 
         }
 
-        val = list->sort(list, compareMovie, 1);
-//        if(val < 1) printf("error");
-       /*val = showMovieListIndex(list);
-        if(val == DENEID) printf("Error en la funcion showMovieList");*/
-
-        movieListToFile(list);
+        if(movieList->sort(movieList, compareMovie, 1) == DENEID ) printf("ERROR en la funsion sort de arrayList de EMovie");
+        movieListToFile(movieList);
         system("cls");
 
     }

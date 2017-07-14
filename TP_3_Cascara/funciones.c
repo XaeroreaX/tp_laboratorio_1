@@ -12,6 +12,14 @@
 
 /**-------------------------------------------------------*////1)
 
+/** \brief añade una pelicula a un arrayList
+ *
+ * \param  arraylist donde se almacena las peliculas
+ * \return entero (-1) si falla al añadir una pelicula en el arraylist  (0) si añadio exitosamente la pelicula
+ *
+ */
+
+
 int addMovieList(ArrayList* movieList)
 {
     int returnAux = DENEID;
@@ -30,10 +38,18 @@ int addMovieList(ArrayList* movieList)
 
 /**-------------------------------------------------------*////2)
 
+/** \brief da elegir una pelicula para borrar en el arraylist
+ *
+ * \param arraylist de peliculas
+ * \return entero (-1) si hay un error en el remove de una pelicula (0) si remueve exitosamente
+ *
+ */
+
+
 int removeMovieList(ArrayList* movieList)
 {
 
-    int returnAux = DENEID, index, val;
+    int returnAux = DENEID, index;
 
 
     if(movieList == NULL) return returnAux;
@@ -42,6 +58,8 @@ int removeMovieList(ArrayList* movieList)
     if(movieList->isEmpty(movieList) == 0)
     {
 
+        printf("ingrese el indice la pelicula que quiere borrar:\n0)Cancel");
+        if(showMovieListIndex(movieList) == DENEID) printf("Error en la funcion showMovieList");
         scanf("%d", &index);
         while(index < 0 || index > movieList->len(movieList))
         {
@@ -67,7 +85,7 @@ int removeMovieList(ArrayList* movieList)
 
 int setMovieList(ArrayList* movieList)
 {
-    int returnAux = DENEID, index, val;
+    int returnAux = DENEID, index;
     EMovie* movie;
 
     if(movieList == NULL) return returnAux;
@@ -78,8 +96,7 @@ int setMovieList(ArrayList* movieList)
     {
 
         printf("ingrese el indice la pelicula que quiere modificar:\n0)Cancel");
-        val = showMovieListIndex(movieList);
-        if(val == DENEID) printf("Error en la funcion showMovieList");
+        if( showMovieListIndex(movieList) == DENEID) printf("Error en la funcion showMovieList");
 
         scanf("%d", &index);
 
@@ -157,12 +174,19 @@ int generarPagina(ArrayList* movieList)
 
 
 
-            fclose(file);
+
             printf("pagina generada esxitosamente");
 
         }
     }
-    else printf("no hay peliculas almacenadas\n");
+    else
+    {
+        file = fopen("index.HTML", "w");
+        fprintf(file,"");
+
+        printf("no hay peliculas almacenadas\n");
+    }
+    fclose(file);
     returnAux = OK;
     return returnAux;
 }
@@ -233,12 +257,14 @@ int movieListToFile(ArrayList* movieList)
 
     //fseek(file, 0 , SEEK_END);
 
-    size = movieList->len(movieList);
 
-    for(index = 0; index<size; index++)
+
+    for(index = 0; index < movieList->len(movieList); index++)
     {
         movie =(EMovie*) movieList->get(movieList, index);
-        len = fwrite(movie, sizeof(EMovie), 1,file);
+
+        len = fwrite(movie, sizeof(EMovie), 1 ,file);
+
         //printf("%d-%d-%s",index,len, movie->titulo);
     }
 
@@ -290,32 +316,36 @@ EMovie* addMovie()
     if(movie != NULL)
     {
         printf("\nIngrese el titulo de la pelicula:");
-        cargarCaracter(20, movie->titulo);
+        cargarCaracter(50, movie->titulo);
 
         printf("\nIngrese el genero de la pelicula:");
-        cargarCaracter(20, movie->genero);
+        cargarCaracter(100,movie->genero);
 
         printf("\nIngrese el duracion de la pelicula(en minutos):");
+        fflush(stdin);
         scanf("%d", &movie->duracion);
         while(movie->duracion < 3)
         {
+            fflush(stdin);
             printf("\nIngreso mal el duracion de la pelicula, por favor ingrese de nuevo:");
             scanf("%d", &movie->duracion);
         }
 
         printf("\nIngrese la descripcion de la pelicula:");
-        cargarCaracter(50, movie->descripcion);
+        cargarCaracter(800, movie->descripcion);
 
         printf("\nIngrese el puntuacion de la pelicula(de 10 a 100):");
+        fflush(stdin);
         scanf("%d", &movie->puntaje);
         while(movie->puntaje < 10 || movie->puntaje > 100)
         {
+            fflush(stdin);
             printf("\nIngreso mal la puntuacion de la pelicula, por favor ingrese de nuevo:");
             scanf("%d", &movie->puntaje);
         }
 
         printf("\nIngrese un link para la imagen de la pelicula:");
-        cargarCaracter(50, movie->linkImagen);
+        cargarCaracter(800, movie->linkImagen);
 
     }
 
@@ -340,6 +370,33 @@ int compareMovie(void* MovieA, void* MovieB)
 
 }
 
+/**-------------------------------------------------------////n)
+
+int charAddDinamic(char* caracter)
+{
+    int len, returnAux = DENEID;
+    char* aux;
+
+    caracter = (char*) malloc(sizeof(char) * 1024);
+
+    if(caracter == NULL) return returnAux;
+
+    fflush(stdin);
+    scanf("%1023[^\n]", caracter);
+
+    len = strlen(caracter);
+
+    aux = (char*) realloc(caracter, sizeof(char*)* len+1);
+
+    if(aux != NULL)
+    {
+        caracter = aux;
+        returnAux = OK;
+    }
+
+    return returnAux;
+}*/
+
 /**-------------------------------------------------------*////n)
 
 void cargarCaracter(int tam, char caracteres[tam])
@@ -358,3 +415,4 @@ void cargarCaracter(int tam, char caracteres[tam])
     strcpy(caracteres, buffer);
 
 }
+
