@@ -28,6 +28,21 @@ EMovie* addMovie();
 
 int compareMovie(void* MovieA, void* MovieB);
 
+typedef struct{
+    int id;
+    char nickName[50];
+
+}SUser;
+
+typedef struct{
+
+    int id;
+    ArrayList* waching;
+    int puntaje;
+}SRanking;
+
+int harcodearSUser(ArrayList*);
+
 void cargarCaracter(int tam, char caracteres[tam]);
 
 #endif // FUNCIONES_H_INCLUDED

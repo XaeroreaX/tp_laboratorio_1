@@ -129,7 +129,7 @@ int setMovieList(ArrayList* movieList)
 
 int generarPagina(ArrayList* movieList)
 {
-    int i, returnAux = DENEID, val;
+    int i, returnAux = DENEID;
 
     EMovie* movie;
 
@@ -142,51 +142,48 @@ int generarPagina(ArrayList* movieList)
     if(movieList->isEmpty(movieList) == 0)
     {
 
-        if(i >= 0)
+
+
+        file = fopen("index.HTML", "w");
+
+        if(file == NULL) return returnAux;
+
+
+        for(i = 0; i < movieList->len(movieList); i++)
         {
 
-            file = fopen("index.HTML", "w");
-
-            if(file == NULL) return returnAux;
-
-
-            for(i = 0; i < movieList->len(movieList); i++)
-            {
-
-                movie = (EMovie*) movieList->get(movieList, i);
+            movie = (EMovie*) movieList->get(movieList, i);
 
 
 
 
-                fprintf(file,"<img  src=%s alt=%s style=width:200px;hight:200px>",movie->linkImagen,movie->titulo);
+            fprintf(file,"<img  src=%s alt=%s style=width:200px;hight:200px>",movie->linkImagen,movie->titulo);
 
                         //titulo
-                fprintf(file,"<h2><a href=#>%s</a></h2>",movie->titulo);
+            fprintf(file,"<h2><a href=#>%s</a></h2>",movie->titulo);
 
                         //otros aspectos
 
-                fprintf(file,"<h3><li> Genero: %s</li>   <li>Puntaje: %d </li>     <li>Duracion: %d </li>               </h3>",movie->genero,movie->puntaje,movie->duracion);
+            fprintf(file,"<h3><li> Genero: %s</li>   <li>Puntaje: %d </li>     <li>Duracion: %d </li>               </h3>",movie->genero,movie->puntaje,movie->duracion);
 
-                fprintf(file,"<pre>%s</pre>", movie->descripcion);
+            fprintf(file,"<pre>%s</pre>", movie->descripcion);
 
-
-            }
-
-
-
-
-            printf("pagina generada esxitosamente");
 
         }
+
+
+
+        fclose(file);
+        printf("pagina generada esxitosamente");
+
+
     }
     else
     {
-        file = fopen("index.HTML", "w");
-        fprintf(file,"");
 
         printf("no hay peliculas almacenadas\n");
     }
-    fclose(file);
+
     returnAux = OK;
     return returnAux;
 }
@@ -196,7 +193,7 @@ int generarPagina(ArrayList* movieList)
 int fileToMovieList(ArrayList* movieList)
 {
     FILE* file;
-    int returnAux = DENEID, index, size, len;
+    int returnAux = DENEID, index, size,len;
 
     EMovie* movie;
 
@@ -241,7 +238,7 @@ int fileToMovieList(ArrayList* movieList)
 int movieListToFile(ArrayList* movieList)
 {
     FILE* file;
-    int returnAux = DENEID, index, size, len;
+    int returnAux = DENEID, index,len;
 
     EMovie* movie;
 
@@ -369,6 +366,36 @@ int compareMovie(void* MovieA, void* MovieB)
 
 
 }
+
+
+/**-------------------------------------------------------*////n)
+
+
+int harcodearSUser(ArrayList* userList)
+{
+    int i, returnAux = DENEID, id[5] = {1001, 1002, 1003, 1004, 1005};
+    char nickName[5][50] = {"XaeroreaX", "mr. queen", "camila","guy", "pucci"};
+    SUser* user;
+
+    user = (SUser*) malloc(sizeof(SUser));
+
+    if(user == NULL || userList == NULL) return returnAux;
+
+    for(i = 0; i < 5; i++)
+    {
+
+        user->id = id[i];
+
+        strcpy(user->nickName, nickName[i]);
+
+        returnAux = userList->add(userList, user);
+        if(returnAux == DENEID) break;
+
+    }
+
+    return returnAux;
+}
+
 
 /**-------------------------------------------------------////n)
 

@@ -14,8 +14,12 @@ int main()
 
 
     ArrayList* movieList;
+    ArrayList* userList;
 
+    userList = al_newArrayList();
     movieList = al_newArrayList();
+
+    if(harcodearSUser(userList) == DENEID) printf("ERROR en la funsion harcodearSUser");
 
     fileToMovieList(movieList);
 
