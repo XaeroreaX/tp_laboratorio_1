@@ -2,12 +2,12 @@
 #define FUNCIONES_H_INCLUDED
 #include "ArrayList.h"
 typedef struct{
-    char* titulo;
-    char* genero;
+    char titulo[50];
+    char genero[100];
     int duracion;
-    char* descripcion;
+    char descripcion[800];
     int puntaje;
-    char* linkImagen;
+    char linkImagen[800];
 }EMovie __attribute__ ((packed));
 
 

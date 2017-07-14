@@ -158,16 +158,16 @@ int generarPagina(ArrayList* movieList)
 
 
 
-                fprintf(file,"<img  src=%s alt=%s style=width:200px;hight:200px>",*movie->linkImagen,*movie->titulo);
+                fprintf(file,"<img  src=%s alt=%s style=width:200px;hight:200px>",movie->linkImagen,movie->titulo);
 
                         //titulo
-                fprintf(file,"<h2><a href=#>%s</a></h2>",*movie->titulo);
+                fprintf(file,"<h2><a href=#>%s</a></h2>",movie->titulo);
 
                         //otros aspectos
 
-                fprintf(file,"<h3><li> Genero: %s</li>   <li>Puntaje: %d </li>     <li>Duracion: %d </li>               </h3>",*movie->genero,movie->puntaje,movie->duracion);
+                fprintf(file,"<h3><li> Genero: %s</li>   <li>Puntaje: %d </li>     <li>Duracion: %d </li>               </h3>",movie->genero,movie->puntaje,movie->duracion);
 
-                fprintf(file,"<pre>%s</pre>", *movie->descripcion);
+                fprintf(file,"<pre>%s</pre>", movie->descripcion);
 
 
             }
@@ -242,7 +242,6 @@ int movieListToFile(ArrayList* movieList)
 {
     FILE* file;
     int returnAux = DENEID, index, size, len;
-    char* caracter;
 
     EMovie* movie;
 
@@ -258,25 +257,14 @@ int movieListToFile(ArrayList* movieList)
 
     //fseek(file, 0 , SEEK_END);
 
-    size = movieList->len(movieList);
 
-    for(index = 0; index<size; index++)
+
+    for(index = 0; index < movieList->len(movieList); index++)
     {
         movie =(EMovie*) movieList->get(movieList, index);
-        caracter = &movie->titulo;
-        fwrite(caracter, sizeof(char), strlen(caracter),file);
-        caracter = &movie->genero;
-        fwrite(caracter, sizeof(char), strlen(caracter),file);
 
-        fwrite(&movie->duracion, sizeof(int), 1,file);
+        len = fwrite(movie, sizeof(EMovie), 1 ,file);
 
-        caracter = &movie->descripcion;
-        fwrite(caracter, sizeof(char), strlen(caracter),file);
-
-        fwrite(&movie->puntaje, sizeof(int), 1,file);
-
-        caracter = &movie->linkImagen;
-        fwrite(caracter, sizeof(char), strlen(caracter),file);
         //printf("%d-%d-%s",index,len, movie->titulo);
     }
 
@@ -328,10 +316,10 @@ EMovie* addMovie()
     if(movie != NULL)
     {
         printf("\nIngrese el titulo de la pelicula:");
-        charAddDinamic(movie->titulo);
+        cargarCaracter(50, movie->titulo);
 
         printf("\nIngrese el genero de la pelicula:");
-        charAddDinamic(movie->genero);
+        cargarCaracter(100,movie->genero);
 
         printf("\nIngrese el duracion de la pelicula(en minutos):");
         fflush(stdin);
@@ -344,7 +332,7 @@ EMovie* addMovie()
         }
 
         printf("\nIngrese la descripcion de la pelicula:");
-        charAddDinamic(movie->descripcion);
+        cargarCaracter(800, movie->descripcion);
 
         printf("\nIngrese el puntuacion de la pelicula(de 10 a 100):");
         fflush(stdin);
@@ -357,7 +345,7 @@ EMovie* addMovie()
         }
 
         printf("\nIngrese un link para la imagen de la pelicula:");
-        charAddDinamic(movie->linkImagen);
+        cargarCaracter(800, movie->linkImagen);
 
     }
 
@@ -382,7 +370,7 @@ int compareMovie(void* MovieA, void* MovieB)
 
 }
 
-/**-------------------------------------------------------*////n)
+/**-------------------------------------------------------////n)
 
 int charAddDinamic(char* caracter)
 {
@@ -407,9 +395,9 @@ int charAddDinamic(char* caracter)
     }
 
     return returnAux;
-}
+}*/
 
-/**-------------------------------------------------------////n)
+/**-------------------------------------------------------*////n)
 
 void cargarCaracter(int tam, char caracteres[tam])
 {
@@ -427,4 +415,4 @@ void cargarCaracter(int tam, char caracteres[tam])
     strcpy(caracteres, buffer);
 
 }
-*/
+
