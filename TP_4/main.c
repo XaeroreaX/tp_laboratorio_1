@@ -31,8 +31,14 @@ int main()
 
     if(logeado != NULL)
     {
+        if(logeado->id == 1)
+        {
+            if(menuAdministrador(movieList) == DENEID) printf("ERROR en la funsion menuAdministrador\n");
+        }
+        else
+        {
 
-        if(menuAdministrador(movieList) == DENEID) printf("ERROR en la funsion menuAdministrador\n");
+        }
 
     }
 

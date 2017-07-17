@@ -504,6 +504,8 @@ SUser* login(ArrayList* userList)
             cargarCaracter(50, find);
             for(i = 0; i < userList->len(userList); i++)
             {
+
+
                 user = (SUser*) userList->get(userList, i);
 
                 if(strcmp(user->nickName, find) == 0)
@@ -511,6 +513,8 @@ SUser* login(ArrayList* userList)
                     flag = OK;
                     break;
                 }
+
+
             }
             if(i == userList->len(userList))
             {
@@ -520,6 +524,8 @@ SUser* login(ArrayList* userList)
             }
             else
             {
+
+
                 for(i = 0; i < 3; i++)
                 {
                     printf("ingrese la contraseña:");
@@ -528,13 +534,27 @@ SUser* login(ArrayList* userList)
                     if(strcmp(user->password, find) == 0) break;
 
                 }
-                if(i == 3) user = NULL;
+
+
+
+                if(i == 3)
+                {
+                    user = NULL;
+                    printf("fallo en ingresar la contraseña");
+                }
+                else
+                {
+                    printf("se logueo como %s\n", user->nickName);
+                }
+
 
             }
         }while(flag == DENEID);
 
 
     }
+    system("pause");
+    system("cls");
 
     return user;
 }
