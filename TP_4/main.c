@@ -12,6 +12,7 @@ int main()
     char seguir='s';
     int opcion=0;
 
+    SUser* logeado;
 
     ArrayList* movieList;
     ArrayList* userList;
@@ -21,6 +22,9 @@ int main()
 
     if(harcodearSUser(userList) == DENEID) printf("ERROR en la funsion harcodearSUser");
 
+    logeado = login(userList);
+
+    //printf("%s\n", logeado->nickName);
     fileToMovieList(movieList);
 
 

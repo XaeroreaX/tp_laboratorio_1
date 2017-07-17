@@ -303,12 +303,6 @@ EMovie* addMovie()
 
     movie = (EMovie*) malloc(sizeof(EMovie));
 
-    /*char titulo[20];
-    char genero[20];
-    int duracion;
-    char descripcion[50];
-    int puntaje;
-    char linkImagen[50];*/
 
     if(movie != NULL)
     {
@@ -374,19 +368,22 @@ int compareMovie(void* MovieA, void* MovieB)
 int harcodearSUser(ArrayList* userList)
 {
     int i, returnAux = DENEID, id[5] = {1001, 1002, 1003, 1004, 1005};
-    char nickName[5][50] = {"XaeroreaX", "mr. queen", "camila","guy", "pucci"};
+    char nickName[5][50] = {"XaeroreaX", "mr. queen", "camila","Atilio", "pucci"};
     SUser* user;
 
-    user = (SUser*) malloc(sizeof(SUser));
+
 
     if(user == NULL || userList == NULL) return returnAux;
 
     for(i = 0; i < 5; i++)
     {
 
+
+        user = (SUser*) malloc(sizeof(SUser));
         user->id = id[i];
 
         strcpy(user->nickName, nickName[i]);
+
 
         returnAux = userList->add(userList, user);
         if(returnAux == DENEID) break;
@@ -396,6 +393,103 @@ int harcodearSUser(ArrayList* userList)
     return returnAux;
 }
 
+/**-------------------------------------------------------*////n)
+
+SUser* login(ArrayList* userList)
+{
+    int i, flag = DENEID;
+
+    char find[50];
+
+    SUser* user;
+
+    user = (SUser*) malloc(sizeof(SUser));
+
+    if(user == NULL || userList == NULL) return NULL;
+
+    if(userList->isEmpty(userList) == 1)
+    {
+        printf("no hay usuarios cargados en sistema");
+        return NULL;
+    }
+    else
+    {
+
+        do
+        {
+            printf("ingrese el usuario:");
+            cargarCaracter(50, find);
+            for(i = 0; i < userList->len(userList); i++)
+            {
+                user = (SUser*) userList->get(userList, i);
+                printf("%d)%s\n",i, user->nickName);
+                if(strcmp(user->nickName, find) == 0)
+                {
+                    flag = OK;
+                    break;
+                }
+            }
+            if(i == userList->len(userList)) printf("no existe ese usuario\n");
+        }while(flag == DENEID);
+
+
+    }
+    return user;
+}
+
+
+
+/**-------------------------------------------------------*////n)
+/*
+int addRank(ArrayList* rankList, ArrayList* userList, ArrayList* movieList)
+{
+    int returnAux = DENEID;
+
+    EMovie* movie;
+    SUser* user;
+    SRanking* rank;
+
+    movie = (EMovie*) malloc(sizeof(EMovie));
+    user = (SUser*) malloc(sizeof(SUser));
+    SRanking = (SRanking*) malloc(sizeof(SRanking));
+
+    if(rankList == NULL || rank == NULL) return returnAux;
+
+    if(movieList == NULL || movie == NULL) return returnAux;
+
+    if(userList == NULL || user == NULL) return returnAux;
+
+
+}
+*/
+/**-------------------------------------------------------*////n)
+/*
+int showUserListIndex(ArrayList* userList)
+{
+    int i, returnAux = DENEID;
+
+    SUser* user;
+
+    user = (SUser*) malloc(sizeof(SUser));
+
+    if(userList == NULL || user == NULL) return returnAux;
+
+
+    for(i = 0; i < userList->len(userList); i++)
+    {
+        user = (SUser*) movieList->get(userList, i);
+        printf("\n%d)nickName:%s", (i + 1), user->nickName);
+    }
+
+    printf("\n");
+    returnAux = i;
+
+    return returnAux;
+}*/
+
+/**-------------------------------------------------------*////n)
+
+//int rank(ArrayList* rankList, ArrayList*)
 
 /**-------------------------------------------------------////n)
 
