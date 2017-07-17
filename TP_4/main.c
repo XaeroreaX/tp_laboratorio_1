@@ -19,82 +19,20 @@ int main()
 
     userList = al_newArrayList();
     movieList = al_newArrayList();
-
-    if(harcodearSUser(userList) == DENEID) printf("ERROR en la funsion harcodearSUser");
-
-    logeado = login(userList);
-
-    //printf("%s\n", logeado->nickName);
     fileToMovieList(movieList);
 
 
-    while(seguir=='s')
+    if(harcodearSUser(userList) == DENEID) printf("ERROR en la funsion harcodearSUser");
+
+    // aqui pide loguearse
+    logeado = login(userList);
+
+    //printf("%s\n", logeado->nickName);
+
+    if(logeado != NULL)
     {
-        printf("1- Agregar pelicula\n");
-        printf("2- Borrar pelicula\n");
-        printf("3- Modificar pelicula\n");
-        printf("4- Generar pagina web\n");
-        printf("5- Limpiar la lista de peliculas\n");
-        printf("6- Salir\n");
 
-        scanf("%d",&opcion);
-
-        switch(opcion)
-        {
-            case 1:
-                system("cls");
-
-                if(addMovieList(movieList) == DENEID) printf("Error en la funcion addMovieList\n");
-
-                system("pause");
-                break;
-            case 2:
-                system("cls");
-                if(removeMovieList(movieList) == DENEID) printf("Error en la funcion removeMovieList\n");
-
-                system("pause");
-                break;
-            case 3:
-                system("cls");
-
-                if(setMovieList(movieList) == DENEID) printf("Error en la funcion removeMovieList\n");
-
-                system("pause");
-                break;
-            case 4:
-                system("cls");
-
-                if(generarPagina(movieList) == DENEID) printf("Error en la funcion generarPagina\n");
-
-                system("pause");
-               break;
-            case 5:
-                system("cls");
-                if(movieList->clear(movieList) == DENEID)
-                {
-
-
-                    printf("ERROR en la funsion CLEAR en movieList\n");
-                }
-                else
-                {
-
-
-                    printf("el arrayList fue limpiado\n");
-                }
-
-                system("pause");
-                break;
-            case 6:
-                seguir = 'n';
-                break;
-
-
-        }
-
-        if(movieList->sort(movieList, compareMovie, 1) == DENEID ) printf("ERROR en la funsion sort de arrayList de EMovie");
-        movieListToFile(movieList);
-        system("cls");
+        if(menuAdministrador(movieList) == DENEID) printf("ERROR en la funsion menuAdministrador\n");
 
     }
 

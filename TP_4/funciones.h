@@ -31,6 +31,7 @@ int compareMovie(void* MovieA, void* MovieB);
 typedef struct{
     int id;
     char nickName[50];
+    char password[50];
 
 }SUser;
 
@@ -42,6 +43,8 @@ typedef struct{
 }SRanking;
 
 int harcodearSUser(ArrayList*);
+
+SUser* login(ArrayList* userList);
 
 void cargarCaracter(int tam, char caracteres[tam]);
 

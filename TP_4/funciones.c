@@ -193,7 +193,7 @@ int generarPagina(ArrayList* movieList)
 int fileToMovieList(ArrayList* movieList)
 {
     FILE* file;
-    int returnAux = DENEID, index, size,len;
+    int returnAux = DENEID, index, size;
 
     EMovie* movie;
 
@@ -217,7 +217,7 @@ int fileToMovieList(ArrayList* movieList)
     {
         movie = (EMovie*) malloc(sizeof(EMovie));
 
-        len = fread(movie, sizeof(EMovie), 1,file);
+        fread(movie, sizeof(EMovie), 1,file);
   //      printf("%d-%s\n",len, movie->titulo);
 
         returnAux = movieList->add(movieList, movie);
@@ -238,7 +238,7 @@ int fileToMovieList(ArrayList* movieList)
 int movieListToFile(ArrayList* movieList)
 {
     FILE* file;
-    int returnAux = DENEID, index,len;
+    int returnAux = DENEID, index;
 
     EMovie* movie;
 
@@ -260,9 +260,8 @@ int movieListToFile(ArrayList* movieList)
     {
         movie =(EMovie*) movieList->get(movieList, index);
 
-        len = fwrite(movie, sizeof(EMovie), 1 ,file);
+        fwrite(movie, sizeof(EMovie), 1 ,file);
 
-        //printf("%d-%d-%s",index,len, movie->titulo);
     }
 
 
@@ -364,11 +363,94 @@ int compareMovie(void* MovieA, void* MovieB)
 
 /**-------------------------------------------------------*////n)
 
+int menuAdministrador(ArrayList* movieList)
+{
+
+    char seguir='s';
+    int opcion=0, returnAux = DENEID;
+
+    if(movieList == NULL) return returnAux;
+
+    while(seguir=='s')
+        {
+            printf("1- Agregar pelicula\n");
+            printf("2- Borrar pelicula\n");
+            printf("3- Modificar pelicula\n");
+            printf("4- Generar pagina web\n");
+            printf("5- Limpiar la lista de peliculas\n");
+            printf("6- Salir\n");
+
+            scanf("%d",&opcion);
+
+            switch(opcion)
+            {
+                case 1:
+                    system("cls");
+
+                    if(addMovieList(movieList) == DENEID) printf("Error en la funcion addMovieList\n");
+
+                    system("pause");
+                    break;
+                case 2:
+                    system("cls");
+                    if(removeMovieList(movieList) == DENEID) printf("Error en la funcion removeMovieList\n");
+
+                    system("pause");
+                    break;
+                case 3:
+                    system("cls");
+
+                    if(setMovieList(movieList) == DENEID) printf("Error en la funcion removeMovieList\n");
+
+                    system("pause");
+                    break;
+                case 4:
+                    system("cls");
+
+                    if(generarPagina(movieList) == DENEID) printf("Error en la funcion generarPagina\n");
+
+                    system("pause");
+                   break;
+                case 5:
+                    system("cls");
+                    if(movieList->clear(movieList) == DENEID)
+                    {
+
+
+                        printf("ERROR en la funsion CLEAR en movieList\n");
+                    }
+                    else
+                    {
+
+
+                        printf("el arrayList fue limpiado\n");
+                    }
+
+                    system("pause");
+                    break;
+                case 6:
+                    seguir = 'n';
+                    break;
+
+
+            }
+
+            if(movieList->sort(movieList, compareMovie, 1) == DENEID ) printf("ERROR en la funsion sort de arrayList de EMovie");
+            movieListToFile(movieList);
+            system("cls");
+
+        }
+    returnAux = OK;
+    return returnAux;
+}
+
+
 
 int harcodearSUser(ArrayList* userList)
 {
-    int i, returnAux = DENEID, id[5] = {1001, 1002, 1003, 1004, 1005};
+    int i, returnAux = DENEID, id[5] = {1, 1001, 1002, 1003, 1004};
     char nickName[5][50] = {"XaeroreaX", "mr. queen", "camila","Atilio", "pucci"};
+    char password[5][50] = {"master6060", "rey2501", "camila","abel6060", "Made in heaven"};
     SUser* user;
 
 
@@ -383,7 +465,7 @@ int harcodearSUser(ArrayList* userList)
         user->id = id[i];
 
         strcpy(user->nickName, nickName[i]);
-
+        strcpy(user->password, password[i]);
 
         returnAux = userList->add(userList, user);
         if(returnAux == DENEID) break;
@@ -415,6 +497,7 @@ SUser* login(ArrayList* userList)
     else
     {
 
+        //bucle para loguear si falla la contraseña 3 veces devolvera NULL
         do
         {
             printf("ingrese el usuario:");
@@ -422,18 +505,37 @@ SUser* login(ArrayList* userList)
             for(i = 0; i < userList->len(userList); i++)
             {
                 user = (SUser*) userList->get(userList, i);
-                printf("%d)%s\n",i, user->nickName);
+
                 if(strcmp(user->nickName, find) == 0)
                 {
                     flag = OK;
                     break;
                 }
             }
-            if(i == userList->len(userList)) printf("no existe ese usuario\n");
+            if(i == userList->len(userList))
+            {
+
+                printf("no existe ese usuario\n");
+
+            }
+            else
+            {
+                for(i = 0; i < 3; i++)
+                {
+                    printf("ingrese la contraseña:");
+                    cargarCaracter(50, find);
+
+                    if(strcmp(user->password, find) == 0) break;
+
+                }
+                if(i == 3) user = NULL;
+
+            }
         }while(flag == DENEID);
 
 
     }
+
     return user;
 }
 
