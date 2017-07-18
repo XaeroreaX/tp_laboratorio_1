@@ -33,6 +33,7 @@ int main()
 
     if(logeado != NULL)
     {
+        if(Rank(movieList, rankList) == DENEID) printf("ERROR en la funsion Rank");
         if(logeado->id == 1)
         {
             if(menuAdministrador(movieList) == DENEID) printf("ERROR en la funsion menuAdministrador\n");

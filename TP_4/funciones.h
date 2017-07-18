@@ -47,6 +47,10 @@ SUser* login(ArrayList* userList);
 
 int addRank(ArrayList* movieList, SUser* user, ArrayList* rankList);
 
+int Rank(ArrayList* movieList, ArrayList* rankList);
+
+int menuCliente(ArrayList* movieList, SUser* user, ArrayList* rankList);
+
 void cargarCaracter(int tam, char caracteres[tam]);
 
 #endif // FUNCIONES_H_INCLUDED

@@ -3,6 +3,7 @@
 #include <string.h>
 #include "funciones.h"
 #include "ArrayList.h"
+#define OKP 1
 #define OK 0
 #define DENEID -1
 
@@ -691,26 +692,40 @@ int Rank(ArrayList* movieList, ArrayList* rankList)
     if(rank == NULL || rankList == NULL) return returnAux;
     if(movie == NULL || movieList == NULL) return returnAux;
 
-    for(i = 0; i < movieList->len(movieList); i++)
+    if(rankList->isEmpty(rankList) == 1)
     {
-        acumPuntaje = 0;
-        puntuadores = 0;
-        movie = (EMovie*) movieList->get(movieList, i);
-        for(j = 0; j < rankList->len(rankList); j++)
-        {
-            rank = (SRanking*) rankList->get(rankList, j);
-
-            if(movie == rank->waching)
-            {
-                acumPuntaje += rank->puntaje;
-                puntuadores++;
-            }
-
-
-        }
-        movie->puntaje = acumPuntaje/puntuadores;
+       ("nadie puntuo\n");
     }
-    returnAux = OK;
+    else
+    {
+
+
+        for(i = 0; i < movieList->len(movieList); i++)
+        {
+            acumPuntaje = 0;
+            puntuadores = 0;
+            movie = (EMovie*) movieList->get(movieList, i);
+            for(j = 0; j < rankList->len(rankList); j++)
+            {
+                rank = (SRanking*) rankList->get(rankList, j);
+
+                if(movie == rank->waching)
+                {
+                    acumPuntaje += rank->puntaje;
+                    puntuadores++;
+                }
+
+
+            }
+            if(acumPuntaje != 0)
+            {
+                movie->puntaje = acumPuntaje/puntuadores;
+                returnAux = movieList->set(movieList, i, movie);
+
+            }
+        }
+    }
+    returnAux++;
     return returnAux;
 
 }
@@ -759,6 +774,7 @@ int menuCliente(ArrayList* movieList, SUser* user, ArrayList* rankList)
             printf("3- Generar pagina web\n");
             printf("4- Salir\n");
 
+            fflush(stdin);
             scanf("%d",&opcion);
 
             switch(opcion)
