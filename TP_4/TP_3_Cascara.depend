@@ -68,24 +68,24 @@
 	"funciones.h"
 	"ArrayList.h"
 
-1499278637 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_4\arraylist.c
+1500383104 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_4\arraylist.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"ArrayList.h"
 
-1499074546 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_4\arraylist.h
+1500383104 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_4\arraylist.h
 
-1500309298 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_4\main.c
+1500399791 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_4\main.c
 	<stdio.h>
 	<stdlib.h>
 	"funciones.h"
 	"ArrayList.h"
 
-1500307094 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_4\funciones.h
+1500398237 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_4\funciones.h
 	"ArrayList.h"
 
-1500308233 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_4\funciones.c
+1500383104 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\tp_4\funciones.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

@@ -10,7 +10,19 @@ typedef struct{
     char linkImagen[800];
 }EMovie __attribute__ ((packed));
 
+typedef struct{
+    int id;
+    char nickName[50];
+    char password[50];
 
+}SUser;
+
+typedef struct{
+
+    int id;
+    EMovie* waching;
+    int puntaje;
+}SRanking;
 
 int addMovieList(ArrayList*);
 
@@ -28,23 +40,12 @@ EMovie* addMovie();
 
 int compareMovie(void* MovieA, void* MovieB);
 
-typedef struct{
-    int id;
-    char nickName[50];
-    char password[50];
-
-}SUser;
-
-typedef struct{
-
-    int id;
-    ArrayList* waching;
-    int puntaje;
-}SRanking;
 
 int harcodearSUser(ArrayList*);
 
 SUser* login(ArrayList* userList);
+
+int addRank(ArrayList* movieList, SUser* user, ArrayList* rankList);
 
 void cargarCaracter(int tam, char caracteres[tam]);
 

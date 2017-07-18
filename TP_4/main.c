@@ -16,9 +16,11 @@ int main()
 
     ArrayList* movieList;
     ArrayList* userList;
+    ArrayList* rankList;
 
     userList = al_newArrayList();
     movieList = al_newArrayList();
+    rankList = al_newArrayList();
     fileToMovieList(movieList);
 
 
@@ -37,7 +39,7 @@ int main()
         }
         else
         {
-
+            if(menuCliente(movieList, logeado, rankList) == DENEID) printf("ERROR en la funsion menuAdministrador\n");
         }
 
     }

@@ -562,28 +562,159 @@ SUser* login(ArrayList* userList)
 
 
 /**-------------------------------------------------------*////n)
-/*
-int addRank(ArrayList* rankList, ArrayList* userList, ArrayList* movieList)
+
+
+
+int addRank(ArrayList* movieList, SUser* user, ArrayList* rankList)
 {
-    int returnAux = DENEID;
+    int index, returnAux = DENEID, puntaje;
 
     EMovie* movie;
-    SUser* user;
     SRanking* rank;
 
     movie = (EMovie*) malloc(sizeof(EMovie));
-    user = (SUser*) malloc(sizeof(SUser));
-    SRanking = (SRanking*) malloc(sizeof(SRanking));
+    rank = (SRanking*) malloc(sizeof(SRanking));
 
     if(rankList == NULL || rank == NULL) return returnAux;
 
     if(movieList == NULL || movie == NULL) return returnAux;
 
-    if(userList == NULL || user == NULL) return returnAux;
+    if(movieList->isEmpty(movieList) == 0)
+    {
 
+        printf("ingrese el indice la pelicula que ha visto:\n0)Cancel");
+        if( showMovieListIndex(movieList) == DENEID) printf("Error en la funcion showMovieList");
+
+        scanf("%d", &index);
+
+        while(index < 0 || index > movieList->len(movieList))
+        {
+            printf("elijio mal la pelicula que quiere modificar, por favor ingrese de nuevo\n");
+            scanf("%d", &index);
+        }
+
+
+        index--;
+        if(index >= 0)
+        {
+
+            do{
+
+                printf("ingrese la calificacion:\n");
+                printf("\n\t10.(obra maestra)");
+                printf("\n\t9.(grandioso)");
+                printf("\n\t8.(muy bueno)");
+                printf("\n\t7.(bueno)");
+                printf("\n\t6.(pasable)");
+                printf("\n\t5.(medicre)");
+                printf("\n\t4.(malo)");
+                printf("\n\t3.(muy malo)");
+                printf("\n\t2.(horrible)");
+                printf("\n\t1.(pesimo)");
+                printf("\n\tingrese calificacion:");
+                scanf("%d",&puntaje);
+                if(puntaje > 10 || puntaje < 1)
+                {
+                    printf("ingreso mal la calificacion");
+                    system("pause");
+                    system("cls");
+                }
+            }while(puntaje > 10 || puntaje < 1);
+
+            switch(puntaje)
+            {
+                case 1:
+                    puntaje = 10;
+                    break;
+                case 2:
+                    puntaje = 20;
+                    break;
+                case 3:
+                    puntaje = 30;
+                    break;
+                case 4:
+                    puntaje = 40;
+                    break;
+                case 5:
+                    puntaje = 50;
+                    break;
+                case 6:
+                    puntaje = 60;
+                    break;
+                case 7:
+                    puntaje = 70;
+                    break;
+                case 8:
+                    puntaje = 80;
+                    break;
+                case 9:
+                    puntaje = 90;
+                    break;
+                case 10:
+                    puntaje = 100;
+                    break;
+
+            }
+
+            movie = (EMovie*) movieList->get(movieList, index);
+
+            rank->id = user->id;
+
+            rank->waching = movie;
+
+            rank->puntaje = puntaje;
+
+
+            returnAux = rankList->add(rankList, rank);
+        }
+        else
+            returnAux = OK;
+    }
+    else printf("no hay peliculas almacenadas\n");
+
+    return returnAux;
 
 }
-*/
+
+/**-------------------------------------------------------*////n)
+
+int Rank(ArrayList* movieList, ArrayList* rankList)
+{
+    int i, j, returnAux = DENEID, acumPuntaje = 0, puntuadores = 0;
+
+    EMovie* movie;
+    SRanking* rank;
+
+    rank = (SRanking*) malloc(sizeof(SRanking));
+    movie = (EMovie*) malloc(sizeof(EMovie));
+
+    if(rank == NULL || rankList == NULL) return returnAux;
+    if(movie == NULL || movieList == NULL) return returnAux;
+
+    for(i = 0; i < movieList->len(movieList); i++)
+    {
+        acumPuntaje = 0;
+        puntuadores = 0;
+        movie = (EMovie*) movieList->get(movieList, i);
+        for(j = 0; j < rankList->len(rankList); j++)
+        {
+            rank = (SRanking*) rankList->get(rankList, j);
+
+            if(movie == rank->waching)
+            {
+                acumPuntaje += rank->puntaje;
+                puntuadores++;
+            }
+
+
+        }
+        movie->puntaje = acumPuntaje/puntuadores;
+    }
+    returnAux = OK;
+    return returnAux;
+
+}
+
 /**-------------------------------------------------------*////n)
 /*
 int showUserListIndex(ArrayList* userList)
@@ -608,6 +739,89 @@ int showUserListIndex(ArrayList* userList)
 
     return returnAux;
 }*/
+
+
+/**-------------------------------------------------------*////n)
+
+
+int menuCliente(ArrayList* movieList, SUser* user, ArrayList* rankList)
+{
+
+    char seguir='s';
+    int opcion=0, returnAux = DENEID;
+
+    if((movieList == NULL || user == NULL) || rankList == NULL) return returnAux;
+
+    while(seguir=='s')
+        {
+            printf("1- Agregar pelicula a vistos\n");
+            printf("2- eliminar pelicula\n");
+            printf("3- Generar pagina web\n");
+            printf("4- Salir\n");
+
+            scanf("%d",&opcion);
+
+            switch(opcion)
+            {
+                case 1:
+                    system("cls");
+
+                    if(addRank(movieList, user, rankList) == DENEID) printf("Error en la funcion addMovieList\n");
+
+                    system("pause");
+                    break;
+                case 2:
+                    system("cls");
+                    //if(removeMovieList(movieList) == DENEID) printf("Error en la funcion removeMovieList\n");
+
+                    system("pause");
+                    break;
+                case 3:
+                    system("cls");
+
+                    //f(setMovieList(movieList) == DENEID) printf("Error en la funcion removeMovieList\n");
+
+                    system("pause");
+                    break;
+                case 4:
+                    system("cls");
+
+                    //if(generarPagina(movieList) == DENEID) printf("Error en la funcion generarPagina\n");
+
+                    system("pause");
+                   break;
+                case 5:
+                    system("cls");
+                    /*if(movieList->clear(movieList) == DENEID)
+                    {
+
+
+                        printf("ERROR en la funsion CLEAR en movieList\n");
+                    }
+                    else
+                    {
+
+
+                        printf("el arrayList fue limpiado\n");
+                    }*/
+
+                    system("pause");
+                    break;
+                case 6:
+                    seguir = 'n';
+                    break;
+
+
+            }
+
+            //if(movieList->sort(movieList, compareMovie, 1) == DENEID ) printf("ERROR en la funsion sort de arrayList de EMovie");
+            //movieListToFile(movieList);
+            system("cls");
+
+        }
+    returnAux = OK;
+    return returnAux;
+}
 
 /**-------------------------------------------------------*////n)
 
