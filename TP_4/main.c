@@ -21,10 +21,16 @@ int main()
     userList = al_newArrayList();
     movieList = al_newArrayList();
     rankList = al_newArrayList();
+
+
+
     fileToMovieList(movieList);
+    fileToUserList(userList);
+    fileToRankList(rankList);
 
+    //if(rankList->isEmpty(rankList) == 1) printf("esta vacio");
 
-    if(harcodearSUser(userList) == DENEID) printf("ERROR en la funsion harcodearSUser");
+    //if(harcodearSUser(userList) == DENEID) printf("ERROR en la funsion harcodearSUser");
 
     // aqui pide loguearse
     logeado = login(userList);
@@ -44,6 +50,10 @@ int main()
         }
 
     }
+
+    movieListToFile(movieList);
+    userListToFile(userList);
+    rankListToFile(rankList);
 
     return 0;
 }

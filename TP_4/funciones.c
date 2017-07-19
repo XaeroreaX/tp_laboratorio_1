@@ -191,6 +191,88 @@ int generarPagina(ArrayList* movieList)
 
 /**-------------------------------------------------------*////n)
 
+int fileToUserList(ArrayList* userList)
+{
+    FILE* file;
+    int returnAux = DENEID, index, size;
+
+    SUser* user;
+
+
+
+    file = fopen("dataUser.dat", "rb");
+
+    if(file == NULL || userList == NULL)
+    {
+        fclose(file);
+        return returnAux;
+    }
+
+    fseek(file, 0 , SEEK_END);
+
+    size = ftell(file)/sizeof(SUser);
+
+    rewind(file);
+
+    for(index = 0; index<size; index++)
+    {
+        user = (SUser*) malloc(sizeof(SUser));
+
+        fread(user, sizeof(SUser), 1,file);
+
+        returnAux = userList->add(userList, user);
+        if(returnAux == DENEID) break;
+
+    }
+
+    fclose(file);
+    return returnAux;
+}
+
+
+/**-------------------------------------------------------*////n)
+
+int fileToRankList(ArrayList* rankList)
+{
+    FILE* file;
+    int returnAux = DENEID, index, size;
+
+    SRanking* rank;
+
+
+
+    file = fopen("dataRank.dat", "rb");
+
+    if(file == NULL || rankList == NULL)
+    {
+        fclose(file);
+        return returnAux;
+    }
+
+    fseek(file, 0 , SEEK_END);
+
+    size = ftell(file)/sizeof(SRanking);
+
+    rewind(file);
+
+    for(index = 0; index < size; index++)
+    {
+        rank = (SRanking*) malloc(sizeof(SRanking));
+
+        fread(rank, sizeof(SRanking), 1,file);
+
+        returnAux = rankList->add(rankList, rank);
+        if(returnAux == DENEID) break;
+
+    }
+
+    fclose(file);
+    return returnAux;
+}
+
+
+/**-------------------------------------------------------*////n)
+
 int fileToMovieList(ArrayList* movieList)
 {
     FILE* file;
@@ -219,7 +301,6 @@ int fileToMovieList(ArrayList* movieList)
         movie = (EMovie*) malloc(sizeof(EMovie));
 
         fread(movie, sizeof(EMovie), 1,file);
-  //      printf("%d-%s\n",len, movie->titulo);
 
         returnAux = movieList->add(movieList, movie);
         if(returnAux == DENEID) break;
@@ -228,6 +309,76 @@ int fileToMovieList(ArrayList* movieList)
 /*
     len = showMovieListIndex(movieList);
         if(len == DENEID) printf("Error en la funcion showMovieList");*/
+
+    fclose(file);
+    return returnAux;
+}
+
+
+
+/**-------------------------------------------------------*////n)
+
+int userListToFile(ArrayList* userList)
+{
+    FILE* file;
+    int returnAux = DENEID, index;
+
+    SUser* user;
+
+    user = (SUser*) malloc(sizeof(SUser));
+
+    file = fopen("dataUser.dat", "w+b");
+
+    if(file == NULL || userList == NULL)
+    {
+        fclose(file);
+        return returnAux;
+    }
+
+
+    for(index = 0; index < userList->len(userList); index++)
+    {
+        user =(SUser*) userList->get(userList, index);
+
+        fwrite(user, sizeof(SUser), 1 ,file);
+
+    }
+
+
+
+    fclose(file);
+    return returnAux;
+}
+
+
+/**-------------------------------------------------------*////n)
+
+int rankListToFile(ArrayList* rankList)
+{
+    FILE* file;
+    int returnAux = DENEID, index;
+
+    SRanking* rank;
+
+    rank = (SRanking*) malloc(sizeof(SRanking));
+
+    file = fopen("dataRank.dat", "w+b");
+
+    if(file == NULL || rankList == NULL)
+    {
+        fclose(file);
+        return returnAux;
+    }
+
+
+    for(index = 0; index < rankList->len(rankList); index++)
+    {
+        rank =(SRanking*) rankList->get(rankList, index);
+        fwrite(rank, sizeof(SRanking), 1 ,file);
+
+    }
+
+
 
     fclose(file);
     return returnAux;
@@ -437,7 +588,6 @@ int menuAdministrador(ArrayList* movieList)
             }
 
             if(movieList->sort(movieList, compareMovie, 1) == DENEID ) printf("ERROR en la funsion sort de arrayList de EMovie");
-            movieListToFile(movieList);
             system("cls");
 
         }
@@ -661,12 +811,13 @@ int addRank(ArrayList* movieList, SUser* user, ArrayList* rankList)
 
             rank->id = user->id;
 
-            rank->waching = movie;
+            strcpy(rank->waching, movie->titulo);
 
             rank->puntaje = puntaje;
 
 
             returnAux = rankList->add(rankList, rank);
+            printf("%d", rankList->len(rankList));
         }
         else
             returnAux = OK;
@@ -692,12 +843,6 @@ int Rank(ArrayList* movieList, ArrayList* rankList)
     if(rank == NULL || rankList == NULL) return returnAux;
     if(movie == NULL || movieList == NULL) return returnAux;
 
-    if(rankList->isEmpty(rankList) == 1)
-    {
-       ("nadie puntuo\n");
-    }
-    else
-    {
 
 
         for(i = 0; i < movieList->len(movieList); i++)
@@ -709,7 +854,7 @@ int Rank(ArrayList* movieList, ArrayList* rankList)
             {
                 rank = (SRanking*) rankList->get(rankList, j);
 
-                if(movie == rank->waching)
+                if(strcmp(movie->titulo, rank->waching) == 0)
                 {
                     acumPuntaje += rank->puntaje;
                     puntuadores++;
@@ -717,14 +862,18 @@ int Rank(ArrayList* movieList, ArrayList* rankList)
 
 
             }
+
             if(acumPuntaje != 0)
             {
                 movie->puntaje = acumPuntaje/puntuadores;
                 returnAux = movieList->set(movieList, i, movie);
+                printf("%d\n", movie->puntaje);
 
             }
         }
-    }
+
+
+
     returnAux++;
     return returnAux;
 

@@ -20,7 +20,7 @@ typedef struct{
 typedef struct{
 
     int id;
-    EMovie* waching;
+    char waching[50];
     int puntaje;
 }SRanking;
 
@@ -30,7 +30,15 @@ int removeMovieList(ArrayList* movieList);
 
 int setMovieList(ArrayList* movieList);
 
+int fileToUserList(ArrayList* userList);
+
+int fileToRankList(ArrayList* rankList);
+
 int fileToMovieList(ArrayList* movieList);
+
+int userListToFile(ArrayList* userList);
+
+int rankListToFile(ArrayList* rankList);
 
 int movieListToFile(ArrayList* movieList);
 
