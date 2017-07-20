@@ -1,57 +1,59 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "funciones.h"
-#define OK 1
-#define DENEID 0
+#include "ArrayList.h"
+#define OK 0
+#define DENEID -1
 
 
 
 int main()
 {
     char seguir='s';
-    int opcion=0, val, dim, i = 2;
+    int opcion=0;
 
-    EMovie* movie = (EMovie*) malloc(sizeof(EMovie) * 5);
+    SUser* logeado;
+
+    ArrayList* movieList;
+    ArrayList* userList;
+    ArrayList* rankList;
+
+    userList = al_newArrayList();
+    movieList = al_newArrayList();
+    rankList = al_newArrayList();
 
 
 
-    while(seguir=='s')
+    fileToMovieList(movieList);
+    fileToUserList(userList);
+    fileToRankList(rankList);
+
+    //if(rankList->isEmpty(rankList) == 1) printf("esta vacio");
+
+    //if(harcodearSUser(userList) == DENEID) printf("ERROR en la funsion harcodearSUser");
+
+    // aqui pide loguearse
+    logeado = login(userList);
+
+    //printf("%s\n", logeado->nickName);
+
+    if(logeado != NULL)
     {
-        printf("1- Agregar pelicula\n");
-        printf("2- Borrar pelicula\n");
-        printf("3- Modificar pelicula\n");
-        printf("4- Generar pagina web\n");
-        printf("5- Salir\n");
-
-        scanf("%d",&opcion);
-
-        switch(opcion)
+        if(Rank(movieList, rankList) == DENEID) printf("ERROR en la funsion Rank");
+        if(logeado->id == 1)
         {
-            case 1:
-                val = agregarPelicula(movie);
-                if(val == DENEID) printf("no se pudo agregar la pelicula");
-
-                break;
-            case 2:
-                break;
-            case 3:
-
-                dim = leerArchData(movie);
-
-
-                val = modificarM(movie, dim);
-               break;
-            case 4:
-               break;
-            case 5:
-                seguir = 'n';
-                break;
-
-
+            if(menuAdministrador(movieList) == DENEID) printf("ERROR en la funsion menuAdministrador\n");
+        }
+        else
+        {
+            if(menuCliente(movieList, logeado, rankList) == DENEID) printf("ERROR en la funsion menuAdministrador\n");
         }
 
-
     }
+
+    movieListToFile(movieList);
+    userListToFile(userList);
+    rankListToFile(rankList);
 
     return 0;
 }

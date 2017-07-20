@@ -1,55 +1,65 @@
 #ifndef FUNCIONES_H_INCLUDED
 #define FUNCIONES_H_INCLUDED
-
+#include "ArrayList.h"
 typedef struct{
-    char titulo[20];
-    char genero[20];
+    char titulo[50];
+    char genero[100];
     int duracion;
-    char descripcion[50];
+    char descripcion[800];
     int puntaje;
-    char linkImagen[50];
+    char linkImagen[800];
 }EMovie __attribute__ ((packed));
 
+typedef struct{
+    int id;
+    char nickName[50];
+    char password[50];
 
+}SUser;
 
-/**1)
- *  Agrega una pelicula al archivo binario
- *  @param movie la estructura a ser agregada al archivo
- *  @return retorna 1 o 0 de acuerdo a si pudo agregar la pelicula o no
- */
-int agregarPelicula(EMovie*);
+typedef struct{
 
-/**2)
- *  Borra una pelicula del archivo binario
- *  @param movie la estructura a ser eliminada al archivo
- *  @return retorna 1 o 0 de acuerdo a si pudo eliminar la pelicula o no
- */
-int borrarPelicula(EMovie movie);
+    int id;
+    char waching[50];
+    int puntaje;
+}SRanking;
 
+int addMovieList(ArrayList*);
 
-int modificarM(EMovie*, int);
+int removeMovieList(ArrayList* movieList);
 
-/**4)
- *  Genera un archivo html a partir de las peliculas cargadas en el archivo binario.
- *  @param lista la lista de peliculas a ser agregadas en el archivo.
- *  @param nombre el nombre para el archivo.
- */
-void generarPagina(EMovie lista[], char nombre[]);
+int setMovieList(ArrayList* movieList);
 
+int generarPagina(ArrayList* movieList);
 
-int leerArchData(EMovie*);
+int selectMovie(ArrayList* movieList);
 
-int findMovie(EMovie* movie, int dim);
+EMovie* addMovie();
 
+int compareMovie(void* MovieA, void* MovieB);
 
-void cargarSmovie(EMovie*, int);
+int harcodearSUser(ArrayList*);
 
-/**n)
- *  carga un dato de tipo string
- *  @param el tamaño del string
- *  @param el string que quiere cargar
- */
-void cargarCaracter(int, char[]);
+SUser* login(ArrayList* userList);
 
+int addRank(ArrayList* movieList, SUser* user, ArrayList* rankList);
+
+int Rank(ArrayList* movieList, ArrayList* rankList);
+
+int menuCliente(ArrayList* movieList, SUser* user, ArrayList* rankList);
+
+void cargarCaracter(int tam, char caracteres[tam]);
+
+int fileToUserList(ArrayList* userList);
+
+int fileToRankList(ArrayList* rankList);
+
+int fileToMovieList(ArrayList* movieList);
+
+int userListToFile(ArrayList* userList);
+
+int rankListToFile(ArrayList* rankList);
+
+int movieListToFile(ArrayList* movieList);
 
 #endif // FUNCIONES_H_INCLUDED

@@ -31,13 +31,14 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="data.txt" />
+		<Unit filename="ArrayList.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="ArrayList.h" />
 		<Unit filename="funciones.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="funciones.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="funciones.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
