@@ -28,28 +28,48 @@ int main()
     fileToUserList(userList);
     fileToRankList(rankList);
 
-    //if(rankList->isEmpty(rankList) == 1) printf("esta vacio");
 
-    //if(harcodearSUser(userList) == DENEID) printf("ERROR en la funsion harcodearSUser");
+    if(harcodearAdmin(userList) == DENEID) printf("ERROR en la funsion harcodearAdmin");
 
-    // aqui pide loguearse
-    logeado = login(userList);
 
-    //printf("%s\n", logeado->nickName);
-
-    if(logeado != NULL)
+    do
     {
-        if(Rank(movieList, rankList) == DENEID) printf("ERROR en la funsion Rank");
-        if(logeado->id == 1)
-        {
-            if(menuAdministrador(movieList) == DENEID) printf("ERROR en la funsion menuAdministrador\n");
-        }
-        else
-        {
-            if(menuCliente(movieList, logeado, rankList) == DENEID) printf("ERROR en la funsion menuAdministrador\n");
-        }
+        printf("1- ingresar usuario\n");
+        printf("2- registrarse\n");
+        printf("3- Salir\n");
 
-    }
+        scanf("%d", &opcion);
+        system("cls");
+        switch(opcion)
+        {
+            case 1:
+                // aqui pide loguearse
+                logeado = login(userList);
+
+                //printf("%s\n", logeado->nickName);
+
+                if(logeado != NULL)
+                {
+
+                    if(logeado->id == 1)
+                    {
+                        if(menuAdministrador(movieList, rankList) == DENEID) printf("ERROR en la funsion menuAdministrador\n");
+                    }
+                    else
+                    {
+                        if(menuCliente(movieList, logeado, rankList) == DENEID) printf("ERROR en la funsion menuAdministrador\n");
+                    }
+
+                }
+                break;
+            case 2:
+                if(signUp(userList) == DENEID) printf("ERROR en la funsion signUp");
+                break;
+            case 3:
+                seguir = 'n';
+                break;
+        }
+    }while(seguir == 's');
 
     movieListToFile(movieList);
     userListToFile(userList);
