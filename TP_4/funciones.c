@@ -256,14 +256,31 @@ EMovie* addMovie()
 int compareMovie(void* MovieA, void* MovieB)
 {
 
-    if( strcmp(((EMovie*)MovieA)->titulo, ((EMovie*)MovieB)->titulo) == 1)
+    if(((EMovie*)MovieA)->puntaje < ((EMovie*)MovieB)->puntaje)
     {
         return 1;
     }
-    if( strcmp(((EMovie*)MovieA)->titulo, ((EMovie*)MovieB)->titulo) == -1)
+
+
+    if(((EMovie*)MovieA)->puntaje > ((EMovie*)MovieB)->puntaje)
     {
         return -1;
     }
+
+    if(((EMovie*)MovieA)->puntaje == ((EMovie*)MovieB)->puntaje)
+    {
+        if(strcmp(((EMovie*)MovieA)->titulo, ((EMovie*)MovieB)->titulo) == 1)
+        {
+            return 1;
+        }
+        else
+        {
+            return -1;
+        }
+
+    }
+
+
     return 0;
 
 
@@ -316,7 +333,7 @@ int menuAdministrador(ArrayList* movieList, ArrayList* rankList)
                 case 4:
                     system("cls");
 
-                    if(Rank(movieList, rankList) == DENEID) printf("ERROR en la funsion Rank");
+
                     if(generarPagina(movieList) == DENEID) printf("Error en la funcion generarPagina\n");
 
                     system("pause");
@@ -344,7 +361,7 @@ int menuAdministrador(ArrayList* movieList, ArrayList* rankList)
 
 
             }
-
+            if(Rank(movieList, rankList) == DENEID) printf("ERROR en la funsion Rank");
             if(movieList->sort(movieList, compareMovie, 1) == DENEID ) printf("ERROR en la funsion sort de arrayList de EMovie");
             system("cls");
 
