@@ -18,7 +18,7 @@ int removeMovieList(ArrayList* movieList);
 
 int setMovieList(ArrayList* movieList);
 
-int fileToMovieList(ArrayList* movieList);
+int fileToMovie(int*,int*, EMovie**);
 
 int movieListToFile(ArrayList* movieList);
 

@@ -11,14 +11,19 @@
 
 /**-------------------------------------------------------*////1)
 
-int addMovieList(ArrayList* movieList)
+int addMovieList(int* len, int* size, EMovie** movie)
 {
     int returnAux = DENEID;
-    EMovie* movie;
 
-    if(movieList == NULL) return returnAux;
+    if(*size == *len)
+        resizeUp(size, movie);
 
-    movie = addMovie();
+    *(movie+(*len+1)) = (EMovie*) malloc(sizeof(EMovie));
+
+
+    if(movie == NULL) return returnAux;
+
+    *(movie+*len) = addMovie();
 
     if(movie != NULL)
         returnAux = movieList->add(movieList, movie);
@@ -99,11 +104,10 @@ int setMovieList(ArrayList* movieList)
 
 /**-------------------------------------------------------*////4)
 
-int generarPagina(ArrayList* movieList)
+int generarPagina(EMovie** movie)
 {
     int i, returnAux = DENEID, val;
 
-    EMovie* movie;
 
     FILE* file;
 
@@ -152,13 +156,10 @@ int generarPagina(ArrayList* movieList)
 
 /**-------------------------------------------------------*////n)
 
-int fileToMovie(int size, EMovie** movieList)
+int fileToMovie(int *len,int *size, EMovie** movie)
 {
     FILE* file;
-    int index, len, sizeAux;
-
-    EMovie* movie;
-
+    int index, returnAux = DENEID;
 
 
     file = fopen("data.dat", "rb");
@@ -166,25 +167,28 @@ int fileToMovie(int size, EMovie** movieList)
     if(file == NULL || movieList == NULL)
     {
         fclose(file);
-        return size;
+        return returnAux;
     }
 
     fseek(file, 0 , SEEK_END);
 
-    len = ftell(file)/sizeof(EMovie);
+    *len = ftell(file)/sizeof(EMovie);
 
     rewind(file);
 
-    for(index = 0; index<len; index++)
+    returnAux = OK;
+    for(index = 0; index<*len; index++)
     {
 
-        if(index == size)
+        if(index == *size)
         {
-            sizeAux = resizeUp(size, movie);
 
-            if(size == sizeAux) break;
-
-            size = sizeAux;
+            if(resizeUp(size, movie) == DENEID)
+            {
+                *len = index;
+                returnAux = DENEID;
+                break;
+            }
         }
 
         *(movie+index) = (EMovie*) malloc(sizeof(EMovie));
@@ -233,18 +237,19 @@ int movieListToFile(int size, EMovie** movie)
 
 /**-------------------------------------------------------*////n)
 
-int resizeUp(int size, EMovie** movie)
+int resizeUp(int *size, EMovie** movie)
 {
     int returnAux = DENEID;
     EMovie** aux;
 
     aux = (EMovie**) realloc(movie, sizeof(EMovie*)*3)
-    if(aux == NULL) return size;
+    if(aux == NULL) return returnAux;
 
     movie = aux;
-    size += 3;
+    *size += 3;
+    returnAux = OK;
 
-    return size;
+    return returnAux;
 
 }
 

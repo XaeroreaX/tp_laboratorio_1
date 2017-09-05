@@ -9,13 +9,22 @@
 int main()
 {
     char seguir='s';
-    int opcion=0, val, size = 3;
+    int opcion=0, val, *size, *len;
 
     EMovie** movies;
 
+    size = (int*) malloc(sizeof(int));
+    *size = 3;
+
+    len = (int*) malloc(sizeof(int));
+    *len = 0;
+
     movies = (EMovie**) malloc(sizeof(EMovie*) * 3)
 
-    fileToMovieList(size, movies);
+    if(fileToMovie(len, size, movies) == DENEID)
+    {
+        printf("fallo la funcion fileToMovie");
+    }
 
 
     while(seguir=='s')
