@@ -1,32 +1,21 @@
 #ifndef FUNCIONES_H_INCLUDED
 #define FUNCIONES_H_INCLUDED
-#include "ArrayList.h"
 typedef struct{
-    char titulo[20];
-    char genero[20];
+    char titulo[50];
+    char genero[50];
     int duracion;
-    char descripcion[50];
+    char descripcion[1024];
     int puntaje;
-    char linkImagen[50];
+    char linkImagen[500];
 }EMovie __attribute__ ((packed));
 
+int HarcodearMovieList(int*, int* ,EMovie**);
 
+int addMovieList(int *, int *, EMovie**, EMovie*);
 
-int addMovieList(ArrayList*);
+void cascara(int *, int *, EMovie**);
 
-int removeMovieList(ArrayList* movieList);
-
-int setMovieList(ArrayList* movieList);
-
-int fileToMovie(int*,int*, EMovie**);
-
-int movieListToFile(ArrayList* movieList);
-
-int showMovieListIndex(ArrayList* movieList);
-
-EMovie* addMovie();
-
-int compareMovie(void* MovieA, void* MovieB);
+int resizeUp(int* , EMovie**);
 
 void cargarCaracter(int tam, char caracteres[tam]);
 

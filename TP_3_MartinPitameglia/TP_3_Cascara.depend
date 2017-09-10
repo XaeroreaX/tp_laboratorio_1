@@ -116,3 +116,18 @@
 	"funciones.h"
 	"ArrayList.h"
 
+1505075291 source:c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\tp_3_martinpitameglia\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+
+1505073389 c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\tp_3_martinpitameglia\funciones.h
+
+1504609204 c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\tp_3_martinpitameglia\arraylist.h
+
+1505075412 source:c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\tp_3_martinpitameglia\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+
