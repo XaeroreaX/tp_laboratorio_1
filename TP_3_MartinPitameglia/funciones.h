@@ -9,6 +9,11 @@ typedef struct{
     char linkImagen[500];
 }EMovie __attribute__ ((packed));
 
+
+int generarPagina(int *len, EMovie** movieList);
+
+int movieListToFile(int *len, EMovie** movieList);
+
 int HarcodearMovieList(int*, int* ,EMovie**);
 
 int addMovieList(int *, int *, EMovie**, EMovie*);

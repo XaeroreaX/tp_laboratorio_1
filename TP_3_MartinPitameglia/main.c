@@ -23,6 +23,11 @@ int main()
 
     if(HarcodearMovieList(len, size, movies) == DENEID) printf("X");
 
+
+    generarPagina(len, movies);
+
+    movieListToFile(len, movies);
+
     //showMovieListIndex(len, movies);
 
     return 0;

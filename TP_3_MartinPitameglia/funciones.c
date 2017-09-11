@@ -5,6 +5,107 @@
 #define OK 0
 #define DENEID -1
 
+
+/**-------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+int generarPagina(int *len, EMovie** movieList)
+{
+    int i, returnAux = DENEID, val;
+
+    EMovie* movie;
+
+    FILE* file;
+
+    movie = (EMovie*) malloc(sizeof(EMovie));
+
+    if(movieList == NULL || movie == NULL) return returnAux;
+
+
+
+
+
+    file = fopen("index.HTML", "w");
+
+    if(file == NULL) return returnAux;
+
+
+    for(i = 0; i < *len; i++)
+    {
+
+        movie = *(movieList+i);
+
+
+
+
+        fprintf(file,"<img  src=%s alt=%s style=width:200px;hight:200px>",movie->linkImagen,movie->titulo);
+
+                //titulo
+        fprintf(file,"<h2><a href=#>%s</a></h2>",movie->titulo);
+
+                //otros aspectos
+
+        fprintf(file,"<h3><li> Genero: %s</li>   <li>Puntaje: %d </li>     <li>Duracion: %d </li>               </h3>",movie->genero,movie->puntaje,movie->duracion);
+
+        fprintf(file,"<pre>%s</pre>", movie->descripcion);
+
+
+    }
+
+
+
+
+    printf("pagina generada esxitosamente");
+
+
+
+    fclose(file);
+    returnAux = OK;
+    return returnAux;
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+int movieListToFile(int *len, EMovie** movieList)
+{
+    FILE* file;
+    int returnAux = DENEID, index;
+
+    EMovie* movie;
+
+    movie = (EMovie*) malloc(sizeof(EMovie));
+
+    file = fopen("data.dat", "w+b");
+
+    if((file == NULL || movieList == NULL) || len == NULL)
+    {
+        fclose(file);
+        return returnAux;
+    }
+
+    //fseek(file, 0 , SEEK_END);
+
+
+
+    for(index = 0; index < *len; index++)
+    {
+        movie = *(movieList+index);
+
+        fwrite(movie, sizeof(EMovie), 1 ,file);
+
+        //printf("%d-%d-%s",index,len, movie->titulo);
+    }
+
+
+
+    fclose(file);
+    return returnAux;
+}
+
+
+
 /**-------------------------------------------------------------------------------------------------------------------------------------------*/
 
 int HarcodearMovieList(int* len, int* size, EMovie** movieList)
@@ -22,7 +123,7 @@ int HarcodearMovieList(int* len, int* size, EMovie** movieList)
     int duracion[5] = {120, 500, 80, 90, 10000};
     char descripcion[5][1024] = {"peli de viajes en el tiempo","peleas en un linaje fabuloso","peli de asesinatos","apocalipcis skinet","juego multiplayer"};
     int puntaje[5] = {90, 70, 60, 80, 80};
-    char linkImagen[5][500] = {"https://images-na.ssl-images-amazon.com/images/M/MV5BZmU0M2Y1OGUtZjIxNi00ZjBkLTg1MjgtOWIyNThiZWIwYjRiXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SY1000_CR0,0,643,1000_AL_.jpg","https://www.google.com.ar/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjqpcycrJvWAhWEkZAKHVNCDQMQjRwIBw&url=http%3A%2F%2Fwww.3djuegos.com%2Fcomunidad-foros%2Ftema%2F45722981%2F0%2Fvuestras-portadas-de-jojo-favoritas%2F&psig=AFQjCNGsVS6GLLgJ8wjnej3UGq3MK4SEzA&ust=1505157879328491","https://images-na.ssl-images-amazon.com/images/M/MV5BMTQ5ODI5NTMzN15BMl5BanBnXkFtZTcwNzY4MTYxMg@@._V1_.jpg","https://images-na.ssl-images-amazon.com/images/M/MV5BODE1MDczNTUxOV5BMl5BanBnXkFtZTcwMTA0NDQyNA@@._V1_SY1000_CR0,0,666,1000_AL_.jpg","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm_VFglXxfyRpFKwavBlewLlgNEY-YXIpVza1f5LnlGhjIevyF"};
+    char linkImagen[5][500] = {"https://images-na.ssl-images-amazon.com/images/M/MV5BZmU0M2Y1OGUtZjIxNi00ZjBkLTg1MjgtOWIyNThiZWIwYjRiXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SY1000_CR0,0,643,1000_AL_.jpg","https://myanimelist.cdn-dena.com/images/anime/2/82464.jpg","https://images-na.ssl-images-amazon.com/images/M/MV5BNWMxYTYzYWQtNGZmNy00MTg5LTk1N2MtNzQ5NjQxYjQ5NTJhXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX669_CR0,0,669,999_AL_.jpg","https://images-na.ssl-images-amazon.com/images/M/MV5BODE1MDczNTUxOV5BMl5BanBnXkFtZTcwMTA0NDQyNA@@._V1_SY1000_CR0,0,666,1000_AL_.jpg","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm_VFglXxfyRpFKwavBlewLlgNEY-YXIpVza1f5LnlGhjIevyF"};
 
     EMovie* movie;
 
@@ -71,7 +172,7 @@ int addMovieList(int *len, int *size, EMovie** movieList, EMovie* movie)
     *(movieList+i) = movie;
     *len = i + 1;
 
-    printf("%d", *len);
+    printf("%d--%d", *len, *size);
 
     returnAux = OK;
 
@@ -163,7 +264,7 @@ int resizeUp(int *size, EMovie** movieList)
     int returnAux = DENEID;
     EMovie** aux;
 
-    aux = (EMovie**) realloc(movieList, sizeof(EMovie*)*3);
+    aux = (EMovie**) realloc(movieList, sizeof(EMovie*)*(*size + 3));
     if(aux == NULL) return returnAux;
 
     movieList = aux;
@@ -173,31 +274,7 @@ int resizeUp(int *size, EMovie** movieList)
     return returnAux;
 
 }
-/*
-/**---------------------------------------------------------------------------------------------------------------------------------------------------------/
 
-int showMovieListIndex(int *len EMovie** movie)
-{
-    int i, returnAux = DENEID;
-
-    EMovie* movie;
-
-    movie = (EMovie*) malloc(sizeof(EMovie));
-
-    if(movieList == NULL || movie == NULL) return returnAux;
-
-    for(i = 0; i < movieList->len(movieList); i++)
-    {
-        movie = (EMovie*) movieList->get(movieList, i);
-        printf("\n%d)titulo:%s", (i + 1), movie->titulo);
-    }
-
-    printf("\n");
-    returnAux = i;
-
-    return returnAux;
-}
-*/
 /**-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------/
 
 EMovie* addMovie()
