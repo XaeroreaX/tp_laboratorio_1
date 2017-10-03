@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1507040786 source:d:\martin pitameglia\cascara.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cascara.h"
+	"funciones.h"
+
+1507038827 d:\martin pitameglia\cascara.h
+
+1507040755 d:\martin pitameglia\funciones.h
+
+1507041590 source:d:\martin pitameglia\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cascara.h"
+	"funciones.h"
+
+1507040900 source:d:\martin pitameglia\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cascara.h"
+	"funciones.h"
+
