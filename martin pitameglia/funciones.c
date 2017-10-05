@@ -116,7 +116,7 @@ int mostrarEquipo(int idCliente, sAlquiler alquileres[], int sizeA)
     return returnAux;
 }
 
-void mostraIndexClientes(sAlquiler alquiler[], int sizeC)
+void mostraIndexClientes(sCliente clientes[], int sizeC)
 {
     int i;
 
@@ -125,23 +125,8 @@ void mostraIndexClientes(sAlquiler alquiler[], int sizeC)
 
         if(clientes[i].flagAlta == OK)
         {
-            printf("id:%d---operador:%s %s\n", alquiler[i].idAlquiler, alquiler[i].operador);
+            printf("id:%d---operador:%s %s\n", clientes[i].idCliente, clientes[i].nombre, clientes[i].apellido);
 
-            switch(alquileres[i].equipo)
-                {
-                    case AMOLADORA:
-                        printf(" amoladora,");
-                        break;
-                    case MEZCLADORA:
-                        printf(" mezcladora,");
-                        break;
-                    case TALADRO:
-                        printf(" taladro,");
-                        break;
-                    default:
-                        printf("NONE");
-                        break;
-                }
 
         }
 
@@ -149,16 +134,16 @@ void mostraIndexClientes(sAlquiler alquiler[], int sizeC)
 
 }
 
-void mostraIndexAlquiler(sCliente alquiler[], int sizeA)
+void mostraIndexAlquiler(sAlquiler alquiler[], int sizeA)
 {
     int i;
 
     for(i = 0; i < sizeA; i++)
     {
 
-        if(clientes[i].flagAlta == OK)
+        if(alquiler[i].flagAlta == OK)
         {
-            printf("id:%d---operador:%s--- \n", clientes[i].idCliente, clientes[i].nombre, clientes[i].apellido);
+            printf("id:%d---operador:%s---\n", alquiler[i].idAlquiler, alquiler[i].operador);
         }
 
     }
@@ -176,7 +161,7 @@ void bajasAlquileres(int idClientse, sAlquiler alquileres[], int sizeA)
         if(alquileres[i].flagAlta == OK)
         {
 
-            if(idClientse == alquileres[i].idCliente) alquileres[i].flagAlta DENEID;
+            if(idClientse == alquileres[i].idCliente) alquileres[i].flagAlta == DENEID;
 
         }
 

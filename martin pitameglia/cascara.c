@@ -127,6 +127,10 @@ int modifCliente(sCliente clientes[], int sizeC)
 
 int finAlquiler(sCliente clientes[], sAlquiler alquiler[], int sizeC, int sizeA)
 {
+    printf("elija un alquiler para darle fin\n");
+
+    mostraIndexAlquiler(alquiler, sizeA);
+
 
 
 
@@ -169,7 +173,7 @@ void HarcodearAlquiler(sAlquiler alquileres[])
 
     for(i = 0; i < 5; i++)
     {
-        alquileres[i].idAlquiler = alquileres[i];
+        alquileres[i].idAlquiler = idAlquiler[i];
         alquileres[i].idCliente = idClientes[i];
         alquileres[i].equipo = equipo[i];
         alquileres[i].time = time[i];

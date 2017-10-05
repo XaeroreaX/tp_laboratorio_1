@@ -26,7 +26,7 @@ int main()
 
     HarcodearClientes(clientes);
 
-    while(opcion != 6)
+    while(opcion != 7)
     {
 
         printf("1.- Alta de clientes\n");
@@ -34,7 +34,7 @@ int main()
         printf("3.- mostrar informacion de los clientes\n");
         printf("4.- baja de cliente\n");
         printf("5.- modificar clientes\n");
-        printf("6.- quit\n");
+        printf("7.- quit\n");
 
         printf("ingresen opcion:");
         scanf("%d", &opcion);
@@ -73,6 +73,10 @@ int main()
 
                 break;
             case 6:
+                finAlquiler(clientes, alquileres, 20, 20);
+                break;
+
+            case 7:
 
                 break;
 
