@@ -35,3 +35,28 @@
 
 1507028454 c:\users\public\cv\tp_laboratorio_1-master\martin pitameglia\funciones.h
 
+1507496035 source:c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\martin pitameglia\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cascara.h"
+	"funciones.h"
+
+1507516102 c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\martin pitameglia\cascara.h
+
+1507479757 c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\martin pitameglia\funciones.h
+
+1507495972 source:c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\martin pitameglia\cascara.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cascara.h"
+	"funciones.h"
+
+1507482643 source:c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\martin pitameglia\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cascara.h"
+	"funciones.h"
+

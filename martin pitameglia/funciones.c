@@ -27,23 +27,72 @@ sCliente cargarCliente(int id)
 }
 
 
-sAlquiler cargarAlquileres()
+sAlquiler cargarAlquileres(int id, sCliente clientes[], int sizeC)
 {
-    int i = 0;
+    int i = 0, idCliente, error = OK;
     sAlquiler alquiler;
 
 
-    alquiler.idCliente = OK;
+    alquiler.idAlquiler = id;
 
-    printf("ingrese el equipo:");
-    scanf("%d", &alquiler.equipo);
-    printf("\ningrese el operador:");
-    cargarCaracter(50, alquiler.operador);
+    mostraIndexClientes(clientes, sizeC);
 
+
+    printf("ingrese id:");
+    scanf("%d", &idCliente);
+
+    i = getIndexId(idCliente, clientes, sizeC);
+    while(i == DENEID) i = getIndexId(idCliente, clientes, sizeC);
+
+
+    alquiler.idCliente = clientes[i].idCliente;
+
+    strcpy(alquiler.operador , clientes[i].nombre);
+    strcat(alquiler.operador, " ");
+    strcat(alquiler.operador, clientes[i].apellido);
+
+
+
+
+    do
+    {
+
+        printf("ingrese el equipo:");
+        printf("\n1.-Amoladora\n2.-Mezcladora\n3.-Taladro\n");
+
+        scanf("%d", &alquiler.equipo);
+
+        switch(alquiler.equipo)
+        {
+            case AMOLADORA:
+                printf("usted ingreso amoladora");
+                error = DENEID;
+                break;
+            case MEZCLADORA:
+                printf("usted ingreso mezcladora,");
+                error = DENEID;
+                break;
+            case TALADRO:
+                printf("usted ingreso taladro");
+                error = DENEID;
+                break;
+            default:
+                error = OK;
+                printf("ingreso mal la opcion\n\n");
+                break;
+        }
+
+
+
+    }while(error == OK);
+
+    printf("ingrese tiempo estimado:");
+
+    scanf("%d", &alquiler.tiempoEstimado);
 
     alquiler.time = OK;
 
-    alquiler.flagEstado = DENEID;
+    alquiler.flagEstado = OK;
 
     alquiler.flagAlta = OK;
 
@@ -58,7 +107,7 @@ int findEspacioClientes(sCliente clientes[], int size)
 
     for(i = 0; i <size; i++)
     {
-        if(clientes[i].flagAlta = DENEID) break;
+        if(clientes[i].flagAlta == DENEID) break;
 
     }
 
@@ -73,7 +122,7 @@ int findEspacioAlquileres(sAlquiler alquileres[], int size)
 
     for(i = 0; i <size; i++)
     {
-        if(alquileres[i].flagAlta = DENEID) break;
+        if(alquileres[i].flagAlta == DENEID) break;
 
     }
 
@@ -104,9 +153,6 @@ int mostrarEquipo(int idCliente, sAlquiler alquileres[], int sizeA)
                     case TALADRO:
                         printf(" taladro,");
                         break;
-                    default:
-                        printf("NONE");
-                        break;
                 }
 
             }
@@ -116,37 +162,80 @@ int mostrarEquipo(int idCliente, sAlquiler alquileres[], int sizeA)
     return returnAux;
 }
 
-void mostraIndexClientes(sCliente clientes[], int sizeC)
+int mostraIndexClientes(sCliente clientes[], int sizeC)
 {
-    int i;
+    int i, returnAux = DENEID;
 
     for(i = 0; i < sizeC; i++)
     {
 
         if(clientes[i].flagAlta == OK)
         {
-            printf("id:%d---operador:%s %s\n", clientes[i].idCliente, clientes[i].nombre, clientes[i].apellido);
+            returnAux = OK;
+            printf("id:%d---Nombre:%s %s\n", clientes[i].idCliente, clientes[i].nombre, clientes[i].apellido);
 
 
         }
 
     }
 
+    return returnAux;
+
 }
 
-void mostraIndexAlquiler(sAlquiler alquiler[], int sizeA)
+int mostraIndexAlquiler(sAlquiler alquiler[], int sizeA, int flagId)
 {
-    int i;
+    int i, returnAux = DENEID;
 
     for(i = 0; i < sizeA; i++)
     {
 
         if(alquiler[i].flagAlta == OK)
         {
-            printf("id:%d---operador:%s---\n", alquiler[i].idAlquiler, alquiler[i].operador);
+            returnAux = OK;
+
+            if(flagId == OK)
+            {
+
+                printf("id:%d---operador:%s---Equipo:", alquiler[i].idAlquiler, alquiler[i].operador);
+            }
+            else
+            {
+                printf("operador:%s---Equipo:", alquiler[i].operador);
+            }
+            switch(alquiler[i].equipo)
+                {
+                    case AMOLADORA:
+                        printf(" amoladora,");
+                        break;
+                    case MEZCLADORA:
+                        printf(" mezcladora,");
+                        break;
+                    case TALADRO:
+                        printf(" taladro,");
+                        break;
+                    default:
+                        printf("NONE");
+                        break;
+                }
+
+            if(alquiler[i].flagEstado == OK)
+            {
+                printf("---Estado:en curso");
+            }
+            else
+            {
+                printf("---Estado:FINALIZADO---tiempo:%d", alquiler[i].time);
+
+            }
+            printf("\n");
+
+
         }
 
     }
+
+    return returnAux;
 
 }
 
@@ -192,6 +281,46 @@ int getIndexId(int idCliente, sCliente clientes[], int sizeC)
 
 
     return returnAux;
+}
+
+int getIndexIdAlquiler(int idAlquiler, sAlquiler alquiler[], int sizeA)
+{
+    int i, returnAux = DENEID;
+
+    for(i = 0; i < sizeA; i++)
+    {
+        if(alquiler[i].flagAlta == OK)
+        {
+            if(alquiler[i].idAlquiler == idAlquiler)break;
+
+
+        }
+
+
+    }
+    if(i < sizeA) returnAux = i;
+
+
+    return returnAux;
+}
+
+
+int numAlquileres(int idCliente, sAlquiler alquileres[], int sizeA)
+{
+    int i, len = 0;
+
+    for(i = 0; i < sizeA; i++)
+    {
+        if(alquileres[i].flagAlta == OK)
+        {
+            if(idCliente == alquileres[i].idCliente) len++;
+
+        }
+
+
+    }
+
+    return len;
 }
 
 /**-----------------------------------------------------------------------------------------------------------------------*/

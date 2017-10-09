@@ -22,11 +22,11 @@ int main()
         alquileres[i].flagAlta = DENEID;
     }
 
-    HarcodearAlquiler(alquileres);
-
     HarcodearClientes(clientes);
 
-    while(opcion != 7)
+    HarcodearAlquiler(alquileres, clientes, 20);
+
+    while(opcion != 11)
     {
 
         printf("1.- Alta de clientes\n");
@@ -34,7 +34,12 @@ int main()
         printf("3.- mostrar informacion de los clientes\n");
         printf("4.- baja de cliente\n");
         printf("5.- modificar clientes\n");
-        printf("7.- quit\n");
+        printf("6.- Fin del alquiler\n");
+        printf("7.- mostrar todos los alquileres\n");
+        printf("8.- mostrar a los clientes con mas alquileres\n");
+        printf("9.- mostrar los equipos mas alquilados\n");
+        printf("10.- mostrar los promedios de los equipos\n");
+        printf("11.- quit\n");
 
         printf("ingresen opcion:");
         scanf("%d", &opcion);
@@ -50,7 +55,7 @@ int main()
 
             case 2:
                 system("cls");
-                altaAlquiler(alquileres, 20);
+                altaAlquiler(alquileres, clientes, 20, 20);
                 break;
 
             case 3:
@@ -73,15 +78,45 @@ int main()
 
                 break;
             case 6:
-                finAlquiler(clientes, alquileres, 20, 20);
+                system("cls");
+                if(finAlquiler(clientes, alquileres, 20, 20) == DENEID) printf("el alquiler ya habia finalizado");
                 break;
 
             case 7:
 
+                system("cls");
+                mostraIndexAlquiler(alquileres, 20, DENEID);
+
                 break;
 
-            default:
+            case 8:
+                system("cls");
+                if(maxClienteAlquileres(alquileres, clientes, 20, 20)) printf("no hay alquileres");
 
+                break;
+
+            case 9:
+                system("cls");
+
+                if(equipoMasAlquilado(alquileres, 20) == DENEID) printf("no hay equipos\n");
+
+                break;
+
+            case 10:
+
+                system("cls");
+
+                if(promedioEquipos(alquileres, 20) == DENEID) printf("no hay alquileres finalizados\n");
+
+                break;
+
+            case 11:
+
+                break;
+
+
+            default:
+                printf("ingreso mal la opcion");
                 break;
 
 
@@ -93,7 +128,7 @@ int main()
     }
 
 
-    printf("Hello world!\n");
+
     return 0;
 }
 

@@ -26,7 +26,7 @@ typedef struct
     int time;
     int tiempoEstimado;
     int flagEstado;
-    char operador[50];
+    char operador[100];
     int flagAlta;
 
 
@@ -34,3 +34,23 @@ typedef struct
 
 
 int altaCliente(sCliente clientes[], int size);
+
+int altaAlquiler(sAlquiler alquileres[], sCliente clientes[], int sizeC, int sizeA);
+
+int mostrarClientes(sCliente clientes[], sAlquiler alquileres[], int sizeC, int sizeA);
+
+int bajaCliente(sCliente cliente[], sAlquiler alquileres[], int sizeC, int sizeA);
+
+int modifCliente(sCliente clientes[], int sizeC);
+
+int finAlquiler(sCliente clientes[], sAlquiler alquiler[], int sizeC, int sizeA);
+
+int maxClienteAlquileres(sAlquiler alquileres[], sCliente clientes[], int sizeA, int sizeC);
+
+int equipoMasAlquilado(sAlquiler alquileres[], int sizeA);
+
+int promedioEquipos(sAlquiler alquileres[], int sizeA);
+
+void HarcodearClientes(sCliente clientes[]);
+
+void HarcodearAlquiler(sAlquiler alquileres[],sCliente clientes[], int sizeC);
