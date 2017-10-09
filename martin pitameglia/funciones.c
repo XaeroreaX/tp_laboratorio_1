@@ -41,8 +41,8 @@ sAlquiler cargarAlquileres(int id, sCliente clientes[], int sizeC)
     printf("ingrese id:");
     scanf("%d", &idCliente);
 
-    i = getIndexId(idCliente, clientes, sizeC);
-    while(i == DENEID) i = getIndexId(idCliente, clientes, sizeC);
+    i = getIndexIdCliente(idCliente, clientes, sizeC);
+    while(i == DENEID) i = getIndexIdCliente(idCliente, clientes, sizeC);
 
 
     alquiler.idCliente = clientes[i].idCliente;
@@ -262,7 +262,45 @@ void bajasAlquileres(int idClientse, sAlquiler alquileres[], int sizeA)
 
 }
 
-int getIndexId(int idCliente, sCliente clientes[], int sizeC)
+int getIdC(sCliente clientes[], int sizeC)
+{
+
+    int i, id = 1000;
+
+    for(i = 0; i < sizeC; i++)
+    {
+        if(clientes[i].flagAlta == OK)
+        {
+            id = clientes[i].idCliente + 1;
+
+        }
+        else break;
+
+    }
+
+    return id;
+}
+
+int getIdA(sAlquiler alquileres[], int sizeA)
+{
+
+    int i, id = 1000;
+
+    for(i = 0; i < sizeA; i++)
+    {
+        if(alquileres[i].flagAlta == OK)
+        {
+            id = alquileres[i].idAlquiler + 1;
+
+        }
+        else break;
+
+    }
+
+    return id;
+}
+
+int getIndexIdCliente(int idCliente, sCliente clientes[], int sizeC)
 {
     int i, returnAux = DENEID;
 
@@ -304,6 +342,26 @@ int getIndexIdAlquiler(int idAlquiler, sAlquiler alquiler[], int sizeA)
     return returnAux;
 }
 
+int getIndexIdCienteAlquiler(int idCliente, sAlquiler alquiler[], int sizeA)
+{
+    int i, returnAux = DENEID;
+
+    for(i = 0; i < sizeA; i++)
+    {
+        if(alquiler[i].flagAlta == OK)
+        {
+            if(alquiler[i].idCliente == idCliente)break;
+
+
+        }
+
+
+    }
+    if(i < sizeA) returnAux = i;
+
+
+    return returnAux;
+}
 
 int numAlquileres(int idCliente, sAlquiler alquileres[], int sizeA)
 {

@@ -50,23 +50,23 @@ int main()
 
             case 1:
                 system("cls");
-                altaCliente(clientes, 20);
+                if(altaCliente(clientes, 20) == DENEID) printf("no hay espacio en el array\n");
                 break;
 
             case 2:
                 system("cls");
-                altaAlquiler(alquileres, clientes, 20, 20);
+                if(altaAlquiler(clientes, alquileres, 20, 20) == DENEID) printf("no hay espacio en el array\n");
                 break;
 
             case 3:
                 system("cls");
-                mostrarClientes(clientes, alquileres, 20, 20);
+                if(mostrarClientes(clientes, alquileres, 20, 20) == DENEID) printf("no hay clientes cargados\n");
                 break;
             case 4:
 
                 system("cls");
 
-                bajaCliente(clientes, alquileres, 20, 20);
+                if(bajaCliente(clientes, alquileres, 20, 20) == DENEID) printf("id no valido\n");
 
                 break;
 
@@ -74,24 +74,24 @@ int main()
 
                 system("cls");
 
-                modifCliente(clientes, 20);
+                if(modifCliente(clientes, alquileres,20, 20) == DENEID) printf("no existe ese id\n");
 
                 break;
             case 6:
                 system("cls");
-                if(finAlquiler(clientes, alquileres, 20, 20) == DENEID) printf("el alquiler ya habia finalizado");
+                if(finAlquiler(clientes, alquileres, 20, 20) == DENEID) printf("el alquiler ya habia finalizado\n");
                 break;
 
             case 7:
 
                 system("cls");
-                mostraIndexAlquiler(alquileres, 20, DENEID);
+                if(mostraIndexAlquiler(alquileres, 20, DENEID) == DENEID) printf("no hay alquileres\n");
 
                 break;
 
             case 8:
                 system("cls");
-                if(maxClienteAlquileres(alquileres, clientes, 20, 20)) printf("no hay alquileres");
+                if(maxClienteAlquileres(clientes, alquileres, 20, 20)) printf("no hay alquileres\n");
 
                 break;
 
@@ -111,12 +111,12 @@ int main()
                 break;
 
             case 11:
-
+                printf("fin del programa\n");
                 break;
 
 
             default:
-                printf("ingreso mal la opcion");
+                printf("opcion incorrecta\n");
                 break;
 
 

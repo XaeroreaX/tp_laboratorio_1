@@ -23,8 +23,10 @@ int mostraIndexAlquiler(sAlquiler alquiler[], int sizeA, int flagId);
 
 void bajasAlquileres(int idClientse, sAlquiler alquileres[], int sizeA);
 
-int getIndexId(int idCliente, sCliente clientes[], int sizeC);
+int getIndexIdCliente(int idCliente, sCliente clientes[], int sizeC);
 
 int getIndexIdAlquiler(int idAlquiler, sAlquiler alquiler[], int sizeA);
+
+int getIndexIdCienteAlquiler(int idCliente, sAlquiler alquiler[], int sizeA);
 
 void cargarCaracter(int tam, char caracteres[tam]);

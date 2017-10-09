@@ -9,19 +9,18 @@
 
 
 
-int altaCliente(sCliente clientes[], int size)
+int altaCliente(sCliente clientes[], int sizeA)
 {
     int i, returnAux = DENEID, id;
 
-    i = findEspacioClientes(clientes, size);
+    i = findEspacioClientes(clientes, sizeA);
 
     if(i != DENEID)
     {
         returnAux = OK;
 
         printf("ingrese datos del cliente");
-        printf("ingrese id:");
-        scanf("%d", &id);
+        id = getIdC(clientes, sizeA);
         clientes[i] =  cargarCliente(id);
 
     }
@@ -30,7 +29,7 @@ int altaCliente(sCliente clientes[], int size)
 }
 
 
-int altaAlquiler(sAlquiler alquileres[], sCliente clientes[], int sizeC, int sizeA)
+int altaAlquiler(sCliente clientes[], sAlquiler alquileres[], int sizeC, int sizeA)
 {
     int i, id, returnAux = DENEID;
 
@@ -41,8 +40,7 @@ int altaAlquiler(sAlquiler alquileres[], sCliente clientes[], int sizeC, int siz
         returnAux = OK;
 
         printf("ingrese datos del alquiler\n");
-        printf("ingrese id del alquiler");
-        scanf("%d", &id);
+        id = getIdA(alquileres, sizeA);
         alquileres[i] =  cargarAlquileres(id, clientes, sizeC);
 
     }
@@ -62,7 +60,7 @@ int mostrarClientes(sCliente clientes[], sAlquiler alquileres[], int sizeC, int 
     {
         if(clientes[i].flagAlta == OK)
         {
-
+            returnAux = OK;
             printf("nombre:%s %s---DNI:%d---Equipos:", clientes[i].nombre, clientes[i].apellido, clientes[i].DNI);
             if(mostrarEquipo(clientes[i].idCliente, alquileres, sizeA) == DENEID) printf("NONE");
             printf("\n");
@@ -87,7 +85,7 @@ int bajaCliente(sCliente cliente[], sAlquiler alquileres[], int sizeC, int sizeA
     printf("ingrese id que quiere eliminar:");
     scanf("%d", &idCiente);
 
-    i = getIndexId(idCiente, cliente, sizeC);
+    i = getIndexIdCliente(idCiente, cliente, sizeC);
 
     if(i != DENEID)
     {
@@ -97,13 +95,14 @@ int bajaCliente(sCliente cliente[], sAlquiler alquileres[], int sizeC, int sizeA
 
     }
 
+    return returnAux;
 
 }
 
 
-int modifCliente(sCliente clientes[], int sizeC)
+int modifCliente(sCliente clientes[], sAlquiler alquileres[], int sizeC, int sizeA)
 {
-    int i, idCiente, returnAux = DENEID;
+    int i, j, idCiente, returnAux = DENEID;
 
     printf("id disponible:\n");
 
@@ -113,23 +112,32 @@ int modifCliente(sCliente clientes[], int sizeC)
     printf("ingrese id que quiere modificar:");
     scanf("%d", &idCiente);
 
-    i = getIndexId(idCiente, clientes, sizeC);
+    i = getIndexIdCliente(idCiente, clientes, sizeC);
 
     if(i != DENEID)
     {
         returnAux = OK;
         clientes[i] = cargarCliente(idCiente);
 
+        j = getIndexIdCienteAlquiler(idCiente, alquileres, sizeA);
+        if(j != DENEID)
+        {
+
+
+            strcpy(alquileres[j].operador , clientes[i].nombre);
+            strcat(alquileres[j].operador, " ");
+            strcat(alquileres[j].operador, clientes[i].apellido);
+        }
 
     }
 
-
+    return returnAux;
 }
 
 
 int finAlquiler(sCliente clientes[], sAlquiler alquiler[], int sizeC, int sizeA)
 {
-    int i, j, idAlquiler, returnAux = DENEID;
+    int i, idAlquiler, returnAux = DENEID;
     printf("elija un alquiler para darle fin\n");
 
 
@@ -166,7 +174,7 @@ int finAlquiler(sCliente clientes[], sAlquiler alquiler[], int sizeC, int sizeA)
 }
 
 
-int maxClienteAlquileres(sAlquiler alquileres[], sCliente clientes[], int sizeA, int sizeC)
+int maxClienteAlquileres( sCliente clientes[], sAlquiler alquileres[], int sizeC, int sizeA)
 {
     int i, acumAlquileres = 0, max, flag = DENEID, returnAux =DENEID;
 
@@ -394,7 +402,7 @@ void HarcodearAlquiler(sAlquiler alquileres[], sCliente clientes[], int sizeC)
 
         alquileres[i].idCliente = idClientes[i];
 
-        j = getIndexId(alquileres[i].idCliente, clientes, sizeC);
+        j = getIndexIdCliente(alquileres[i].idCliente, clientes, sizeC);
 
         strcpy(alquileres[i].operador , clientes[j].nombre);
         strcat(alquileres[i].operador, " ");

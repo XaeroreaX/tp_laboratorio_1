@@ -24,16 +24,16 @@
 	"cascara.h"
 	"funciones.h"
 
-1507230720 source:c:\users\public\cv\tp_laboratorio_1-master\martin pitameglia\cascara.c
+1507579128 source:c:\users\public\cv\tp_laboratorio_1-master\martin pitameglia\cascara.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"cascara.h"
 	"funciones.h"
 
-1507028454 c:\users\public\cv\tp_laboratorio_1-master\martin pitameglia\cascara.h
+1507580599 c:\users\public\cv\tp_laboratorio_1-master\martin pitameglia\cascara.h
 
-1507028454 c:\users\public\cv\tp_laboratorio_1-master\martin pitameglia\funciones.h
+1507578361 c:\users\public\cv\tp_laboratorio_1-master\martin pitameglia\funciones.h
 
 1507496035 source:c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\martin pitameglia\main.c
 	<stdio.h>
@@ -54,6 +54,20 @@
 	"funciones.h"
 
 1507482643 source:c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\martin pitameglia\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cascara.h"
+	"funciones.h"
+
+1507579143 source:c:\users\public\cv\tp_laboratorio_1-master\martin pitameglia\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cascara.h"
+	"funciones.h"
+
+1507578361 source:c:\users\public\cv\tp_laboratorio_1-master\martin pitameglia\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
