@@ -204,20 +204,20 @@ int mostraIndexAlquiler(sAlquiler alquiler[], int sizeA, int flagId)
                 printf("operador:%s---Equipo:", alquiler[i].operador);
             }
             switch(alquiler[i].equipo)
-                {
-                    case AMOLADORA:
-                        printf(" amoladora,");
-                        break;
-                    case MEZCLADORA:
-                        printf(" mezcladora,");
-                        break;
-                    case TALADRO:
-                        printf(" taladro,");
-                        break;
-                    default:
-                        printf("NONE");
-                        break;
-                }
+            {
+                case AMOLADORA:
+                    printf(" amoladora,");
+                    break;
+                case MEZCLADORA:
+                    printf(" mezcladora,");
+                    break;
+                case TALADRO:
+                    printf(" taladro,");
+                    break;
+                default:
+                    printf("NONE");
+                    break;
+            }
 
             if(alquiler[i].flagEstado == OK)
             {
@@ -237,7 +237,7 @@ int mostraIndexAlquiler(sAlquiler alquiler[], int sizeA, int flagId)
 
     return returnAux;
 
-}
+}int getIdA(sAlquiler alquileres[], int sizeA)
 
 
 void bajasAlquileres(int idClientse, sAlquiler alquileres[], int sizeA)
@@ -250,8 +250,8 @@ void bajasAlquileres(int idClientse, sAlquiler alquileres[], int sizeA)
         if(alquileres[i].flagAlta == OK)
         {
 
-            if(idClientse == alquileres[i].idCliente) alquileres[i].flagAlta == DENEID;
-
+            if(idClientse == alquileres[i].idCliente) alquileres[i].flagAlta = DENEID;
+            //
         }
 
 

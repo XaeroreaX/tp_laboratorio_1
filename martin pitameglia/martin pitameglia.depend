@@ -74,3 +74,28 @@
 	"cascara.h"
 	"funciones.h"
 
+1507636543 source:c:\users\alumno\desktop\martin pitameglia\cascara.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cascara.h"
+	"funciones.h"
+
+1507636508 c:\users\alumno\desktop\martin pitameglia\cascara.h
+
+1507636601 c:\users\alumno\desktop\martin pitameglia\funciones.h
+
+1507636949 source:c:\users\alumno\desktop\martin pitameglia\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cascara.h"
+	"funciones.h"
+
+1507636508 source:c:\users\alumno\desktop\martin pitameglia\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cascara.h"
+	"funciones.h"
+

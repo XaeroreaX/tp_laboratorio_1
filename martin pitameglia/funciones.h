@@ -23,6 +23,10 @@ int mostraIndexAlquiler(sAlquiler alquiler[], int sizeA, int flagId);
 
 void bajasAlquileres(int idClientse, sAlquiler alquileres[], int sizeA);
 
+int getIdC(sCliente clientes[], int sizeC);
+
+int getIdA(sAlquiler alquileres[], int sizeA);
+
 int getIndexIdCliente(int idCliente, sCliente clientes[], int sizeC);
 
 int getIndexIdAlquiler(int idAlquiler, sAlquiler alquiler[], int sizeA);
