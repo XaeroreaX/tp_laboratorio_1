@@ -482,7 +482,7 @@ int al_containsAll(ArrayList* pList,ArrayList* pList2)
 
 
     for(index = 0; index < pList->len(pList); index++)
-    {
+    {resizeUp
         if(pList->contains(pList, pList2->get(pList2, index)) < 1) break;
         printf("%d",pList2->contains(pList2, pList->get(pList, index)));
 
@@ -542,7 +542,7 @@ int al_sort(ArrayList* pList, int (*pFunc)(void*,void*), int order)
 
                 }
             }
-        }
+        }resizeUp
 
     }
 
