@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../inc/ArrayList.h"
+#include "ArrayList.h"
 
 // funciones privadas
 int resizeUp(ArrayList* pList);
@@ -482,7 +482,7 @@ int al_containsAll(ArrayList* pList,ArrayList* pList2)
 
 
     for(index = 0; index < pList->len(pList); index++)
-    {resizeUp
+    {
         if(pList->contains(pList, pList2->get(pList2, index)) < 1) break;
         printf("%d",pList2->contains(pList2, pList->get(pList, index)));
 
@@ -542,7 +542,7 @@ int al_sort(ArrayList* pList, int (*pFunc)(void*,void*), int order)
 
                 }
             }
-        }resizeUp
+        }
 
     }
 
@@ -643,7 +643,7 @@ int contract(ArrayList* pList,int index)
 
 
     //if(index)
-    for(i = index + 1; i < pList->size; i++)
+    for(i = index; i < pList->size; i++)
     {
 
         pList->pElements[i] = pList->pElements[i + 1];
