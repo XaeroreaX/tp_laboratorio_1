@@ -49,7 +49,146 @@ sCliente* cargarCliente(int id)
     return cliente;
 }
 
+int getId(ArrayList* clienteList)
+{
+    int flagEncontrado = DENIED,i, j,id;
 
+
+
+    sCliente* cliente1, *cliente2;
+
+    if(clienteList == NULL) return DENIED;
+
+
+    if(clienteList->isEmpty(clienteList) == 1)
+    {
+        id = 1000;
+    }
+    else
+    {
+
+
+        cliente1 =(sCliente*) clienteList->get(clienteList, 0);
+        id = cliente1->idCliente +1;
+
+
+        for(i = 1; i < clienteList->len(clienteList); i++)
+        {
+            cliente1 =(sCliente*) clienteList->get(clienteList, i);
+
+            if(cliente1->idCliente == id)
+            {
+                id = cliente1->idCliente +1;
+            }
+            else
+            {
+
+                for(j = i + 1; j < clienteList->len(clienteList); j++)
+                {
+                    cliente2 =(sCliente*) clienteList->get(clienteList, j);
+
+                    if(id == cliente2->idCliente) break;
+
+                }
+
+
+                if(j < clienteList->len(clienteList)) flagEncontrado = OK;
+
+            }
+
+            if(flagEncontrado == DENIED)
+            {
+                id = cliente1->idCliente + 1;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+    }
+
+    return id;
+}
+
+
+int getIndex(ArrayList* clientetList)
+{
+    int i = DENIED, id;
+    sCliente* cliente;
+
+    if(clientetList == NULL) return i;
+
+    showAllClientes(clientetList, showClienteId);
+
+    printf("ingrese el id:");
+    scanf("%d", &id);
+
+
+    for(i = 0; i < clientetList->len(clientetList);i++)
+    {
+        cliente = (sCliente*) clientetList->get(clientetList, i);
+
+        if(cliente->idCliente = id) break;
+
+    }
+
+    return i;
+}
+
+
+
+int fileToListText(ArrayList* clienteList)
+{
+    FILE* pFile;
+
+    int returnAux = DENIED;
+    char idCliente[50], nombre[100], apellido[100], documeto[50];
+    sCliente* cliente;
+
+    pFile = fopen("cliente.txt", "r");
+
+    if(clienteList == NULL || pFile == NULL) return returnAux;
+
+    fscanf(pFile, "%[^,],%[^,],%[^,],%[^\n]\n", idCliente, nombre, apellido, documeto);
+
+    while(!feof(pFile))
+    {
+        fscanf(pFile, "%[^,],%[^,],%[^,],%[^\n]\n", idCliente, nombre, apellido, documeto);
+        cliente = contructParamClientes(atoi(idCliente), nombre, apellido, atoi(documeto));
+        returnAux = clienteList->add(clienteList, cliente);
+    }
+
+    return returnAux;
+}
+
+int listToFileText(ArrayList* clienteList)
+{
+    FILE* pFIle;
+    int i, returnAux = DENIED;
+    sCliente* cliente;
+
+    pFIle = fopen("cliente.txt", "w+");
+
+    if(clienteList == NULL || pFIle == NULL) return returnAux;
+
+    fprintf(pFIle, "id,nombre,apellido,documento\n");
+
+    for(i = 0; i < clienteList->len(clienteList); i++)
+    {
+        cliente = clienteList->get(clienteList, i);
+        if(cliente != NULL)
+        {
+            fprintf(pFIle, "%d,%s,%s,%d\n", cliente->idCliente, cliente->nombre, cliente->apellido, cliente->documento);
+            returnAux = OK;
+        }
+    }
+
+    return returnAux;
+}
+
+
+///**-------------------------------------shows------------------------------------------------*/
 
 void showAllClientes(ArrayList* clienteList, void (*funcion)(sCliente*))
 {
@@ -57,10 +196,12 @@ void showAllClientes(ArrayList* clienteList, void (*funcion)(sCliente*))
 
     sCliente* cliente;
 
-    for(i = 0; i < standList->len(standList); i++)
+
+
+    for(i = 0; i < clienteList->len(clienteList); i++)
     {
 
-        stand = clienteList->get(standList, i);
+        cliente = clienteList->get(clienteList, i);
 
         funcion(cliente);
 
@@ -68,4 +209,53 @@ void showAllClientes(ArrayList* clienteList, void (*funcion)(sCliente*))
 
     }
 
+}
+
+void showCliente(sCliente* cliente){printf("%s %s", cliente->nombre, cliente->apellido);}
+
+void showClienteData(sCliente* cliente)
+{
+    printf("----------------------------------------------------------------------\n\n");
+    printf("cliente: %s %s\n\n", cliente->apellido, cliente->nombre);
+    printf("DNI:%d\n\n", cliente->documento);
+
+}
+
+void showClienteId(sCliente* cliente)
+{
+    printf("%d)%s %s", cliente->idCliente, cliente->nombre, cliente->apellido);
+}
+
+
+
+///**-------------------------------------shows------------------------------------------------*/
+
+int compareCliente(void* clienteA, void* clienteB)
+{
+
+    if(strcmp(((sCliente*)clienteA)->apellido, ((sCliente*)clienteB)->apellido ) < 0)
+    {
+        return -1;
+    }
+
+    if(strcmp(((sCliente*)clienteA)->apellido, ((sCliente*)clienteB)->apellido ) > 0)
+    {
+        return 1;
+    }
+
+
+    if(strcmp(((sCliente*)clienteA)->apellido, ((sCliente*)clienteB)->apellido ) == 0)
+    {
+
+        if(strcmp(((sCliente*)clienteA)->nombre, ((sCliente*)clienteB)->nombre ) < 0)
+        {
+            return -1;
+        }
+
+        if(strcmp(((sCliente*)clienteA)->nombre, ((sCliente*)clienteB)->nombre ) > 0)
+        {
+            return 1;
+        }
+
+    }
 }

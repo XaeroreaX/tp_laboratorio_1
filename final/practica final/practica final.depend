@@ -28,3 +28,50 @@
 
 1512934045 c:\users\jmpit\downloads\proyectos\projectos del cod\final\practica final\funciones.h
 
+1512941076 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1512941076 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\arraylist.h
+
+1513001050 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+
+1512941076 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\funciones.h
+
+1512941076 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\fventas.c
+
+1513017785 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\cascara.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"fCientes.h"
+	"fventas.h"
+
+1513017684 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\fcientes.h
+
+1512941076 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\fventas.h
+
+1513018057 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\fcientes.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"fCientes.h"
+
+1513017780 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"fCientes.h"
+	"cascara.h"
+
+1513001050 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\cascara.h
+
