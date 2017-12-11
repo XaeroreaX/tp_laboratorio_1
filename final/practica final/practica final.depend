@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1499266030 source:c:\users\jmpit\downloads\proyectos\projectos del cod\final\practica final\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1499266030 c:\users\jmpit\downloads\proyectos\projectos del cod\final\practica final\arraylist.h
+
+1512931194 source:c:\users\jmpit\downloads\proyectos\projectos del cod\final\practica final\cascara.c
+
+1512931147 source:c:\users\jmpit\downloads\proyectos\projectos del cod\final\practica final\fventas.c
+
+1512932346 source:c:\users\jmpit\downloads\proyectos\projectos del cod\final\practica final\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"fCientes.h"
+
+1512934069 c:\users\jmpit\downloads\proyectos\projectos del cod\final\practica final\fcientes.h
+
+1512932948 source:c:\users\jmpit\downloads\proyectos\projectos del cod\final\practica final\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+
+1512934045 c:\users\jmpit\downloads\proyectos\projectos del cod\final\practica final\funciones.h
+
