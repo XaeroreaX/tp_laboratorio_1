@@ -14,21 +14,25 @@ typedef struct
 }sCliente;
 
 
-sCliente* contructParamClientes(int id, char nombre[], char apellido[], int documento);
+sCliente* C_contructParamClientes(int id, char nombre[], char apellido[], int documento);
 
-sCliente* cargarCliente(int id);
+sCliente* C_cargarCliente(int id);
 
-int getId(ArrayList* clienteList);
+int C_getId(ArrayList* clienteList);
 
-int getIndex(ArrayList* clientetList);
+int C_getIndex(ArrayList* clientetList);
 
-///**-------------------------------------shows------------------------------------------------*/
+int C_fileToListText(ArrayList* clienteList);
 
-void showAllClientes(ArrayList* clienteList, void (*funcion)(sCliente*));
-void showCliente(sCliente* cliente);
-void showClienteData(sCliente* cliente);
-void showClienteId(sCliente* cliente);
+int C_listToFileText(ArrayList* clienteList);
 
 ///**-------------------------------------shows------------------------------------------------*/
 
-int compareCliente(void* clienteA, void* clienteB);
+void C_showAllClientes(ArrayList* clienteList, void (*funcion)(sCliente*));
+void C_showCliente(sCliente* cliente);
+void C_showClienteData(sCliente* cliente);
+void C_showClienteId(sCliente* cliente);
+
+///**-------------------------------------shows------------------------------------------------*/
+
+int C_compareCliente(void* clienteA, void* clienteB);

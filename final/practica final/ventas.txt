@@ -1,0 +1,2 @@
+id,nombre,codigo,idCliente
+1000,alfajores,c6655,1004

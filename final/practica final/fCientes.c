@@ -7,7 +7,7 @@
 
 
 
-sCliente* contructParamClientes(int id, char nombre[], char apellido[], int documento)
+sCliente* C_contructParamClientes(int id, char nombre[], char apellido[], int documento)
 {
     sCliente* cliente;
 
@@ -28,7 +28,7 @@ sCliente* contructParamClientes(int id, char nombre[], char apellido[], int docu
 }
 
 
-sCliente* cargarCliente(int id)
+sCliente* C_cargarCliente(int id)
 {
     sCliente* cliente;
 
@@ -44,12 +44,12 @@ sCliente* cargarCliente(int id)
     printf("ingrese el documneto");
     scanf("%d",&documento);
 
-    cliente = contructParamClientes(id,nombre, apellido, documento);
+    cliente = C_contructParamClientes(id,nombre, apellido, documento);
 
     return cliente;
 }
 
-int getId(ArrayList* clienteList)
+int C_getId(ArrayList* clienteList)
 {
     int flagEncontrado = DENIED,i, j,id;
 
@@ -112,14 +112,14 @@ int getId(ArrayList* clienteList)
 }
 
 
-int getIndex(ArrayList* clientetList)
+int C_getIndex(ArrayList* clientetList)
 {
     int i = DENIED, id;
     sCliente* cliente;
 
     if(clientetList == NULL) return i;
 
-    showAllClientes(clientetList, showClienteId);
+    C_showAllClientes(clientetList, C_showClienteId);
 
     printf("ingrese el id:");
     scanf("%d", &id);
@@ -138,7 +138,7 @@ int getIndex(ArrayList* clientetList)
 
 
 
-int fileToListText(ArrayList* clienteList)
+int C_fileToListText(ArrayList* clienteList)
 {
     FILE* pFile;
 
@@ -155,14 +155,14 @@ int fileToListText(ArrayList* clienteList)
     while(!feof(pFile))
     {
         fscanf(pFile, "%[^,],%[^,],%[^,],%[^\n]\n", idCliente, nombre, apellido, documeto);
-        cliente = contructParamClientes(atoi(idCliente), nombre, apellido, atoi(documeto));
+        cliente = C_contructParamClientes(atoi(idCliente), nombre, apellido, atoi(documeto));
         returnAux = clienteList->add(clienteList, cliente);
     }
 
     return returnAux;
 }
 
-int listToFileText(ArrayList* clienteList)
+int C_listToFileText(ArrayList* clienteList)
 {
     FILE* pFIle;
     int i, returnAux = DENIED;
@@ -190,7 +190,7 @@ int listToFileText(ArrayList* clienteList)
 
 ///**-------------------------------------shows------------------------------------------------*/
 
-void showAllClientes(ArrayList* clienteList, void (*funcion)(sCliente*))
+void C_showAllClientes(ArrayList* clienteList, void (*funcion)(sCliente*))
 {
     int i;
 
@@ -211,9 +211,9 @@ void showAllClientes(ArrayList* clienteList, void (*funcion)(sCliente*))
 
 }
 
-void showCliente(sCliente* cliente){printf("%s %s", cliente->nombre, cliente->apellido);}
+void C_showCliente(sCliente* cliente){printf("%s %s", cliente->nombre, cliente->apellido);}
 
-void showClienteData(sCliente* cliente)
+void C_showClienteData(sCliente* cliente)
 {
     printf("----------------------------------------------------------------------\n\n");
     printf("cliente: %s %s\n\n", cliente->apellido, cliente->nombre);
@@ -221,16 +221,16 @@ void showClienteData(sCliente* cliente)
 
 }
 
-void showClienteId(sCliente* cliente)
+void C_showClienteId(sCliente* cliente)
 {
     printf("%d)%s %s", cliente->idCliente, cliente->nombre, cliente->apellido);
 }
 
 
 
-///**-------------------------------------shows------------------------------------------------*/
+///**-----------------------------------------------------------------------------------------*/
 
-int compareCliente(void* clienteA, void* clienteB)
+int C_compareCliente(void* clienteA, void* clienteB)
 {
 
     if(strcmp(((sCliente*)clienteA)->apellido, ((sCliente*)clienteB)->apellido ) < 0)

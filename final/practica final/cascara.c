@@ -2,13 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include "ArrayList.h"
+#include "cascara.h"
 #include "fCientes.h"
 #include "fventas.h"
 
 
 
-///1)
 
+
+///1)
 int AltaDeCliente(ArrayList* clienteList)
 {
     int returnAux = DENIED, id;
@@ -16,10 +18,10 @@ int AltaDeCliente(ArrayList* clienteList)
 
     if(clienteList == NULL) return returnAux;
 
-    id = getId(clienteList);
+    id = C_getId(clienteList);
 
     printf("ingrese los datos del cliente: \n\n");
-    cliente = cargarCliente(id);
+    cliente = C_cargarCliente(id);
 
     returnAux = clienteList->add(clienteList, cliente);
 
@@ -38,13 +40,13 @@ int modificarCliente(ArrayList* clienteList)
 
     if(clienteList->isEmpty(clienteList) != OKP)
     {
-        i = getIndex(clienteList);
+        i = C_getIndex(clienteList);
 
         cliente = clienteList->get(clienteList, i);
 
         id = cliente->idCliente;
 
-        cliente = cargarCliente(id);
+        cliente = C_cargarCliente(id);
 
         returnAux = clienteList->set(clienteList, i, cliente);
 
@@ -61,7 +63,6 @@ int modificarCliente(ArrayList* clienteList)
 
 
 ///3)
-
 int bajaDeCliente(ArrayList* clienteList)
 {
     int i, returnAux = DENIED;
@@ -71,14 +72,14 @@ int bajaDeCliente(ArrayList* clienteList)
 
     if(clienteList->isEmpty(clienteList) != OKP)
     {
-        i = getIndex(clienteList);
+        i = C_getIndex(clienteList);
 
         cliente = clienteList->pop(clienteList, i);
 
         if(cliente != NULL)
         {
             printf("el cliente:");
-            showCliente(cliente);
+            C_showCliente(cliente);
             printf("ha sido eliminado\n");
             returnAux = OK;
         }
@@ -94,7 +95,6 @@ int bajaDeCliente(ArrayList* clienteList)
 
 
 ///4)
-
 int listarClientes(ArrayList* clienteList)
 {
     int returnAux = DENIED;
@@ -104,10 +104,10 @@ int listarClientes(ArrayList* clienteList)
     {
         listaOrdenada = clienteList->clone(clienteList);
 
-        listaOrdenada->sort(listaOrdenada, compareCliente, 1);
+        listaOrdenada->sort(listaOrdenada, C_compareCliente, 1);
 
 
-        showAllClientes(listaOrdenada, showClienteData);
+        C_showAllClientes(listaOrdenada, C_showClienteData);
 
         returnAux = OK;
     }
@@ -122,6 +122,78 @@ int listarClientes(ArrayList* clienteList)
 
 
 
+
+    return returnAux;
+}
+
+
+///5)
+int realizarVenta(ArrayList* clienteList, ArrayList* ventaList)
+{
+    int i, idVenta, returnAux = DENIED;
+
+    sCliente* cliente;
+    sVenta* venta;
+
+    if(clienteList == NULL || ventaList == NULL) return returnAux;
+
+
+    if(clienteList->isEmpty(clienteList) == OK)
+    {
+        printf("ingrese el id del cliente que realiza la compra:\n");
+        i = C_getIndex(clienteList);
+
+        cliente = (sCliente*) clienteList->get(clienteList, i);
+
+        idVenta = V_getId(ventaList);
+
+        venta = V_cargarVenta(idVenta, cliente->idCliente);
+
+        returnAux = ventaList->add(ventaList, venta);
+    }
+    else
+    {
+        if(clienteList->isEmpty(clienteList) == OKP)
+        {
+            printf("isEmpty!!!\n");
+            returnAux = OK;
+        }
+    }
+
+    return returnAux;
+
+}
+
+///6)
+int bajaDeVenta(ArrayList* ventaList)
+{
+    int i, returnAux = DENIED;
+    sVenta* venta;
+
+    if(ventaList == NULL) return returnAux;
+
+    if(ventaList->isEmpty(ventaList) != OKP)
+    {
+        i = V_getIndex(ventaList);
+
+        venta = ventaList->pop(ventaList, i);
+
+        if(venta != NULL)
+        {
+            printf("la venta:");
+            V_showVentas(venta);
+            printf("ha sido eliminado\n");
+            returnAux = OK;
+        }
+    }
+    else
+    {
+        if(ventaList->isEmpty(ventaList) == OKP)
+        {
+            printf("isEmpty!!!\n");
+            returnAux = OK;
+        }
+    }
 
     return returnAux;
 }

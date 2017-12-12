@@ -3,7 +3,7 @@
 #include <string.h>
 #include "ArrayList.h"
 #include "fCientes.h"
-#include "cascara.h"
+#include "fventas.h"
 #define OKP 1
 #define OK 0
 #define DENIED -1
@@ -21,7 +21,13 @@ int main()
     clienteList = al_newArrayList();
     ventaList = al_newArrayList();
 
-    fileToListText(clienteList);
+    /////////////////////////////Load
+    C_fileToListText(clienteList);
+    V_fileToListText(ventaList);
+    ////////////////////////////
+
+
+
 
     while(seguir=='s')
         {
@@ -64,18 +70,20 @@ int main()
                 case 4:
                     system("cls");
 
-                    listarClientes(clienteList);
+                    if(listarClientes(clienteList) == DENIED) printf("hubo un error al listar los clientes");
 
                     system("pause");
                    break;
                 case 5:
                     system("cls");
 
+                    if(realizarVenta(clienteList, ventaList) == DENIED) printf("hubo un error al realizar una venta");
+
                     system("pause");
                     break;
                 case 6:
                     system("cls");
-
+                     if(bajaDeVenta(ventaList) == DENIED) printf("hubo un error al eliminar una venta");
                     system("pause");
                     break;
                 case 7:
@@ -102,7 +110,10 @@ int main()
             system("cls");
 
         }
-
-    listToFileText(clienteList);
+    ////////////////////////////////SAVE
+    C_listToFileText(clienteList);
+    V_listToFileText(ventaList);
+    ////////////////////////////////
     return 0;
 }
+

@@ -34,7 +34,7 @@
 	<string.h>
 	"ArrayList.h"
 
-1512941076 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\arraylist.h
+1513088909 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\arraylist.h
 
 1513001050 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\funciones.c
 	<stdio.h>
@@ -44,9 +44,34 @@
 
 1512941076 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\funciones.h
 
-1512941076 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\fventas.c
+1513101173 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\fventas.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"fventas.h"
 
-1513017785 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\cascara.c
+1513100138 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\cascara.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"cascara.h"
+	"fCientes.h"
+	"fventas.h"
+
+1513087897 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\fcientes.h
+
+1513101461 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\fventas.h
+
+1513088075 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\fcientes.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"fCientes.h"
+
+1513100812 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -54,24 +79,5 @@
 	"fCientes.h"
 	"fventas.h"
 
-1513017684 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\fcientes.h
-
-1512941076 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\fventas.h
-
-1513018057 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\fcientes.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"ArrayList.h"
-	"fCientes.h"
-
-1513017780 source:c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\main.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"ArrayList.h"
-	"fCientes.h"
-	"cascara.h"
-
-1513001050 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\cascara.h
+1513099907 c:\users\public\cv\tp_laboratorio_1-master\tp_laboratorio_1-master\final\practica final\cascara.h
 
