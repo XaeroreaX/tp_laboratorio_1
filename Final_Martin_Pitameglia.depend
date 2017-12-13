@@ -1,0 +1,99 @@
+# depslib dependency file v1.0
+1513103871 source:c:\users\alumno\desktop\final_martin_pitameglia\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1513103871 c:\users\alumno\desktop\final_martin_pitameglia\arraylist.h
+
+1513167770 source:c:\users\alumno\desktop\final_martin_pitameglia\cascara.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"cascara.h"
+	"fClientes.h"
+
+1513167527 c:\users\alumno\desktop\final_martin_pitameglia\cascara.h
+
+1513168734 c:\users\alumno\desktop\final_martin_pitameglia\fclientes.h
+
+1513168734 source:c:\users\alumno\desktop\final_martin_pitameglia\fclientes.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"fClientes.h"
+	"funciones.h"
+
+1513167527 c:\users\alumno\desktop\final_martin_pitameglia\funciones.h
+
+1513167527 source:c:\users\alumno\desktop\final_martin_pitameglia\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+
+1513168735 source:c:\users\alumno\desktop\final_martin_pitameglia\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"cascara.h"
+
+1513103871 source:d:\final_martin_pitameglia\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1513103871 d:\final_martin_pitameglia\arraylist.h
+
+1513167527 source:d:\final_martin_pitameglia\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+
+1513167527 d:\final_martin_pitameglia\funciones.h
+
+1513175822 source:d:\final_martin_pitameglia\cascara.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"cascara.h"
+	"fClientes.h"
+	"fServicios.h"
+
+1513167527 d:\final_martin_pitameglia\cascara.h
+
+1513173235 d:\final_martin_pitameglia\fclientes.h
+
+1513174108 source:d:\final_martin_pitameglia\fclientes.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"fClientes.h"
+	"funciones.h"
+
+1513175733 source:d:\final_martin_pitameglia\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"cascara.h"
+	"fClientes.h"
+
+1513175511 d:\final_martin_pitameglia\fservicios.h
+
+1513175909 source:d:\final_martin_pitameglia\fservicios.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"fServicios.h"
+	"funciones.h"
+

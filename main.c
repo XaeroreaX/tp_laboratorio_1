@@ -1,59 +1,91 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "funciones.h"
+#include <string.h>
 #include "ArrayList.h"
+#include "cascara.h"
+#include "fClientes.h"
+#define OKP 1
 #define OK 0
-#define DENEID -1
-
+#define DENIED -1
 
 
 int main()
 {
+    ArrayList* clienteList, *servicioList;
     char seguir='s';
     int opcion=0;
 
-    SUser* logeado;
+    clienteList = al_newArrayList();
+    servicioList = al_newArrayList();
 
-    ArrayList* movieList;
-    ArrayList* userList;
-    ArrayList* rankList;
+    if(C_fileToListBin(clienteList) == DENIED) printf(" no se pudo habrir el archivo\n");
 
-    userList = al_newArrayList();
-    movieList = al_newArrayList();
-    rankList = al_newArrayList();
-
-
-
-    fileToMovieList(movieList);
-    fileToUserList(userList);
-    fileToRankList(rankList);
-
-    //if(rankList->isEmpty(rankList) == 1) printf("esta vacio");
-
-    //if(harcodearSUser(userList) == DENEID) printf("ERROR en la funsion harcodearSUser");
-
-    // aqui pide loguearse
-    logeado = login(userList);
-
-    //printf("%s\n", logeado->nickName);
-
-    if(logeado != NULL)
-    {
-        if(Rank(movieList, rankList) == DENEID) printf("ERROR en la funsion Rank");
-        if(logeado->id == 1)
+    while(seguir=='s')
         {
-            if(menuAdministrador(movieList) == DENEID) printf("ERROR en la funsion menuAdministrador\n");
-        }
-        else
-        {
-            if(menuCliente(movieList, logeado, rankList) == DENEID) printf("ERROR en la funsion menuAdministrador\n");
+            printf("1- Alta de cliente \n");
+            printf("2- modificacion de clientes \n");
+            printf("3- baja de clientes \n");
+            printf("4- listar clientes\n");
+            printf("5- importar servicio tecnico desde CSV\n");
+            printf("6- Salir\n");
+            printf("ingrese opcion");
+
+            scanf("%d",&opcion);
+
+            switch(opcion)
+            {
+                case 1:
+                    system("cls");
+
+                    if(AltaDeCliente(clienteList) == DENIED) printf("hubo un error en la alta del cliente!!");
+
+                    system("pause");
+                    break;
+                case 2:
+                    system("cls");
+
+                    if(modificacionDeCliente(clienteList) == DENIED) printf("hubo un error en la modificacion del cliente");
+
+                    system("pause");
+                    break;
+                case 3:
+                    system("cls");
+
+                    if(bajaDeCliente(clienteList) == DENIED)printf("hubo un error en la baja del cliente");
+
+
+                    system("pause");
+                    break;
+                case 4:
+                    system("cls");
+
+                    if(listarClientes(clienteList) == DENIED) printf("hubo un error al listar los clientes");
+
+                    system("pause");
+                   break;
+                case 5:
+                    system("cls");
+
+                    importarServicios(clienteList, servicioList);
+
+                    system("pause");
+                    break;
+                case 6:
+                    seguir = 'n';
+                    break;
+                default:
+                    system("cls");
+                    printf("ingreso mal la opcion, por favor ingrese de nuevo");
+                    system("pause");
+                    break;
+
+
+            }
+            system("cls");
+
         }
 
-    }
-
-    movieListToFile(movieList);
-    userListToFile(userList);
-    rankListToFile(rankList);
+    C_ListToFileBin(clienteList);
 
     return 0;
 }
