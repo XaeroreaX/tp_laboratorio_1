@@ -1,0 +1,57 @@
+# depslib dependency file v1.0
+1518203793 source:c:\martin\project\evaluacion\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"cascara.h"
+	"fClientes.h"
+
+1513176274 c:\martin\project\evaluacion\arraylist.h
+
+1518016398 c:\martin\project\evaluacion\cascara.h
+
+1518016393 c:\martin\project\evaluacion\fclientes.h
+
+1513176274 source:c:\martin\project\evaluacion\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1518206347 source:c:\martin\project\evaluacion\cascara.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"cascara.h"
+	"fClientes.h"
+	"fServicios.h"
+
+1518016403 c:\martin\project\evaluacion\fservicios.h
+
+1518206878 source:c:\martin\project\evaluacion\fclientes.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"fClientes.h"
+	"funciones.h"
+
+1518112186 c:\martin\project\evaluacion\funciones.h
+
+1518112186 source:c:\martin\project\evaluacion\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+
+1518203964 source:c:\martin\project\evaluacion\fservicios.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"fClientes.h"
+	"fServicios.h"
+	"funciones.h"
+
