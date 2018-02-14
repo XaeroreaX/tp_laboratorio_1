@@ -185,7 +185,7 @@ int importarServicios(ArrayList* clienteList, ArrayList* servicioList)
 
         if(idCliente > OK)
         {
-            servicio = S_contructParamServicio(atoi(NRO_servicio), codigo, atof(costo), atoi(estado), atoi(idCliente));
+            servicio = S_contructParamServicio(atoi(NRO_servicio), codigo, atof(costo), atoi(estado),idCliente);
 
             if(servicioList->contains(servicioList, servicio) != OKP) flag = OK;
 
@@ -199,10 +199,12 @@ int importarServicios(ArrayList* clienteList, ArrayList* servicioList)
             idCliente = C_getId(clienteList);
 
             cliente->idCliente = idCliente;
-
-            servicio = S_contructParamServicio(atoi(NRO_servicio), codigo, atof(costo), atoi(estado), atoi(idCliente));
+            if(servicio->codigo != codigo)
+                servicio = S_contructParamServicio(atoi(NRO_servicio), codigo, atof(costo), atoi(estado), idCliente);
            // printf("entra");
-            returnAux = clienteList->add(clienteList, cliente);
+
+            if()
+                returnAux = clienteList->add(clienteList, cliente);
 
             returnAux = servicioList->add(servicioList, servicio);
 

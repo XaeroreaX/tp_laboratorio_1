@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1518203793 source:c:\martin\project\evaluacion\main.c
+1518207120 source:c:\martin\project\evaluacion\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -7,19 +7,19 @@
 	"cascara.h"
 	"fClientes.h"
 
-1513176274 c:\martin\project\evaluacion\arraylist.h
+1518207120 c:\martin\project\evaluacion\arraylist.h
 
-1518016398 c:\martin\project\evaluacion\cascara.h
+1518207120 c:\martin\project\evaluacion\cascara.h
 
-1518016393 c:\martin\project\evaluacion\fclientes.h
+1518207120 c:\martin\project\evaluacion\fclientes.h
 
-1513176274 source:c:\martin\project\evaluacion\arraylist.c
+1518207120 source:c:\martin\project\evaluacion\arraylist.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"ArrayList.h"
 
-1518206347 source:c:\martin\project\evaluacion\cascara.c
+1518620652 source:c:\martin\project\evaluacion\cascara.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -28,9 +28,9 @@
 	"fClientes.h"
 	"fServicios.h"
 
-1518016403 c:\martin\project\evaluacion\fservicios.h
+1518207120 c:\martin\project\evaluacion\fservicios.h
 
-1518206878 source:c:\martin\project\evaluacion\fclientes.c
+1518620531 source:c:\martin\project\evaluacion\fclientes.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -38,15 +38,15 @@
 	"fClientes.h"
 	"funciones.h"
 
-1518112186 c:\martin\project\evaluacion\funciones.h
+1518207120 c:\martin\project\evaluacion\funciones.h
 
-1518112186 source:c:\martin\project\evaluacion\funciones.c
+1518207120 source:c:\martin\project\evaluacion\funciones.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"funciones.h"
 
-1518203964 source:c:\martin\project\evaluacion\fservicios.c
+1518207120 source:c:\martin\project\evaluacion\fservicios.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
