@@ -8,6 +8,68 @@
 
 
 
+int S_getId(ArrayList* servicioList)
+{
+    int flagEncontrado = DENIED,i, j,id;
+
+
+
+    sServicio* servicio1, *servicio2;
+
+    if(servicioList == NULL) return DENIED;
+
+
+    if(servicioList->isEmpty(servicioList) == 1)
+    {
+        id = 25;
+    }
+    else
+    {
+
+
+        servicio1 =(sServicio*) servicioList->get(servicioList, 0);
+        id = servicio1->NRO_servicio +1;
+
+
+        for(i = 1; i < servicioList->len(servicioList); i++)
+        {
+            servicio1 =(sServicio*) servicioList->get(servicioList, i);
+
+            if(servicio1->NRO_servicio == id)
+            {
+                id = servicio1->NRO_servicio +1;
+            }
+            else
+            {
+
+                for(j = i + 1; j < servicioList->len(servicioList); j++)
+                {
+                    servicio2 =(sServicio*) servicioList->get(servicioList, j);
+
+                    if(id == servicio2->NRO_servicio) break;
+
+                }
+
+
+                if(j < servicioList->len(servicioList)) flagEncontrado = OK;
+
+            }
+
+            if(flagEncontrado == DENIED)
+            {
+                id = servicio1->NRO_servicio + 1;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+    }
+
+    return id;
+}
+
 
 
 sServicio* S_contructParamServicio(int NRO_servicio, char codigo[], double costo, int estado, int idCliente)
@@ -118,9 +180,8 @@ int S_validarCliente(sServicio* servicio, ArrayList* servicioList)
 
     if(servicio == NULL || servicioList == NULL) return returnAux;
 
-    returnAux = OK;
 
-    if(servicioList->isEmpty(servicioList) == OKP) return returnAux;
+    if(servicioList->isEmpty(servicioList) == OKP) return OK;
 
     for(i = 0; i<servicioList->len(servicioList); i++)
     {
@@ -128,17 +189,16 @@ int S_validarCliente(sServicio* servicio, ArrayList* servicioList)
 
         servicio->idCliente = servicioA->idCliente;
 
-        returnAux = servicioList->contains(servicioList, servicio);
 
-        printf("%d\n", returnAux);
+        if(servicio->NRO_servicio == servicioA->NRO_servicio) break;
 
-        if(returnAux == OKP) break;
 
 
     }
 
-    if(returnAux == OKP) returnAux = servicioA->idCliente;
+    if(i < servicioList->len(servicioList)) returnAux = OK;
 
+    printf("%d\n", returnAux);
 
     return returnAux;
 

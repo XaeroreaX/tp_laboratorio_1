@@ -181,7 +181,7 @@ int importarServicios(ArrayList* clienteList, ArrayList* servicioList)
 
         idCliente = C_validarCliente(cliente, clienteList);
 
-        if(idCliente > OK)
+        if(idCliente == OK)
         {
             servicio = S_contructParamServicio(atoi(NRO_servicio), codigo, atof(costo), atoi(estado), idCliente);
 
@@ -194,13 +194,12 @@ int importarServicios(ArrayList* clienteList, ArrayList* servicioList)
         else
         {
 
-            if(idCliente != DENIED)
-            {
 
-                flagCliente = OK;
-                flagServicio = OK;
 
-            }
+            flagCliente = OK;
+            flagServicio = OK;
+
+
         }
         if(flagCliente == OK)
         {
@@ -234,4 +233,23 @@ int importarServicios(ArrayList* clienteList, ArrayList* servicioList)
     }
 
     return returnAux;
+}
+
+///6)
+int ingresarServicioTecnico(ArrayList* servicioList, ArrayList* clienteList)
+{
+    int NRO_servicio, idCliente, returnAux = DENIED;
+
+    sServicio* servicio;
+
+
+    if(servicioList == NULL || clienteList == NULL) return returnAux;
+
+    NRO_servicio = S_getId(servicioList);
+
+    printf("ingrese el id del cliente:\n\n");
+
+    idCliente = C_selectIdCliente(clienteList);
+
+
 }

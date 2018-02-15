@@ -71,7 +71,36 @@ int main()
 
                 system("pause");
                 break;
+
             case 6:
+                system("cls");
+
+                importarServicios(clienteList, servicioList);
+
+                system("pause");
+                break;
+            case 7:
+                system("cls");
+
+                importarServicios(clienteList, servicioList);
+
+                system("pause");
+                break;
+            case 8:
+                system("cls");
+
+                importarServicios(clienteList, servicioList);
+
+                system("pause");
+                break;
+            case 9:
+                system("cls");
+
+                importarServicios(clienteList, servicioList);
+
+                system("pause");
+                break;
+            case 10:
                 seguir = 'n';
                 break;
             default:

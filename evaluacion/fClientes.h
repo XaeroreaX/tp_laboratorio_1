@@ -18,8 +18,9 @@ sCliente* C_cargarCliente(int id);
 
 sCliente* C_contructParamClientes(int id, char nombre[], char apellido[], int documento);
 
-
 int C_getIndex(ArrayList* clientetList);
+
+int C_selectIdCliente(ArrayList* clienteList);
 
 ///**-------------------------------------shows------------------------------------------------*/
 

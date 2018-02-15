@@ -69,6 +69,39 @@ int C_getId(ArrayList* clienteList)
 }
 
 
+int C_selectIdCliente(ArrayList* clienteList)
+{
+    int i, id = DENIED;
+
+    sCliente* cliente;
+
+    if(clienteList == NULL) return id;
+
+    id = OK;
+
+    if(clienteList->isEmpty(clienteList) == OKP) return id;
+
+
+    C_showAllClientes(clienteList, C_showClienteId);
+
+    printf("ingrese el id:");
+
+    scanf("%d", &id);
+
+    for(i = 0; i < clienteList->len(clienteList); i++)
+    {
+        cliente = (sCliente*) clienteList->get(clienteList, i);
+
+        if(cliente->idCliente == id) break;
+
+    }
+
+    if(i == clienteList->len(clienteList)) return OK;
+
+    return id;
+}
+
+
 sCliente* C_cargarCliente(int id)
 {
     sCliente* cliente;
@@ -99,26 +132,19 @@ int C_validarCliente(sCliente* cliente, ArrayList* clienteList)
 
     if(cliente == NULL || clienteList == NULL) return returnAux;
 
-    returnAux = OK;
 
-    if(clienteList->isEmpty(clienteList) == OKP) return returnAux;
+    if(clienteList->isEmpty(clienteList) == OKP) return OK;
 
     for(i = 0; i<clienteList->len(clienteList); i++)
     {
         clienteA = (sCliente*)clienteList->get(clienteList,i);
 
-        cliente->idCliente = clienteA->idCliente;
-
-        returnAux = clienteList->contains(clienteList, cliente);
-
-
-
-        if(returnAux == OKP) break;
+        if((strcmp(cliente->nombre, clienteA->nombre) == 0 && strcmp(cliente->nombre, clienteA->nombre) == 0) && cliente->documento == cliente->documento) break;
 
 
     }
 
-    if(returnAux == OKP) returnAux = clienteA->idCliente;
+    if(i < clienteList->len(clienteList)) returnAux = OK;
 
     printf("%d\n", returnAux);
 
