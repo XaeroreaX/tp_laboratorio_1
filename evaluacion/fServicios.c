@@ -111,35 +111,16 @@ int S_ListToFileBin(ArrayList* servicioList)
 }
 
 
-
-/**
-sServicio* S_cargarServicio(int nro_servicio, sCliente elCliente)
-{
-    sCliente* cliente;
-
-    char nombre[100];
-    char apellido[100];
-    int documento;
-    printf("ingrese un nombre:");
-    cargarCaracter(100, nombre);
-
-    printf("ingrese el apellido:");
-    cargarCaracter(100, apellido);
-
-    printf("ingrese el documneto");
-    scanf("%d",&documento);
-
-    cliente = C_contructParamClientes(id,nombre, apellido, documento);
-
-    return cliente;
-}
-*/
-/**
-int S_validarServicio(sServicio* servicio, ArrayList* servicioList)
+int S_validarCliente(sServicio* servicio, ArrayList* servicioList)
 {
     int i, returnAux = DENIED;
     sServicio* servicioA;
 
+    if(servicio == NULL || servicioList == NULL) return returnAux;
+
+    returnAux = OK;
+
+    if(servicioList->isEmpty(servicioList) == OKP) return returnAux;
 
     for(i = 0; i<servicioList->len(servicioList); i++)
     {
@@ -149,14 +130,17 @@ int S_validarServicio(sServicio* servicio, ArrayList* servicioList)
 
         returnAux = servicioList->contains(servicioList, servicio);
 
+        printf("%d\n", returnAux);
+
         if(returnAux == OKP) break;
 
 
     }
+
+    if(returnAux == OKP) returnAux = servicioA->idCliente;
 
 
     return returnAux;
 
 
 }
-*/

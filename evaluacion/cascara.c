@@ -154,7 +154,7 @@ int importarServicios(ArrayList* clienteList, ArrayList* servicioList)
 
 
 
-    int returnAux = DENIED, idCliente, flag = DENIED;
+    int returnAux = DENIED, idCliente, flagCliente = DENIED, flagServicio = DENIED;
     char nombre[100], apellido[100], documento[100], codigo[50], costo[50], estado[10], NRO_servicio[100];
     sCliente* cliente;
 
@@ -181,35 +181,55 @@ int importarServicios(ArrayList* clienteList, ArrayList* servicioList)
 
         idCliente = C_validarCliente(cliente, clienteList);
 
-        //printf("%d\n", idCliente);
-
         if(idCliente > OK)
         {
-            servicio = S_contructParamServicio(atoi(NRO_servicio), codigo, atof(costo), atoi(estado),idCliente);
+            servicio = S_contructParamServicio(atoi(NRO_servicio), codigo, atof(costo), atoi(estado), idCliente);
 
-            if(servicioList->contains(servicioList, servicio) != OKP) flag = OK;
+            idCliente = S_validarCliente(servicio, servicioList);
 
+            if(idCliente == OK) flagServicio = OK;
 
 
         }
-        else if(idCliente != DENIED) flag = OK;
-
-        if(flag == OK)
+        else
         {
+
+            if(idCliente != DENIED)
+            {
+
+                flagCliente = OK;
+                flagServicio = OK;
+
+            }
+        }
+        if(flagCliente == OK)
+        {
+
             idCliente = C_getId(clienteList);
 
             cliente->idCliente = idCliente;
-            if(servicio->codigo != codigo)
-                servicio = S_contructParamServicio(atoi(NRO_servicio), codigo, atof(costo), atoi(estado), idCliente);
-           // printf("entra");
 
-            if()
-                returnAux = clienteList->add(clienteList, cliente);
+            returnAux = clienteList->add(clienteList, cliente);
+
+
+        }
+
+
+        if(flagServicio == OK)
+        {
+            if(flagCliente == OK)
+            {
+                servicio = S_contructParamServicio(atoi(NRO_servicio), codigo, atof(costo), atoi(estado), idCliente);
+            }
+            else
+            {
+                idCliente = C_validarCliente(cliente, clienteList);
+                servicio->idCliente = idCliente;
+            }
 
             returnAux = servicioList->add(servicioList, servicio);
 
         }
-
 
     }
 

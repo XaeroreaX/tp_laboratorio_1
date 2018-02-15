@@ -111,7 +111,7 @@ int C_validarCliente(sCliente* cliente, ArrayList* clienteList)
 
         returnAux = clienteList->contains(clienteList, cliente);
 
-        printf("%d\n", returnAux);
+
 
         if(returnAux == OKP) break;
 
@@ -120,6 +120,7 @@ int C_validarCliente(sCliente* cliente, ArrayList* clienteList)
 
     if(returnAux == OKP) returnAux = clienteA->idCliente;
 
+    printf("%d\n", returnAux);
 
     return returnAux;
 

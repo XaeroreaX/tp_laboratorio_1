@@ -55,3 +55,59 @@
 	"fServicios.h"
 	"funciones.h"
 
+1518605386 source:c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\evaluacion\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1518605386 c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\evaluacion\arraylist.h
+
+1518605386 source:c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\evaluacion\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"cascara.h"
+	"fClientes.h"
+
+1518605386 c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\evaluacion\cascara.h
+
+1518605386 c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\evaluacion\fclientes.h
+
+1518659144 source:c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\evaluacion\cascara.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"cascara.h"
+	"fClientes.h"
+	"fServicios.h"
+
+1518605386 c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\evaluacion\fservicios.h
+
+1518663524 source:c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\evaluacion\fclientes.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"fClientes.h"
+	"funciones.h"
+
+1518605386 c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\evaluacion\funciones.h
+
+1518663524 source:c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\evaluacion\fservicios.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"fClientes.h"
+	"fServicios.h"
+	"funciones.h"
+
+1518605386 source:c:\users\jmpit\downloads\proyectos\projectos del cod\tp_laboratorio_1-master\evaluacion\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+
