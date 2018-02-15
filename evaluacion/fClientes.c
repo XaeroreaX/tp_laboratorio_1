@@ -79,6 +79,8 @@ int C_selectIdCliente(ArrayList* clienteList)
 
     id = OK;
 
+    printf("%d", clienteList->isEmpty(clienteList));
+
     if(clienteList->isEmpty(clienteList) == OKP) return id;
 
 

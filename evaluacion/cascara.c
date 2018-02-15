@@ -236,20 +236,22 @@ int importarServicios(ArrayList* clienteList, ArrayList* servicioList)
 }
 
 ///6)
+
 int ingresarServicioTecnico(ArrayList* servicioList, ArrayList* clienteList)
 {
-    int NRO_servicio, idCliente, returnAux = DENIED;
+    int returnAux = DENIED, NRO_servicio;
 
     sServicio* servicio;
 
-
-    if(servicioList == NULL || clienteList == NULL) return returnAux;
-
     NRO_servicio = S_getId(servicioList);
 
-    printf("ingrese el id del cliente:\n\n");
+    servicio = S_cargarServicio(NRO_servicio, clienteList);
 
-    idCliente = C_selectIdCliente(clienteList);
+    if(servicio != NULL)
+    {
+        returnAux = servicioList->add(servicioList, servicio);
+    }
 
+    return returnAux;
 
 }

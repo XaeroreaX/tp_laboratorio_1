@@ -28,7 +28,8 @@ int main()
         printf("3- baja de clientes \n");
         printf("4- listar clientes\n");
         printf("5- importar servicio tecnico desde CSV\n");
-        printf("6- Salir\n");
+        printf("6- ingresar servicio tecnico\n");
+        printf("10- Salir\n");
         printf("ingrese opcion");
 
         scanf("%d",&opcion);
@@ -75,7 +76,7 @@ int main()
             case 6:
                 system("cls");
 
-                importarServicios(clienteList, servicioList);
+                ingresarServicioTecnico(servicioList, clienteList);
 
                 system("pause");
                 break;

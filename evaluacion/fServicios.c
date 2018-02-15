@@ -92,6 +92,48 @@ sServicio* S_contructParamServicio(int NRO_servicio, char codigo[], double costo
     return servicio;
 }
 
+
+
+sServicio* S_cargarServicio(int NRO_servicio, ArrayList* clienteList)
+{
+    int idCliente;
+
+    double costo;
+
+    char codigo[100];
+
+    sServicio* servicio;
+
+
+    if(clienteList != NULL)
+    {
+
+
+        printf("ingrese el id del cliente:\n\n");
+
+        idCliente = C_selectIdCliente(clienteList);
+
+        if(idCliente > OK)
+        {
+
+            printf("ingrese el costo:");
+
+            scanf("%f", &costo);
+
+            printf("ingrese el codigo alfaNumerico:");
+
+            cargarCaracter(10, codigo);
+
+            servicio = S_contructParamServicio(NRO_servicio, codigo, costo, 1, idCliente);
+
+        }
+    }
+
+
+    return servicio;
+}
+
+
 /**------------------------------------ARCHIVOS-----------------------------------*/
 
 
