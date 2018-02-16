@@ -83,7 +83,7 @@ int main()
             case 7:
                 system("cls");
 
-                importarServicios(clienteList, servicioList);
+                finalizarServicioTecnico(servicioList, clienteList);
 
                 system("pause");
                 break;

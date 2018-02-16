@@ -134,8 +134,9 @@ int C_validarCliente(sCliente* cliente, ArrayList* clienteList)
 
     if(cliente == NULL || clienteList == NULL) return returnAux;
 
+    returnAux = OK;
 
-    if(clienteList->isEmpty(clienteList) == OKP) return OK;
+    if(clienteList->isEmpty(clienteList) == OKP) return returnAux;
 
     for(i = 0; i<clienteList->len(clienteList); i++)
     {
@@ -146,9 +147,9 @@ int C_validarCliente(sCliente* cliente, ArrayList* clienteList)
 
     }
 
-    if(i < clienteList->len(clienteList)) returnAux = OK;
+    if(i < clienteList->len(clienteList)) returnAux = cliente->idCliente;
 
-    printf("%d\n", returnAux);
+    //printf("%d\n", returnAux);
 
     return returnAux;
 

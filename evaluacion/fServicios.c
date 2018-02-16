@@ -134,6 +134,89 @@ sServicio* S_cargarServicio(int NRO_servicio, ArrayList* clienteList)
 }
 
 
+int S_getNRO_servicio(ArrayList* servicioList, ArrayList* clienteList)
+{
+    int i, NRO_servicio, returnAux = DENIED;
+
+    sServicio* servicio;
+
+    if(servicioList == NULL || clienteList == NULL) return returnAux;
+
+
+    returnAux = OK;
+
+    printf("ingrese el NRO de servicio que quiera finalizar");
+
+    S_showAllSevicio(servicioList, clienteList);
+
+
+    scanf("%d", &NRO_servicio);
+
+    for(i = 0; i < servicioList->len(servicioList); i++)
+    {
+        servicio =(sServicio*) servicioList->get(servicioList, i);
+
+        if(servicio->NRO_servicio == NRO_servicio || servicio->estado == 1) break;
+    }
+
+    if(i < servicioList->len(servicioList)) returnAux = NRO_servicio;
+
+
+    return returnAux;
+
+}
+
+
+
+/**------------------------------------shows-----------------------------------*/
+
+void S_showAllSevicio(ArrayList* servicioList, ArrayList* clienteList)
+{
+    int i, j;
+
+    sCliente* cliente;
+    sServicio* servicio;
+
+
+    for(i = 0; i < clienteList->len(clienteList); i++)
+    {
+
+        cliente =(sCliente*) clienteList->get(clienteList, i);
+
+        C_showClienteData(cliente);
+
+        printf("servicios:\n");
+
+        printf("\t\tNRO_servicio           codigo       costo\n\n");
+        for(j = 0; j < servicioList->len(servicioList); j++)
+        {
+            servicio = (sServicio*) servicioList->get(servicioList, j);
+            //printf("%d --- %d\n", servicio->idCliente, cliente->idCliente);
+            if(servicio->idCliente == cliente->idCliente)
+            {
+                if(servicio->estado == 1)
+                {
+                    printf("\t\t%12d%18s%12.2f\n", servicio->NRO_servicio, servicio->codigo, servicio->costo);
+                }
+            }
+
+
+        }
+
+        printf("----------------------------------------------------------------------\n\n");
+
+    }
+
+
+
+
+
+
+}
+
+
+
+
 /**------------------------------------ARCHIVOS-----------------------------------*/
 
 
@@ -222,8 +305,9 @@ int S_validarCliente(sServicio* servicio, ArrayList* servicioList)
 
     if(servicio == NULL || servicioList == NULL) return returnAux;
 
+    returnAux = OK;
 
-    if(servicioList->isEmpty(servicioList) == OKP) return OK;
+    if(servicioList->isEmpty(servicioList) == OKP) return returnAux;
 
     for(i = 0; i<servicioList->len(servicioList); i++)
     {
@@ -238,7 +322,7 @@ int S_validarCliente(sServicio* servicio, ArrayList* servicioList)
 
     }
 
-    if(i < servicioList->len(servicioList)) returnAux = OK;
+    if(i < servicioList->len(servicioList)) returnAux = servicio->idCliente;
 
     printf("%d\n", returnAux);
 
