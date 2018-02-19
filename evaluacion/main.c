@@ -29,7 +29,11 @@ int main()
         printf("4- listar clientes\n");
         printf("5- importar servicio tecnico desde CSV\n");
         printf("6- ingresar servicio tecnico\n");
-        printf("10- Salir\n");
+        printf("7- finalizar servicio tecnico\n");
+        printf("8- exportar servicios tecnicos de un cliente\n");
+        printf("9- imprir servicios tecnicos por producto\n");
+        printf("10- informar")
+        printf("11- Salir\n");
         printf("ingrese opcion");
 
         scanf("%d",&opcion);
@@ -90,18 +94,25 @@ int main()
             case 8:
                 system("cls");
 
-                importarServicios(clienteList, servicioList);
+                exportarCSV(servicioList, clienteList);
 
                 system("pause");
                 break;
             case 9:
                 system("cls");
 
-                importarServicios(clienteList, servicioList);
+                imprimirProducto(servicioList, clienteList);
 
                 system("pause");
                 break;
-            case 10:
+            case 9:
+                system("cls");
+
+                imprimirProducto(servicioList, clienteList);
+
+                system("pause");
+                break;
+            case 11:
                 seguir = 'n';
                 break;
             default:

@@ -154,7 +154,7 @@ int importarServicios(ArrayList* clienteList, ArrayList* servicioList)
 
 
 
-    int returnAux = DENIED, idCliente, flagCliente = DENIED, flagServicio = DENIED;
+    int returnAux = DENIED, idCliente, flagCliente = DENIED, flagServicio = DENIED,i;
     char nombre[100], apellido[100], documento[100], codigo[50], costo[50], estado[10], NRO_servicio[100];
     sCliente* cliente;
 
@@ -181,16 +181,16 @@ int importarServicios(ArrayList* clienteList, ArrayList* servicioList)
 
         idCliente = C_validarCliente(cliente, clienteList);
 
-        printf("idCliente:%d\n", idCliente);
+
 
 
         if(idCliente > OK)
         {
             servicio = S_contructParamServicio(atoi(NRO_servicio), codigo, atof(costo), atoi(estado), idCliente);
 
-            idCliente = S_validarCliente(servicio, servicioList);
+            idCliente = S_validarServicio(servicio, servicioList);
 
-            if(idCliente > OK) flagServicio = OK;
+            if(idCliente == OK) flagServicio = OK;
 
 
         }
@@ -225,7 +225,11 @@ int importarServicios(ArrayList* clienteList, ArrayList* servicioList)
             }
             else
             {
+
                 idCliente = C_validarCliente(cliente, clienteList);
+
+                //printf("idCliente:%d\n", idCliente);
+
                 servicio->idCliente = idCliente;
             }
 
@@ -233,6 +237,20 @@ int importarServicios(ArrayList* clienteList, ArrayList* servicioList)
 
         }
 
+            /*for(i = 0; i < servicioList->len(servicioList); i++)
+            {
+                servicio = (sServicio*) servicioList->get(servicioList, i);
+
+                if(idCliente == servicio->idCliente)
+                {
+                    servicio->estado = 1;
+                    servicioList->set(servicioList, servicio);
+                }
+
+            }*/
+
+        flagCliente = DENIED;
+        flagServicio = DENIED;
     }
 
     return returnAux;
@@ -273,14 +291,96 @@ int finalizarServicioTecnico(ArrayList* servicioList, ArrayList* clienteList)
         {
             servicio = (sServicio*) servicioList->get(servicioList, i);
 
-            if(servicio->NRO_servicio == NRO_servicio) break;
+            if(servicio->NRO_servicio == NRO_servicio && servicio->estado == 1) break;
         }
+        if(i < servicioList->len(servicioList))
+        {
+            printf("costo:%1.2f", servicio->costo);
 
-        printf("costo:%1.2f", servicio->costo);
+            servicio->estado = OK;
 
-        servicio->estado = OK;
+        }
+        else
+        {
+            printf("seleccion incorrecta");
+        }
 
     }
 
 
+}
+
+
+///8)
+int exportarCSV(ArrayList* servicioList, ArrayList* clienteList)
+{
+    int i, returnAux = DENIED;
+
+    char name[200];
+    sCliente* cliente;
+
+    sServicio* servicio;
+
+
+    if(servicioList == NULL || clienteList == NULL) return returnAux;
+
+    returnAux = OK;
+
+    if(clienteList->isEmpty(clienteList) == OKP) return returnAux;
+
+    cliente = C_selectCliente(clienteList);
+
+    while(cliente == NULL)
+    {
+        printf("el id que selecciono no es valido, porfavor ingrese otro");
+        cliente = C_selectCliente(clienteList);
+    }
+
+    for(i = 0; i < servicioList->len(servicioList); i++)
+    {
+
+        servicio = (sServicio*) servicioList->get(servicioList, i);
+
+        if(servicio->idCliente == cliente->idCliente)
+        {
+            strcpy(name, cliente->nombre);
+            strcat(name, " ");
+            strcat(name, cliente->apellido);
+
+            S_exportarServiciosCliente(name, servicio->idCliente, servicioList);
+
+
+
+        }
+
+
+    }
+
+    returnAux = OKP;
+
+    return returnAux;
+
+}
+
+
+
+///9)
+int imprimirProducto(ArrayList* servicioList, ArrayList* clienteList)
+{
+    int returnAux = DENIED;
+
+    ArrayList* auxList;
+
+    if(clienteList == NULL) return returnAux;
+
+    auxList = al_newArrayList();
+
+    auxList = servicioList->clone(servicioList);
+
+    returnAux = auxList->sort(auxList, S_compareProductos, 1);
+
+    if(returnAux != DENIED)
+        S_showServiciosFinalizados(servicioList,clienteList);
+
+    return returnAux;
 }
