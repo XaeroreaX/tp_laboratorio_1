@@ -14,6 +14,8 @@ typedef struct
 
 int C_getId(ArrayList* clienteList);
 
+sCliente* C_selectCliente(ArrayList* clienteList);
+
 int C_selectIdCliente(ArrayList* clienteList);
 
 int C_validarCliente(sCliente* cliente, ArrayList* clienteList);

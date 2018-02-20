@@ -282,7 +282,9 @@ int finalizarServicioTecnico(ArrayList* servicioList, ArrayList* clienteList)
     int i, returnAux = DENIED, NRO_servicio;
     sServicio* servicio;
 
+    if(servicioList == NULL || clienteList == NULL) return returnAux;
 
+    returnAux = OK;
     NRO_servicio = S_getNRO_servicio(servicioList, clienteList);
 
     if(NRO_servicio > OK)
@@ -307,7 +309,7 @@ int finalizarServicioTecnico(ArrayList* servicioList, ArrayList* clienteList)
 
     }
 
-
+    return returnAux;
 }
 
 
@@ -394,6 +396,12 @@ int informar(ArrayList* servicioList, ArrayList* clienteList)
 
     printf("el producto con mayor numeros de servicios pendientes son:\n");
     S_showProducto(servicioList);
+
+    printf("\n\nel cliente con mayor numeros de servicios pendiente son:\n");
+    S_showClienteMayor(servicioList, clienteList, 1);
+
+    printf("\n\nel cliente con mayor numeros de servicios finalizados son:\n");
+    S_showClienteMayor(servicioList, clienteList, 0);
 
     return returnAux;
 

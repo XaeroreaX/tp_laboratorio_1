@@ -251,14 +251,14 @@ void S_showProducto(ArrayList* servicioList)
 
     int cont = 0, max, i, j, flag = DENIED;
 
-    for(i = 0; i < servicioList->len(servicioList); i++)
+    for(i = 0; i < servicioList->len(servicioList) - 1; i++)
     {
 
         servicioA = (sServicio*) servicioList->get(servicioList, i);
 
         if(servicioA->estado == 1)
         {
-            for(j = 0; j < servicioList->len(servicioList); j++)
+            for(j = i + 1; j < servicioList->len(servicioList); j++)
             {
                 servicioB = (sServicio*) servicioList->get(servicioList, j);
 
@@ -283,33 +283,100 @@ void S_showProducto(ArrayList* servicioList)
 
     }
 
-     for(i = 0; i < servicioList->len(servicioList); i++)
+    if(max == 0)
     {
-
-        servicioA = (sServicio*) servicioList->get(servicioList, i);
-
-
-        if(servicioA->estado == 1)
+        printf("\t\tno hay mas de un servicio por producto\n");
+    }
+    else
+    {
+        for(i = 0; i < servicioList->len(servicioList) - 1; i++)
         {
 
-            for(j = 0; j < servicioList->len(servicioList); j++)
-            {
-                servicioB = (sServicio*) servicioList->get(servicioList, j);
+            servicioA = (sServicio*) servicioList->get(servicioList, i);
 
-                if(strcmp(servicioA->codigo, servicioB->codigo) == 0 && servicioB->estado == 1) cont++;
+
+            if(servicioA->estado == 1)
+            {
+
+                for(j = i + 1; j < servicioList->len(servicioList); j++)
+                {
+                    servicioB = (sServicio*) servicioList->get(servicioList, j);
+
+                    if(strcmp(servicioA->codigo, servicioB->codigo) == 0 && servicioB->estado == 1) cont++;
+
+
+                }
+
+
+
+                if(cont == max) printf("\t\t-%s\n", servicioA->codigo);
 
 
             }
 
-            if(cont == max) printf("\t\t-%s\n", servicioA->codigo);
 
+            cont = 0;
+        }
+    }
+}
 
+int S_showClienteMayor(ArrayList* servicioList, ArrayList* clienteList, int estado)
+{
+    int i, j, max, cont = 0, flag = DENIED;
+    sServicio* servicio;
+    sCliente* cliente;
+
+    if(servicioList == NULL || clienteList == NULL) return DENIED;
+
+    for(i = 0; i < clienteList->len(clienteList); i++)
+    {
+        cliente = (sCliente*) clienteList->get(clienteList, i);
+
+        for(j = 0; j < servicioList->len(servicioList); j++)
+        {
+            servicio = (sServicio*) servicioList->get(servicioList, j);
+
+            if(servicio->idCliente == cliente->idCliente && servicio->estado == estado) cont++;
         }
 
+        if(max < cont || flag == DENIED)
+        {
+            max = cont;
+            flag = OK;
+
+        }
 
         cont = 0;
     }
 
+    if(max == 0)
+    {
+        return OK;
+
+    }
+
+    for(i = 0; i < clienteList->len(clienteList); i++)
+    {
+        cliente = (sCliente*) clienteList->get(clienteList, i);
+
+        for(j = 0; j < servicioList->len(servicioList); j++)
+        {
+            servicio = (sServicio*) servicioList->get(servicioList, j);
+
+            if(servicio->idCliente == cliente->idCliente && servicio->estado == estado) cont++;
+        }
+
+        if(cont == max)
+        {
+            printf("\t\t");
+            C_showCliente(cliente);
+            printf("\n");
+        }
+
+        cont = 0;
+    }
+
+    return OKP;
 }
 
 /**------------------------------------------------------------------------------------*/

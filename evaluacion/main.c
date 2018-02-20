@@ -72,7 +72,7 @@ int main()
             case 5:
                 system("cls");
 
-                importarServicios(clienteList, servicioList);
+                if(importarServicios(clienteList, servicioList) == DENIED) printf("hubo un error al importar servicio");
 
                 system("pause");
                 break;
@@ -80,14 +80,14 @@ int main()
             case 6:
                 system("cls");
 
-                ingresarServicioTecnico(servicioList, clienteList);
+                if(ingresarServicioTecnico(servicioList, clienteList) == DENIED) printf("hubo un error al ingresar servicio tecnico");
 
                 system("pause");
                 break;
             case 7:
                 system("cls");
 
-                finalizarServicioTecnico(servicioList, clienteList);
+                if(finalizarServicioTecnico(servicioList, clienteList));
 
                 system("pause");
                 break;
