@@ -168,7 +168,7 @@ int S_getNRO_servicio(ArrayList* servicioList, ArrayList* clienteList)
 
 
 
-/**------------------------------------shows-----------------------------------*/
+/**------------------------------------shows-------------------------------------------*/
 
 void S_showAllSevicio(ArrayList* servicioList, ArrayList* clienteList)
 {
@@ -208,16 +208,114 @@ void S_showAllSevicio(ArrayList* servicioList, ArrayList* clienteList)
     }
 
 
+}
+
+void S_showServiciosFinalizados(ArrayList* servicioList, ArrayList* clienteList)
+{
+    int i, j;
+
+    sCliente* cliente;
+    sServicio* servicio;
 
 
+    printf("\t\tcliente---codigo---costo\n\n");
+    for(i = 0; i < servicioList->len(servicioList); i++)
+    {
+        servicio = (sServicio*) servicioList->get(servicioList, i);
+        if(servicio->estado == 0)
+        {
+            for(j = 0; j < clienteList->len(clienteList); j++)
+            {
+                cliente =(sCliente*) clienteList->get(clienteList, j);
+
+                if(cliente->idCliente == servicio->idCliente)
+                {
+                    printf("\t\t%s %s---", cliente->nombre, cliente->apellido);
+                }
+
+            }
+
+            printf("---%s---%1.2f\n\n", servicio->codigo, servicio->costo);
+
+        }
+
+    }
 
 
 }
 
 
+void S_showProducto(ArrayList* servicioList)
+{
+    sServicio* servicioA, *servicioB;
+
+    int cont = 0, max, i, j, flag = DENIED;
+
+    for(i = 0; i < servicioList->len(servicioList); i++)
+    {
+
+        servicioA = (sServicio*) servicioList->get(servicioList, i);
+
+        if(servicioA->estado == 1)
+        {
+            for(j = 0; j < servicioList->len(servicioList); j++)
+            {
+                servicioB = (sServicio*) servicioList->get(servicioList, j);
+
+                if(strcmp(servicioA->codigo, servicioB->codigo) == 0 && servicioB->estado == 1) cont++;
 
 
-/**------------------------------------ARCHIVOS-----------------------------------*/
+            }
+
+            if(max < cont || flag == DENIED)
+            {
+                max = cont;
+                flag = OK;
+
+            }
+
+
+            cont = 0;
+        }
+
+
+
+
+    }
+
+     for(i = 0; i < servicioList->len(servicioList); i++)
+    {
+
+        servicioA = (sServicio*) servicioList->get(servicioList, i);
+
+
+        if(servicioA->estado == 1)
+        {
+
+            for(j = 0; j < servicioList->len(servicioList); j++)
+            {
+                servicioB = (sServicio*) servicioList->get(servicioList, j);
+
+                if(strcmp(servicioA->codigo, servicioB->codigo) == 0 && servicioB->estado == 1) cont++;
+
+
+            }
+
+            if(cont == max) printf("\t\t-%s\n", servicioA->codigo);
+
+
+        }
+
+
+        cont = 0;
+    }
+
+}
+
+/**------------------------------------------------------------------------------------*/
+
+
+/**------------------------------------ARCHIVOS----------------------------------------*/
 
 
 int S_fileToListBin(ArrayList* serviciosList)
@@ -298,7 +396,41 @@ int S_ListToFileBin(ArrayList* servicioList)
 }
 
 
-int S_validarCliente(sServicio* servicio, ArrayList* servicioList)
+int S_exportarServiciosCliente(char name[200], int idCliente, ArrayList* servicioList)
+{
+    int i, returnAux = DENIED;
+    FILE* pFile;
+    sServicio* servicio;
+
+    if(servicio == NULL || servicioList == NULL) return returnAux;
+
+    strcat(name,".csv");
+
+    pFile = fopen(name,"w+");
+
+
+    fprintf(pFile,"\t\tproducto\t\t\tcosto\n");
+    for(i = 0; i < servicioList->len(servicioList); i++)
+    {
+
+        servicio = (sServicio*) servicioList->get(servicioList, i);
+
+        if(idCliente == servicio->idCliente && servicio->estado == OK)
+        {
+
+            fprintf(pFile,"\t\t%s\t\t\t%1.2f\n", servicio->codigo, servicio->costo);
+            returnAux = OK;
+
+        }
+
+    }
+    return returnAux;
+}
+
+
+/**------------------------------------------------------------------------------------*/
+
+int S_validarServicio(sServicio* servicio, ArrayList* servicioList)
 {
     int i, returnAux = DENIED;
     sServicio* servicioA;
@@ -316,17 +448,37 @@ int S_validarCliente(sServicio* servicio, ArrayList* servicioList)
         servicio->idCliente = servicioA->idCliente;
 
 
-        if(servicio->NRO_servicio == servicioA->NRO_servicio) break;
-
+        if(servicio->NRO_servicio == servicioA->NRO_servicio && servicioA->estado == 1)
+        {
+            break;
+        }
 
 
     }
 
     if(i < servicioList->len(servicioList)) returnAux = servicio->idCliente;
 
-    printf("%d\n", returnAux);
+    //printf("%d\n", returnAux);
 
     return returnAux;
+
+
+}
+
+
+
+int S_compareProductos(void* servicioA, void* servicioB)
+{
+
+    if(strcmp(((sServicio*)servicioA)->codigo, ((sServicio*)servicioB)->codigo ) < 0)
+    {
+        return -1;
+    }
+
+    if(strcmp(((sServicio*)servicioA)->codigo, ((sServicio*)servicioB)->codigo ) > 0)
+    {
+        return 1;
+    }
 
 
 }

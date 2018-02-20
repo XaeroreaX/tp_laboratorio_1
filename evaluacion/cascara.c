@@ -384,3 +384,17 @@ int imprimirProducto(ArrayList* servicioList, ArrayList* clienteList)
 
     return returnAux;
 }
+
+
+///10)
+int informar(ArrayList* servicioList, ArrayList* clienteList)
+{
+
+    int returnAux = DENIED;
+
+    printf("el producto con mayor numeros de servicios pendientes son:\n");
+    S_showProducto(servicioList);
+
+    return returnAux;
+
+}

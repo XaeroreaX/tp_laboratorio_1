@@ -32,7 +32,7 @@ int main()
         printf("7- finalizar servicio tecnico\n");
         printf("8- exportar servicios tecnicos de un cliente\n");
         printf("9- imprir servicios tecnicos por producto\n");
-        printf("10- informar")
+        printf("10- informar\n");
         printf("11- Salir\n");
         printf("ingrese opcion");
 
@@ -105,10 +105,10 @@ int main()
 
                 system("pause");
                 break;
-            case 9:
+            case 10:
                 system("cls");
 
-                imprimirProducto(servicioList, clienteList);
+                informar(servicioList, clienteList);
 
                 system("pause");
                 break;
