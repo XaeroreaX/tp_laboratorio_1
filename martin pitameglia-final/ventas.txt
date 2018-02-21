@@ -1,0 +1,11 @@
+idCliente,codigo,costoUnitario,cantidad,fechaVenta(DD/MM/YY)
+1,monitor001,980.00,1,02/01/18
+2,tv001,4999.00,1,02/01/18
+3,aspiradora001,1975.00,2,05/01/18
+5,lavarropas001,8999.00,1,06/01/18
+7,aire001,10999.00,1,06/01/18
+11,cocina001,3999.00,1,07/01/18
+13,monitor002,1295.00,1,07/01/18
+1,teclado001,850.00,1,07/01/18
+3,mouse002,750.00,1,07/01/18
+

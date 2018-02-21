@@ -1,0 +1,53 @@
+# depslib dependency file v1.0
+1513103725 source:d:\martin pitameglia\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1513103725 d:\martin pitameglia\arraylist.h
+
+1519225556 source:d:\martin pitameglia\cascara.c
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+	"cascara.h"
+	"fClientes.h"
+	"fVentas.h"
+	"funciones.h"
+
+1519215778 d:\martin pitameglia\cascara.h
+
+1519222015 d:\martin pitameglia\fclientes.h
+
+1519222227 d:\martin pitameglia\fventas.h
+
+1519215778 d:\martin pitameglia\funciones.h
+
+1519225795 source:d:\martin pitameglia\fclientes.c
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+	"fClientes.h"
+
+1519215604 source:d:\martin pitameglia\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+
+1519225632 source:d:\martin pitameglia\fventas.c
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+	"fClientes.h"
+	"fVentas.h"
+
+1519224657 source:d:\martin pitameglia\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+	"cascara.h"
+	"fClientes.h"
+	"fVentas.h"
+	"funciones.h"
+
