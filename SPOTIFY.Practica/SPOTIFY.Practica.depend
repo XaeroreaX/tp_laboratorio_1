@@ -1,0 +1,40 @@
+# depslib dependency file v1.0
+1500978148 source:e:\xaeroreax\proyectos\projectos del cod\spotify.practica\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1500978148 e:\xaeroreax\proyectos\projectos del cod\spotify.practica\arraylist.h
+
+1532845728 source:e:\xaeroreax\proyectos\projectos del cod\spotify.practica\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+	"SSong.h"
+	"cascara.h"
+
+1532844716 e:\xaeroreax\proyectos\projectos del cod\spotify.practica\ssong.h
+
+1532841483 e:\xaeroreax\proyectos\projectos del cod\spotify.practica\cascara.h
+
+1532845728 source:e:\xaeroreax\proyectos\projectos del cod\spotify.practica\ssong.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"SSong.h"
+
+1532836490 source:e:\xaeroreax\proyectos\projectos del cod\spotify.practica\tools.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1532841659 source:e:\xaeroreax\proyectos\projectos del cod\spotify.practica\cascara.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"SSong.h"
+	"cascara.h"
+

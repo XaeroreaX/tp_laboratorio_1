@@ -1,0 +1,6 @@
+id,nombre,albun,artista,visitas,durationSeg
+1,Watching over,Something Wicked This Way Comes,Iced earth,6421723,269
+2,Fiddle About,Tommy,The Who,6421723,91
+3,Full Moon,Ecliptica,Sonata Artistica,6421723,307
+4,Hotel California,Hotel California,Eagle,6421723,391
+5,Mab in the mirror,Michael Jackson's this is it,Michael Jackson,6421723,319
