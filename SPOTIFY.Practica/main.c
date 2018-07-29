@@ -24,11 +24,7 @@ int main()
 
     }
 
-    if(Song_listToFileText("PlayList.txt", playList) == DENIED)
-    {
-        printf("ERROR En Song_fileToListText");
 
-    }
 
     system("pause");
 
@@ -94,5 +90,12 @@ int main()
         system("cls");
 
     }while(seguir=='s');
+
+    if(Song_listToFileText("PlayList.txt", playList) == DENIED)
+    {
+        printf("ERROR En Song_listToFileText");
+
+    }
+
     return 0;
 }
