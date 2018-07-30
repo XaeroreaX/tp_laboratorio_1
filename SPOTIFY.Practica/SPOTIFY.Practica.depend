@@ -38,3 +38,45 @@
 	"SSong.h"
 	"cascara.h"
 
+1532850502 source:c:\martin\project\tp_laboratorio_1-master\spotify.practica\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1532850502 c:\martin\project\tp_laboratorio_1-master\spotify.practica\arraylist.h
+
+1532975871 source:c:\martin\project\tp_laboratorio_1-master\spotify.practica\cascara.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"SSong.h"
+	"cascara.h"
+
+1532976735 c:\martin\project\tp_laboratorio_1-master\spotify.practica\ssong.h
+
+1532850502 c:\martin\project\tp_laboratorio_1-master\spotify.practica\cascara.h
+
+1532976735 source:c:\martin\project\tp_laboratorio_1-master\spotify.practica\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+	"SSong.h"
+	"cascara.h"
+
+1532976900 source:c:\martin\project\tp_laboratorio_1-master\spotify.practica\ssong.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"SSong.h"
+	"Tools.h"
+
+1532850502 source:c:\martin\project\tp_laboratorio_1-master\spotify.practica\tools.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1532850502 c:\martin\project\tp_laboratorio_1-master\spotify.practica\tools.h
+

@@ -18,15 +18,12 @@ int main()
     int opcion=0;
 
 
-    if(Song_fileToListText("PlayList.txt", playList) == DENIED)
+    if(Song_fileToList(playList, "PlayList.dat") == DENIED)
     {
         printf("ERROR En Song_fileToListText");
 
     }
 
-
-
-    system("pause");
 
     do
     {
@@ -65,7 +62,8 @@ int main()
             case 4:
                 system("cls");
 
-
+                if(VisitaMusic(playList) == DENIED)
+                    printf("ERROR en la funcion");
 
                 system("pause");
                break;
@@ -91,7 +89,7 @@ int main()
 
     }while(seguir=='s');
 
-    if(Song_listToFileText("PlayList.txt", playList) == DENIED)
+    if(Song_ListToFile(playList, "PlayList.dat") == DENIED)
     {
         printf("ERROR En Song_listToFileText");
 

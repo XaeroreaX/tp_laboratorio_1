@@ -3,6 +3,7 @@
 #include <string.h>
 #include "ArrayList.h"
 #include "SSong.h"
+#include "Tools.h"
 #define DENIED -1
 #define OK 0
 #define OKP 1
@@ -144,6 +145,12 @@ void Song_showList(ArrayList* playList, void (*funcion)(SSong*))
 }
 
 
+void Song_showListRestrictedAlbun(ArrayList* playList, void (*funcion), char albun[101])
+{
+
+
+}
+
 void Song_showIdNombre(SSong* music)
 {
     if(music != NULL)
@@ -151,6 +158,87 @@ void Song_showIdNombre(SSong* music)
 
 }
 
+
+void Song_ShowAllData(SSong* music)
+{
+
+    printf("%40s %40s %40s%10d          ", music->name,music->Albun,music->Artist, music->visit);
+    ShowTimeMin(music->durationSeg);
+
+
+}
+
+int Song_getIndex(ArrayList* playList, int (*funcion)(ArrayList*))
+{
+    int i = DENIED, id = 0;
+    int flagEncontrado = DENIED;
+
+    SSong* music;
+
+    if(playList == NULL || funcion == NULL) return i;
+
+
+    id = funcion(playList);
+
+
+    for(i = 0; i < playList->len(playList);i++)
+    {
+        music = (SSong*) playList->get(playList, i);
+
+        if(music->id == id)
+        {
+            flagEncontrado = OK;
+            break;
+        }
+
+
+    }
+
+
+    if(flagEncontrado == OK);
+        return i;
+
+    return DENIED;
+}
+
+int Song_getIdAboutName(ArrayList* playList)
+{
+    int id = DENIED, i, flagEncontrado = DENIED;
+
+    SSong* music;
+
+    if(playList == NULL) return id;
+
+    char name[101];
+
+
+
+    Song_showList(playList, Song_showIdNombre);
+
+    printf("ingrese la cancion que desea escuchar:");
+    cargarCaracter(101, name);
+
+
+    for(i = 0; i < playList->len(playList); i++)
+    {
+        music = playList->get(playList, i);
+
+        if(strcmpi(music->name, name ) == 0)
+        {
+            flagEncontrado = OK;
+            id = music->id;
+            break;
+        }
+
+    }
+
+    if(flagEncontrado == DENIED)
+    {
+        id = flagEncontrado;
+    }
+
+    return id;
+}
 
 ArrayList* Song_Harcodear()
 {
@@ -192,7 +280,7 @@ int Song_fileToListText(char path[], ArrayList* playList)
     {
         fscanf(pFile, "%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]\n",id, nombre, albun, artista, visitas, duracionSeg);
         music = Song_contructor(atoi(id), nombre, artista,albun, atoi(duracionSeg));
-        music->visit = visitas;
+        music->visit = atoi(visitas);
 
         returnAux = playList->add(playList, music);
     }
@@ -232,8 +320,117 @@ int Song_listToFileText(char path[], ArrayList* playList)
 }
 
 
+int Song_ListToFile(ArrayList* playList, char path[])
+{
+    FILE* file;
+    int returnAux = DENIED, index;
+
+    SSong* music;
+
+    file = fopen(path, "w+b");
+
+    if(file == NULL || playList == NULL)
+    {
+        fclose(file);
+        return returnAux;
+    }
 
 
+    for(index = 0; index < playList->len(playList); index++)
+    {
+        music =(SSong*) playList->get(playList, index);
+
+        returnAux = fwrite(music, sizeof(SSong), 1 ,file);
+
+    }
+
+
+
+    fclose(file);
+    return returnAux;
+}
+
+
+
+int Song_fileToList(ArrayList* playList, char path[])
+{
+    FILE* file;
+    int returnAux = DENIED, index, size;
+
+    SSong* music;
+
+
+
+    file = fopen(path, "rb");
+
+    if(file == NULL || playList == NULL)
+    {
+        fclose(file);
+        return returnAux;
+    }
+
+    fseek(file, 0 , SEEK_END);
+
+    size = ftell(file)/sizeof(SSong);
+
+    rewind(file);
+
+    for(index = 0; index<size; index++)
+    {
+        music = (SSong*) malloc(sizeof(SSong));
+
+        fread(music, sizeof(SSong), 1,file);
+
+        returnAux = playList->add(playList, music);
+        if(returnAux == DENIED) break;
+
+    }
+/*
+    len = showMovieListIndex(movieList);
+        if(len == DENEID) printf("Error en la funcion showMovieList");*/
+
+    fclose(file);
+    return returnAux;
+}
+
+
+
+
+int Song_CompareNombreVistas(void* movieA, void* movieB)
+{
+    int returnAux = 0;
+    if(strcmpi(((SSong*)movieA)->name, ((SSong*)movieB)->name) > 0)
+    {
+        returnAux = 1;
+    }
+    else
+    {
+        if(strcmpi(((SSong*)movieA)->name, ((SSong*)movieB)->name) < 0)
+        {
+            returnAux = -1;
+        }
+        else
+        {
+            if(((SSong*)movieA)->visit < ((SSong*)movieB)->visit)
+            {
+
+                returnAux = 1;
+            }
+            else
+            {
+                if(((SSong*)movieA)->visit > ((SSong*)movieB)->visit)
+                {
+                    returnAux = -1;
+                }
+            }
+        }
+
+
+    }
+
+
+    return returnAux;
+}
 
 
 

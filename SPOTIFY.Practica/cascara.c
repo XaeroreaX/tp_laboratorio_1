@@ -29,8 +29,38 @@ int AltaSong(ArrayList* playList)
 
 void ListarPlaylist(ArrayList* playList)
 {
+    ArrayList* AuxList = playList->clone(playList);
 
-    Song_showList(playList, Song_showIdNombre);
+    AuxList->sort(AuxList, Song_CompareNombreVistas, 1);
+    printf("                                 Cancion                                    Albun                                  Artista   visitas       duracion\n");
+    printf("----------------------------------------------------------------------------------------------------------------------------------------------------\n");
+    Song_showList(AuxList, Song_ShowAllData);
 
 
+}
+
+
+int VisitaMusic(ArrayList* playList)
+{
+    int returnAux = DENIED;
+
+    if(playList != NULL)
+    {
+        int i = Song_getIndex(playList, Song_getIdAboutName);
+
+        if(i != DENIED)
+        {
+            SSong* music = playList->get(playList, i);
+
+            music->visit++;
+
+            returnAux = playList->set(playList, i, music);
+
+        }
+    }
+
+
+    //if()
+
+    return returnAux;
 }
